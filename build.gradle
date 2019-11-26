@@ -19,7 +19,8 @@ allprojects {
     repositories {
         google()
         jcenter()
-
+        maven { url '/Users/allens/Documents/model/maven/' }
+        maven { url "https://jitpack.io" }
     }
 }
 
