@@ -1,0 +1,121 @@
+ext {
+    android {
+        //==========================================================================================
+        // 配置多环境
+        //==========================================================================================
+
+
+        //配置变种 例如 开发环境需要将某个引入编译，线上环境不需要引入，则需要添加变种
+        //命名规则 维度 + Api ,如下
+        //引入 方式eg   developApi project(':lib_s3')
+        configurations {
+            productApi
+            developApi
+        }
+
+        //版本名后面添加一句话，意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
+        flavorDimensions "versionCode"
+
+        //添加维度
+        productFlavors {
+
+            //开发
+            develop {
+                //包名
+                applicationId "com.allens.allenstools"
+                //app 名称 需要将 xml 中的app_name 删除
+                resValue "string", "app_name", "玩安卓_MVVM"
+
+                //添加默认的配置
+                buildConfigField("Boolean", "isDev", "true")
+                buildConfigField("Boolean", "isProduct", "false")
+                buildConfigField("String", "HostUrl", "\"http://134.175.88.222/app/\"")
+
+                //版本号
+                versionCode 1
+                //版本名称
+                versionName "1.0"
+            }
+
+
+            //生产环境
+            product {
+                applicationId "com.allens.allenstools"
+                resValue "string", "app_name", "玩安卓_MVVM"
+                buildConfigField("Boolean", "isDev", "false")
+                buildConfigField("Boolean", "isProduct", "true")
+                buildConfigField("String", "HostUrl", "\"http://134.175.88.222/app/\"")
+
+                //版本号
+                versionCode 1
+                //版本名称
+                versionName "1.0"
+            }
+        }
+
+        //==========================================================================================
+        // 获取git版本号 需要将项目启动git
+        //==========================================================================================
+        def getGitHash = { ->
+            def stdout = new ByteArrayOutputStream()
+            exec {
+                commandLine 'git', 'rev-parse', '--short', 'HEAD'
+                standardOutput = stdout
+            }
+            return stdout.toString().trim()
+        }
+
+        //==========================================================================================
+        // 签名配置
+        //==========================================================================================
+        signingConfigs {//签名配置
+            release {//发布版签名配置
+//                storeFile file('../allens.jks')//密钥文件路径
+//                storePassword "allens123456"//密钥文件密码
+//                keyAlias "allens"//key别名
+//                keyPassword "allens123456"//key密码
+            }
+            debug {
+//                storeFile file('../allens.jks')//密钥文件路径
+//                storePassword "allens123456"//密钥文件密码
+//                keyAlias "allens"//key别名
+//                keyPassword "allens123456"//key密码
+            }
+        }
+
+
+        //==========================================================================================
+        // 编译配置
+        //==========================================================================================
+        buildTypes {
+            release.initWith(buildTypes.release)
+            release {
+                //添加此行代码，可以在release包下打印log,上线的时候一定要改成false
+                debuggable false
+                // 打开混淆
+                minifyEnabled true
+                // Zipalign优化
+                zipAlignEnabled true
+                // 移除无用的resource文件
+                shrinkResources true
+                // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，
+                // 后一个文件是自己的定义混淆文件
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                //build 使用的配置信息
+                signingConfig signingConfigs.release
+                //可以添加默认的配置
+                buildConfigField("Boolean", "isDebug", "false")
+                buildConfigField "String", "GitHash", "\"${getGitHash()}\""
+            }
+            debug {
+                debuggable true
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.debug
+                buildConfigField("Boolean", "isDebug", "true")
+                buildConfigField "String", "GitHash", "\"${getGitHash()}\""
+            }
+        }
+
+    }
+}

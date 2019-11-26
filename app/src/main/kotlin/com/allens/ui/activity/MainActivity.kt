@@ -1,7 +1,8 @@
-package com.allens.tools
+package com.allens.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.allens.tools.R
 
 class MainActivity : AppCompatActivity() {
 
