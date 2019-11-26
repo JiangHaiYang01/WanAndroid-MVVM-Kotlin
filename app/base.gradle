@@ -67,20 +67,20 @@ ext {
         //==============================================================================================
         // dex 配置
         //==============================================================================================
-        dexOptions {
-            jumboMode true
-            dexInProcess true
-            //是否预索引库。这可以改善增量构建，但是干净的构建可能会更慢。
-            preDexLibraries true
-            //指定-Xmx调用dx时的值。示例值为"2048m"。
-            javaMaxHeapSize "4g"
-            //可用于dex的最大并发进程数。默认为4
-            maxProcessCount 6
-            //运行dx时要使用的线程数。默认为4
-            threadCount 4
-            //将所有带有运行时注释的类保留在旧版multidex中的主dex中。
-            keepRuntimeAnnotatedClasses false
-        }
+//        dexOptions {
+//            jumboMode true
+//            dexInProcess true
+//            //是否预索引库。这可以改善增量构建，但是干净的构建可能会更慢。
+//            preDexLibraries true
+//            //指定-Xmx调用dx时的值。示例值为"2048m"。
+//            javaMaxHeapSize "3072m"
+//            //可用于dex的最大并发进程数。默认为4
+//            maxProcessCount 6
+//            //运行dx时要使用的线程数。默认为4
+//            threadCount 4
+//            //将所有带有运行时注释的类保留在旧版multidex中的主dex中。
+//            keepRuntimeAnnotatedClasses false
+//        }
 
 
         //==========================================================================================
@@ -98,7 +98,6 @@ ext {
                 //资源路径 当需要将layout 进行分包时候可以进行配置 eg  'src/main/res/layout/activity',
                 res.srcDirs =
                         [
-                                'src/main/res/layout',
                                 'src/main/res'
                         ]
 
@@ -131,5 +130,12 @@ ext {
         implementation 'com.allens:logger:1.0.0'
         implementation 'com.allens:base:1.0.0'
         implementation 'com.allens:http:1.0.0'
+
+
+        //==========================================================================================
+        // 其他第三方
+        //==========================================================================================
+        //https://github.com/whataa/noDrawable
+        implementation 'com.github.whataa:noDrawable:1.1.1'
     }
 }
