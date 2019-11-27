@@ -7,8 +7,6 @@ import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityMainBinding
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
     override fun createModel(): MainModel {
