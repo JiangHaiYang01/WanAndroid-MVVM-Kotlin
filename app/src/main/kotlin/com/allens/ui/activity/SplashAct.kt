@@ -16,6 +16,7 @@ class SplashAct : BaseActivity() {
 
     override fun initListener() {
         startActivity(MainActivity::class.java)
+        finish()
     }
 
 }

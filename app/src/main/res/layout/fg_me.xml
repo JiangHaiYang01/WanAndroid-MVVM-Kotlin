@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.allens.ui.fragment.MeFgVM" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_background">
+
+
+        <TextView
+            android:id="@+id/fg_me_tv_title"
+            style="@style/style_title"
+            android:text="@string/act_main_rb_me"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fg_me_cl"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/color_write"
+            app:layout_constraintTop_toBottomOf="@+id/fg_me_tv_title">
+
+            <ImageView
+                android:id="@+id/fg_me_img_heard"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                app:imgUrl="@{vm.heardImgUrl}"
+                app:imgError="@{vm.defHeardImg}"
+                app:imgPlace="@{vm.defHeardImg}"
+                app:imgSrc="@{vm.defHeardImg}"
+                app:roundingRadius="@{30}"
+                app:isCircleCrop="@{true}"
+                app:isRounded="@{true}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/fg_me_tv_click_login"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fg_me_img_heard"
+                app:layout_constraintLeft_toRightOf="@+id/fg_me_img_heard"
+                app:layout_constraintTop_toTopOf="@+id/fg_me_img_heard" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginEnd="20dp"
+                android:src="@mipmap/fg_me_more"
+                app:layout_constraintBottom_toBottomOf="@+id/fg_me_img_heard"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fg_me_img_heard"
+                tools:ignore="ContentDescription" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -59,23 +59,23 @@ abstract class BaseApplication : Application(),
 
 
     override fun onNetWorkStatus(isMobileConn: Boolean, isWifiConn: Boolean) {
-        print("网络变化 手机网络 $isMobileConn  wifi网络 $isWifiConn")
+        println("网络变化 手机网络 $isMobileConn  wifi网络 $isWifiConn")
         AppEventUtil.post(AppEventUtil.STATUS_NETWORK).value =
             NetWorkEvent(isMobileConn, isWifiConn)
     }
 
     override fun onGPSChange(isOpen: Boolean) {
-        print("gps是否开启 $isOpen")
+        println("gps是否开启 $isOpen")
         AppEventUtil.post(AppEventUtil.STATUS_GPS).value = GPSEvent(isOpen)
     }
 
     override fun onBlueStatusChange(status: BlueAction) {
-        print("blue 状态 $status")
+        println("blue 状态 $status")
         AppEventUtil.post(AppEventUtil.STATUS_BLUE).value = BlueEvent(status)
     }
 
     override fun onAppUIStatus(isBack: Boolean) {
-        print("app 当前是否在后台 $isBack")
+        println("app 当前是否在后台 $isBack")
         AppEventUtil.post(AppEventUtil.STATUS_APP_FRONT_BACk).value = AppUIEvent(isBack)
     }
 

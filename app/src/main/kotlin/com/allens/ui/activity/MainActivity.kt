@@ -5,8 +5,12 @@ import android.os.Bundle
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
+import com.allens.model_base.tools.TabHelper
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityMainBinding
+import com.allens.ui.fragment.HomeFragment
+import com.allens.ui.fragment.MeFragment
+import java.util.*
 
 class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
     override fun createModel(): MainModel {
@@ -24,6 +28,13 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
 
     override fun initMVVMListener() {
         bind.vm = MainVM()
+
+        TabHelper(
+            supportFragmentManager,
+            listOf(HomeFragment(), HomeFragment(), HomeFragment(), MeFragment()),
+            bind.actMainRg,
+            R.id.act_main_fl
+        ).showTabToFragment()
     }
 
 }
@@ -32,6 +43,4 @@ class MainModel : BaseModel
 
 class MainVM : BaseVM<MainModel>() {
 
-    var imgUrl: String? = "http://pic1.win4000.com/pic/a/0b/333747d77d_250_300.jpg"
-    var img = R.mipmap.act_splash_def
 }
