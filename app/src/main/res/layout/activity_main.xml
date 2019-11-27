@@ -16,43 +16,50 @@
         android:orientation="vertical"
         tools:context="com.allens.ui.activity.MainActivity">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <!--        <FrameLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_weight="1" />-->
 
-        <RadioGroup
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-
-            <RadioButton
-                style="@style/BaseStyleRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_home" />
-
-            <RadioButton
-                style="@style/BaseStyleRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_star" />
-
-            <RadioButton
-                style="@style/BaseStyleRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_project" />
-
-            <RadioButton
-                style="@style/BaseStyleRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_me" />
+        <!--        <RadioGroup-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content" >-->
 
 
-        </RadioGroup>
+        <!--            <RadioButton-->
+        <!--                style="@style/BaseStyleRadioButton"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/act_main_rb_home" />-->
+
+        <!--            <RadioButton-->
+        <!--                style="@style/BaseStyleRadioButton"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/act_main_rb_star" />-->
+
+        <!--            <RadioButton-->
+        <!--                style="@style/BaseStyleRadioButton"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/act_main_rb_project" />-->
+
+        <!--            <RadioButton-->
+        <!--                style="@style/BaseStyleRadioButton"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/act_main_rb_me" />-->
+
+
+        <!--        </RadioGroup>-->
+
+
+        <ImageView
+            android:id="@+id/img"
+            imgUrl="@{vm.imgUrl}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </layout>

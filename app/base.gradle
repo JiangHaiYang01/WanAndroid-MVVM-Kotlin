@@ -1,3 +1,4 @@
+apply plugin: 'kotlin-kapt'
 ext {
     android {
         //编译的SDK版本
