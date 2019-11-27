@@ -140,7 +140,8 @@ ext {
         //==========================================================================================
         // 其他第三方
         //==========================================================================================
-        //https://github.com/whataa/noDrawable
-        implementation 'com.github.whataa:noDrawable:1.1.1'
+
+        //屏幕适配 {@link https://github.com/JessYanCoding/AndroidAutoSize}
+        implementation 'me.jessyan:autosize:1.1.2'
     }
 }

@@ -7,4 +7,5 @@
 
     <color name="color_write">#ffffff</color>
     <color name="color_background">#F8F8F8</color>
+    <color name="color_blue">#0088FF</color>
 </resources>

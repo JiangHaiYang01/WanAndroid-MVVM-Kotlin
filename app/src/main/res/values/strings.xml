@@ -4,4 +4,11 @@
     <string name="act_main_rb_project">项目</string>
     <string name="act_main_rb_me">我的</string>
     <string name="fg_me_tv_click_login">登录 / 注册</string>
+
+    <string name="please_input_phone">请输入手机号</string>
+    <string name="please_input_pwd">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="register_phone">注册新用户</string>
+    <string name="forget_pwd">忘记密码?</string>
+    <string name="register_new_user">注册新用户</string>
 </resources>

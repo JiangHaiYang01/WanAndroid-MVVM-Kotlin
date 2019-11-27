@@ -14,16 +14,10 @@ import com.bumptech.glide.request.RequestOptions
 //使用拓展方法
 //这里有个坑,不能写在class 中
 //或者就使用静态类去写
-@BindingAdapter(value = ["app:imgSrc"], requireAll = false)
-fun ImageView.src(resId: Int) {
-    println("自定义的image adapter ---------------------------------------")
-    this.setImageResource(resId)
-}
-
 @SuppressLint("CheckResult")
 @BindingAdapter(
     value = ["app:imgUrl", "app:imgError", "app:imgPlace",
-        "app:isCircleCrop", "app:isRounded", "app:roundingRadius"],
+        "app:imgIsCircleCrop", "app:imgIsRounded", "app:imgIsRoundingRadius"],
     requireAll = false
 )
 fun ImageView.loadImg(
@@ -35,7 +29,7 @@ fun ImageView.loadImg(
     roundingRadius: Int = 10
 ) {
     val builder = Glide.with(context).load(url)
-    println("自定义的image adapter ---------------------------------------")
+    println("自定义的image adapter ---------------------------------------start")
 
     //错误显示图片
     if (error != null) {

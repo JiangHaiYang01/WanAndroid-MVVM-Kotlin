@@ -14,6 +14,16 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
+
+
+        <!-- 屏幕适配 -->
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640" />
+
         <activity
             android:name="com.allens.ui.activity.SplashAct"
             android:theme="@style/AppWelcome">
@@ -24,6 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.allens.ui.activity.MainActivity" />
+        <activity android:name="com.allens.ui.activity.LogInAct" />
     </application>
 
 </manifest>
