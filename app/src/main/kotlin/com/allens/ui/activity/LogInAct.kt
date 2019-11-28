@@ -33,9 +33,9 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
 
 
 
-        bind.etPwd.addTextChangedListener(MyTextWatcher(0, vm))
+        bind.etPwd.addTextChangedListener(LoginTextWatcher(0, vm))
 
-        bind.etPhone.addTextChangedListener(MyTextWatcher(1, vm))
+        bind.etPhone.addTextChangedListener(LoginTextWatcher(1, vm))
 
         bind.loginImgDelete.setOnClickListener {
             bind.etPhone.setText("")
@@ -48,7 +48,7 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
 
         bind.loginBtnLogin.setOnClickListener {
             LogHelper.i("点击登录 账号 ${vm.number.value} 密码 ${vm.pwd.value}")
-            vm.login(vm.number.value, vm.pwd.value, object :OnBaseHttpListener<String>{
+            vm.login(vm.number.value, vm.pwd.value, object : OnBaseHttpListener<String> {
                 override fun onSuccess(t: String) {
                     LogHelper.i("登录请求成功 $t")
                 }
@@ -58,10 +58,16 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
                 }
             })
         }
+
+
+        bind.registerNewCount.setOnClickListener {
+            LogHelper.i("点击注册新用户")
+            startActivity(RegisterAct::class.java)
+        }
     }
 }
 
-class MyTextWatcher(private val type: Int, private val vm: LogInVM) : TextWatcher {
+class LoginTextWatcher(private val type: Int, private val vm: LogInVM) : TextWatcher {
     override fun afterTextChanged(s: Editable?) {
     }
 
@@ -78,7 +84,10 @@ class MyTextWatcher(private val type: Int, private val vm: LogInVM) : TextWatche
         if (vm.number.value.isNullOrEmpty() || vm.pwd.value.isNullOrEmpty()) {
             vm.isClickLogin.value = false
         } else {
-            vm.isClickLogin.value = (true)
+            val value = vm.number.value
+            if (value != null && value.length == 11) {
+                vm.isClickLogin.value = (true)
+            }
         }
     }
 

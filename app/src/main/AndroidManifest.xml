@@ -35,6 +35,7 @@
         </activity>
         <activity android:name="com.allens.ui.activity.MainActivity" />
         <activity android:name="com.allens.ui.activity.LogInAct" />
+        <activity android:name="com.allens.ui.activity.RegisterAct" />
     </application>
 
 </manifest>

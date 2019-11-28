@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.allens.ui.activity.RegisterVM" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/act_login_img_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.15" />
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/et_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="69dp"
+            android:layout_marginEnd="29dp"
+            android:background="@null"
+            android:hint="@string/please_input_phone"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/et_cursor_drawable"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/act_login_img_icon"
+            tools:ignore="TextFields" />
+
+        <View
+            android:id="@+id/login_phone_view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="29dp"
+            android:background="#DDDDDD"
+            app:layout_constraintLeft_toLeftOf="@+id/et_phone"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+
+        <ImageView
+            android:id="@+id/login_img_delete"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@null"
+            android:src="@drawable/act_login_delete"
+            app:isVisible="@{vm.number.length()>0}"
+            app:layout_constraintRight_toRightOf="@+id/login_phone_view"
+            app:layout_constraintTop_toTopOf="@+id/et_phone" />
+
+
+        <EditText
+            android:id="@+id/et_pwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="29dp"
+            android:background="@null"
+            android:hint="@string/please_input_pwd"
+            android:inputType="textPassword"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/et_cursor_drawable"
+            app:etIsShowPwd="@{vm.isShowPwd().booleanValue()}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_phone_view" />
+
+        <View
+            android:id="@+id/login_pwd_view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="29dp"
+            android:background="#DDDDDD"
+            app:layout_constraintLeft_toLeftOf="@+id/et_phone"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_pwd" />
+
+        <ImageView
+            android:id="@+id/login_img_show"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@null"
+            android:src="@drawable/login_pwd_hint"
+            app:imgSrc="@{vm.isShowPwd().booleanValue() ? @drawable/login_pwd_show : @drawable/login_pwd_hint}"
+            app:layout_constraintRight_toRightOf="@+id/login_phone_view"
+            app:layout_constraintTop_toTopOf="@+id/et_pwd" />
+
+
+        <TextView
+            android:id="@+id/login_btn_login"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="48dp"
+            android:background="@{vm.isClickLogin().booleanValue() ? @drawable/bg_tv_blue : @drawable/bg_tv_gray,default = @drawable/bg_tv_gray}"
+            android:gravity="center"
+            android:clickable="@{vm.isClickLogin().booleanValue()}"
+            android:text="@string/register"
+            android:textColor="@color/color_write"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="@+id/login_pwd_view"
+            app:layout_constraintRight_toRightOf="@+id/login_pwd_view"
+            app:layout_constraintTop_toBottomOf="@+id/login_pwd_view" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
