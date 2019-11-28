@@ -29,12 +29,18 @@
 
 
     <!-- tv 样式的 btn -->
-    <style name="style_tv_bg">
+    <style name="style_tv_bg_blue">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:background">@drawable/bg_tv_blue</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/color_write</item>
+    </style>
+
+
+    <!-- tv 样式的 btn -->
+    <style name="style_tv_bg_gray" parent="style_tv_bg_blue">
+        <item name="android:background">@drawable/bg_tv_gray</item>
     </style>
 
 

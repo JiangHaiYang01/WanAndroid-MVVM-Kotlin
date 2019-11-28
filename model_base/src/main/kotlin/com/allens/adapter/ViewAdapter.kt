@@ -13,3 +13,4 @@ fun View.isVisible(visibility: Boolean) {
         this.visibility = View.GONE
     }
 }
+

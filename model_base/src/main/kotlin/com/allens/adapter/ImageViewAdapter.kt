@@ -2,6 +2,7 @@ package com.allens.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
+import android.media.Image
 import android.text.TextUtils
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -10,6 +11,11 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
+
+@BindingAdapter("app:imgSrc")
+fun ImageView.imgSrc(resId: Int) {
+    setImageResource(resId)
+}
 
 //使用拓展方法
 //这里有个坑,不能写在class 中

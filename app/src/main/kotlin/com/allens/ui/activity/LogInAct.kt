@@ -2,6 +2,7 @@ package com.allens.ui.activity
 
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.allens.LogHelper
 import com.allens.model_base.base.impl.BaseMVVMAct
@@ -26,7 +27,7 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
     }
 
     override fun initMVVMListener() {
-        bind.vm = LogInVM()
+        bind.vm = vm
 
 
         bind.etPwd.addTextChangedListener(object : TextWatcher {
@@ -38,7 +39,7 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                vm.test.value = s.toString()
+                vm.pwd.set(s.toString())
             }
         })
 
@@ -51,17 +52,21 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                vm.number.set(s.toString())
             }
         })
 
-        bind.loginBtnLogin.setOnClickListener {
-            LogHelper.i("vm ----- ${vm.isShowDelete}")
+        bind.loginImgDelete.setOnClickListener {
+            bind.etPhone.setText("")
         }
-        bind.registerNewCount.setOnClickListener {
-            vm.isShowDelete = (true)
-        }
-        bind.forgetPwd.setOnClickListener {
-            vm.isShowDelete = (false)
+
+        bind.loginImgShow.setOnClickListener {
+            val get = vm.isShowPwd.get()
+            if (get == false) {
+                vm.isShowPwd.set(true)
+            } else {
+                vm.isShowPwd.set(false)
+            }
         }
     }
 }
@@ -71,7 +76,10 @@ class LogInModel : BaseModel
 
 class LogInVM : BaseVM<LogInModel>() {
 
-    var isShowDelete: Boolean = false
+    //是否显示密码
+    var isShowPwd: ObservableField<Boolean> = ObservableField()
+    var pwd: ObservableField<String> = ObservableField()
+    var number: ObservableField<String> = ObservableField()
 
-    var test: MutableLiveData<String> = MutableLiveData()
+
 }

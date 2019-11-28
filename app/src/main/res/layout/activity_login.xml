@@ -28,7 +28,6 @@
             app:layout_constraintVertical_bias="0.15" />
 
         <EditText
-            android:text="@{vm.test}"
             android:id="@+id/et_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -62,6 +61,7 @@
             android:layout_marginEnd="10dp"
             android:contentDescription="@null"
             android:src="@mipmap/act_login_delete"
+            app:isVisible="@{vm.number.length()>0}"
             app:layout_constraintRight_toRightOf="@+id/login_phone_view"
             app:layout_constraintTop_toTopOf="@+id/et_phone" />
 
@@ -100,14 +100,15 @@
             android:layout_height="23dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@null"
-            android:src="@mipmap/login_pwd_hint"
+            android:src="@drawable/login_pwd_hint"
+
             app:layout_constraintRight_toRightOf="@+id/login_phone_view"
             app:layout_constraintTop_toTopOf="@+id/et_pwd" />
 
 
         <TextView
             android:id="@+id/login_btn_login"
-            style="@style/style_tv_bg"
+            style="@style/style_tv_bg_gray"
             android:layout_width="0dp"
             android:layout_marginTop="48dp"
             android:text="@string/login"
