@@ -22,7 +22,7 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
     }
 
     override fun initMVVMListener() {
-        bind.vm = MeFgVM()
+        bind.vm = vm
 
 
         //主界面

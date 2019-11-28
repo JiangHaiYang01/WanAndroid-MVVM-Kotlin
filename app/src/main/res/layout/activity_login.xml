@@ -109,11 +109,14 @@
 
         <TextView
             android:id="@+id/login_btn_login"
-            style="@style/style_tv_bg_gray"
             android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_marginTop="48dp"
+            android:background="@{vm.isClickLogin() ? @drawable/bg_tv_blue : @drawable/bg_tv_gray,default = @drawable/bg_tv_gray}"
+            android:gravity="center"
+            android:clickable="@{vm.isClickLogin()}"
             android:text="@string/login"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/color_write"
             android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="@+id/login_pwd_view"
             app:layout_constraintRight_toRightOf="@+id/login_pwd_view"
