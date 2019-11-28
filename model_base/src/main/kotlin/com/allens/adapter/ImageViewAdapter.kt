@@ -12,9 +12,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
 
-@BindingAdapter("app:imgSrc")
-fun ImageView.imgSrc(resId: Int) {
-    setImageResource(resId)
+@BindingAdapter("app:imgSrc",requireAll = false)
+fun ImageView.imgSrc(resId: Drawable) {
+    setImageDrawable(resId)
 }
 
 //使用拓展方法
