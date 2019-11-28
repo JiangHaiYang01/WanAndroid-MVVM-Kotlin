@@ -11,7 +11,7 @@
 
     <!-- 启动页样式 -->
     <style name="AppWelcome" parent="BaseStyleAppWelcome">
-        <item name="android:windowBackground">@mipmap/act_splash_def</item>
+        <item name="android:windowBackground">@drawable/act_splash_def</item>
     </style>
 
 

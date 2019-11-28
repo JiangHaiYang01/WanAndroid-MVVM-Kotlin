@@ -36,5 +36,5 @@ class MeFgModel : BaseModel
 
 class MeFgVM : BaseVM<MeFgModel>() {
     var heardImgUrl = "http://static.runoob.com/images/demo/demo1.jpg"
-    var defHeardImg = R.mipmap.fg_me_heard_def
+    var defHeardImg = R.drawable.fg_me_heard_def
 }
