@@ -2,9 +2,12 @@ package com.allens.ui.activity
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
 import com.allens.Config
 import com.allens.LogHelper
+import com.allens.bean.LogInBean
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -13,6 +16,7 @@ import com.allens.model_http.impl.OnBaseHttpListener
 import com.allens.model_http.impl.OnHttpListener
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityLoginBinding
+import com.google.android.material.snackbar.Snackbar
 
 class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
 
@@ -47,14 +51,23 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
         }
 
         bind.loginBtnLogin.setOnClickListener {
+            //隐藏软键盘
+            hideSoftInput()
             LogHelper.i("点击登录 账号 ${vm.number.value} 密码 ${vm.pwd.value}")
-            vm.login(vm.number.value, vm.pwd.value, object : OnBaseHttpListener<String> {
-                override fun onSuccess(t: String) {
+            vm.login(vm.number.value, vm.pwd.value, object : OnBaseHttpListener<LogInBean> {
+                override fun onSuccess(t: LogInBean) {
                     LogHelper.i("登录请求成功 $t")
+                    if (t.errorCode == 0) {
+
+                    } else {
+                        Snackbar.make(bind.actLoginParent, t.errorMsg, Snackbar.LENGTH_SHORT).show()
+                    }
                 }
 
                 override fun onError(e: Throwable) {
                     LogHelper.i("登录请求失败 $e")
+                    Snackbar.make(bind.actLoginParent, "登录失败,请检查网络后重试~", Snackbar.LENGTH_SHORT)
+                        .show()
                 }
             })
         }
@@ -98,13 +111,13 @@ class LogInModel : BaseModel {
     fun login(
         number: String?,
         pwd: String?,
-        listener: OnBaseHttpListener<String>
+        listener: OnBaseHttpListener<LogInBean>
     ) {
         XHttp.Builder()
             .baseUrl(Config.baseURL)
             .retryOnConnectionFailure(false)
             .build()
-            .doPost(String::class.java, "user/login", object : OnHttpListener<String>() {
+            .doPost(LogInBean::class.java, "user/login", object : OnHttpListener<LogInBean>() {
                 override fun onMap(map: HashMap<String, Any>) {
                     super.onMap(map)
                     if (!number.isNullOrEmpty()) {
@@ -115,7 +128,7 @@ class LogInModel : BaseModel {
                     }
                 }
 
-                override fun onSuccess(t: String) {
+                override fun onSuccess(t: LogInBean) {
                     listener.onSuccess(t)
                 }
 
@@ -128,6 +141,7 @@ class LogInModel : BaseModel {
 
 class LogInVM : BaseVM<LogInModel>() {
 
+
     //是否显示密码
     var isShowPwd: MutableLiveData<Boolean> = MutableLiveData()
     //是否可以点击
@@ -137,7 +151,7 @@ class LogInVM : BaseVM<LogInModel>() {
     //账号
     var number: MutableLiveData<String> = MutableLiveData()
 
-    fun login(number: String?, pwd: String?, listener: OnBaseHttpListener<String>) {
+    fun login(number: String?, pwd: String?, listener: OnBaseHttpListener<LogInBean>) {
         model.login(number, pwd, listener)
     }
 

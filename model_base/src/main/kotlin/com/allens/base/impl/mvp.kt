@@ -69,6 +69,9 @@ interface BaseView {
     //app 前后台变化
     fun onAppUIChange(isBack: Boolean)
 
+    //软键盘消失
+    fun hideSoftInput()
+
 }
 
 

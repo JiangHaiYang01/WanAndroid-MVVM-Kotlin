@@ -1,10 +1,13 @@
 package com.allens.model_base.base
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.allens.model_base.base.impl.BaseView
@@ -134,5 +137,9 @@ abstract class BaseFragment : Fragment(), BaseView {
         startActivityForResult(intent, requestCode)
     }
 
+
+    override fun hideSoftInput() {
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+    }
 
 }

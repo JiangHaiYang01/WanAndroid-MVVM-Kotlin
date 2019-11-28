@@ -1,6 +1,10 @@
 package com.allens.model_http
 
+import android.content.Context
 import androidx.annotation.MainThread
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.allens.model_http.config.HttpConfig
 import com.allens.model_http.config.HttpLevel
 import com.allens.model_http.impl.ApiService
@@ -10,6 +14,7 @@ import com.allens.model_http.manager.HttpManager
 import com.allens.model_http.subscriber.BeanObserver
 import com.allens.model_http.tools.ObservableTool
 import com.allens.model_http.tools.UrlTool
+import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -77,6 +82,14 @@ class XHttp {
         }
     }
 
+
+    //==============================================================================================
+    // 绑定生命周期
+    //==============================================================================================
+
+
+
+
     //==============================================================================================
     // 请求方法
     //==============================================================================================
@@ -86,6 +99,30 @@ class XHttp {
         listener: OnHttpListener<T>
     ) {
         ObservableTool.getObservableGet(parameter, listener)
+            .subscribe(BeanObserver(tClass, listener))
+    }
+
+    fun <T> doGet(
+        life: LifecycleOwner,
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservableGet(parameter, listener)
+            .compose(AndroidLifecycle.createLifecycleProvider(life).bindUntilEvent(Lifecycle.Event.ON_DESTROY))
+            .subscribe(BeanObserver(tClass, listener))
+    }
+
+
+    //绑定了 生命周期 推荐在mvp 中使用
+    fun <T> doPost(
+        life: LifecycleOwner,
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservablePost(parameter, listener)
+            .compose(AndroidLifecycle.createLifecycleProvider(life).bindUntilEvent(Lifecycle.Event.ON_DESTROY))
             .subscribe(BeanObserver(tClass, listener))
     }
 
@@ -109,12 +146,34 @@ class XHttp {
             .subscribe(BeanObserver(tClass, listener))
     }
 
+    fun <T> doBody(
+        life: LifecycleOwner,
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservableBody(parameter, listener)
+            .compose(AndroidLifecycle.createLifecycleProvider(life).bindUntilEvent(Lifecycle.Event.ON_DESTROY))
+            .subscribe(BeanObserver(tClass, listener))
+    }
+
     fun <T> doPut(
         tClass: Class<T>,
         parameter: String,
         listener: OnHttpListener<T>
     ) {
         ObservableTool.getObservablePut(parameter, listener)
+            .subscribe(BeanObserver(tClass, listener))
+    }
+
+    fun <T> doPut(
+        life: LifecycleOwner,
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservablePut(parameter, listener)
+            .compose(AndroidLifecycle.createLifecycleProvider(life).bindUntilEvent(Lifecycle.Event.ON_DESTROY))
             .subscribe(BeanObserver(tClass, listener))
     }
 
@@ -127,9 +186,16 @@ class XHttp {
             .subscribe(BeanObserver(tClass, listener))
     }
 
-
-
-
+    fun <T> doDelete(
+        life: LifecycleOwner,
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservableDelete(parameter, listener)
+            .compose(AndroidLifecycle.createLifecycleProvider(life).bindUntilEvent(Lifecycle.Event.ON_DESTROY))
+            .subscribe(BeanObserver(tClass, listener))
+    }
 
 
 }

@@ -1,14 +1,18 @@
 package com.allens.model_base.base
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.allens.model_base.base.impl.BaseView
 import com.allens.model_base.event.*
-import com.allens.model_base.tools.*
+import com.allens.model_base.tools.BlueAction
+import com.allens.model_base.tools.OnTouchHelperListener
+import com.allens.model_base.tools.TouchHelper
 import com.allens.status.NetworkHelper
 import qiu.niorgai.StatusBarCompat
 import java.util.concurrent.TimeUnit
@@ -142,6 +146,14 @@ abstract class BaseActivity : AppCompatActivity(), BaseView, OnTouchHelperListen
         val intent = Intent()
         intent.setClass(this, cls)
         startActivityForResult(intent, requestCode)
+    }
+
+    override fun hideSoftInput() {
+        val service = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val view: View? = currentFocus
+        if(view!= null){
+            service.hideSoftInputFromWindow(view.windowToken,InputMethodManager.HIDE_NOT_ALWAYS)
+        }
     }
 
 
