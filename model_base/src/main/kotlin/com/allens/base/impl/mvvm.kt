@@ -99,6 +99,8 @@ abstract class BaseMVVMAct<V : ViewDataBinding, M : BaseModel, VM : BaseVM<M>> :
         lifecycle.addObserver(vm)
         vm.registerModel(createModel())
         bind = DataBindingUtil.setContentView(this, getContentViewId())
+        //用LiveData配合DataBinding的话，要手动将生成的Binding布局类和LifecycleOwner关联起来
+        bind.lifecycleOwner = this
 
         initMVVMListener()
     }
@@ -125,6 +127,9 @@ abstract class BaseMVVMFragment<V : ViewDataBinding, M : BaseModel, VM : BaseVM<
         lifecycle.addObserver(vm)
         vm.registerModel(createModel())
         bind = DataBindingUtil.inflate(inflater, getContentViewId(), container, false)
+        //用LiveData配合DataBinding的话，要手动将生成的Binding布局类和LifecycleOwner关联起来
+        bind.lifecycleOwner = this
+
         return bind.root
     }
 

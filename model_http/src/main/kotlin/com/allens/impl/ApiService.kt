@@ -15,7 +15,7 @@ import retrofit2.http.*
  */
 interface ApiService{
     @GET
-    fun doGet(@HeaderMap headers: Map<String, String>, @Url url: String): Observable<ResponseBody>
+    fun doGet(@HeaderMap headers: HashMap<String, String>, @Url url: String): Observable<ResponseBody>
 
 
     @FormUrlEncoded
@@ -24,7 +24,7 @@ interface ApiService{
         @Path(
             value = "path",
             encoded = true
-        ) urlPath: String, @HeaderMap headers: Map<String, String>, @FieldMap map: Map<String, Any>
+        ) urlPath: String, @HeaderMap headers: HashMap<String, String>, @FieldMap map: HashMap<String, Any>
     ): Observable<ResponseBody>
 
 
@@ -33,16 +33,16 @@ interface ApiService{
         @Path(
             value = "path",
             encoded = true
-        ) urlPath: String, @HeaderMap headers: Map<String, String>, @Body body: RequestBody
+        ) urlPath: String, @HeaderMap headers: HashMap<String, String>, @Body body: RequestBody
     ): Observable<ResponseBody>
 
 
     @DELETE
-    fun doDelete(@Url url: String, @HeaderMap headers: Map<String, String>, @QueryMap maps: Map<String, Any>): Observable<ResponseBody>
+    fun doDelete(@Url url: String, @HeaderMap headers: HashMap<String, String>, @QueryMap maps: Map<String, Any>): Observable<ResponseBody>
 
 
     @PUT
-    fun doPut(@Url url: String, @HeaderMap headers: Map<String, String>, @FieldMap maps: Map<String, Any>): Observable<ResponseBody>
+    fun doPut(@Url url: String, @HeaderMap headers: HashMap<String, String>, @FieldMap maps: HashMap<String, Any>): Observable<ResponseBody>
 
     @Streaming
     @GET
@@ -52,14 +52,14 @@ interface ApiService{
     @PUT
     fun uploadByPut(
         @Url url: String,
-        @HeaderMap headers: Map<String, String>,
+        @HeaderMap headers: HashMap<String, String>,
         @Body body: RequestBody
     ): Observable<ResponseBody>
 
     @POST
     fun upload(
         @Url url: String,
-        @HeaderMap headers: Map<String, String>,
+        @HeaderMap headers: HashMap<String, String>,
         @Body body: RequestBody
     ): Observable<ResponseBody>
 

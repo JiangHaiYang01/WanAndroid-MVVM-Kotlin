@@ -2,6 +2,7 @@ package com.allens
 
 import com.allens.model_base.base.BaseApplication
 import com.allens.model_base.tools.FileHelper
+import com.allens.model_http.XHttp
 
 /**
  *
@@ -11,8 +12,19 @@ import com.allens.model_base.tools.FileHelper
  * @Version:        1.0
  */
 class MyApp : BaseApplication() {
+
+    lateinit var xHttp: XHttp
+
     override fun onAppCreate() {
-        LogHelper.init(this, FileHelper.getBasePath() + "/log", 10, 5, true)
+        LogHelper.init(
+            this,
+            FileHelper.getBasePath() + Config.logPath,
+            Config.maxLogRom,
+            Config.maxLogFile,
+            Config.isDebug
+        )
+
+
     }
 
 }

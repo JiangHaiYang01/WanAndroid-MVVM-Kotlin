@@ -90,5 +90,47 @@ class XHttp {
     }
 
 
+    fun <T> doPost(
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservablePost(parameter, listener)
+            .subscribe(BeanObserver(tClass, listener))
+    }
+
+
+    fun <T> doBody(
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservableBody(parameter, listener)
+            .subscribe(BeanObserver(tClass, listener))
+    }
+
+    fun <T> doPut(
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservablePut(parameter, listener)
+            .subscribe(BeanObserver(tClass, listener))
+    }
+
+    fun <T> doDelete(
+        tClass: Class<T>,
+        parameter: String,
+        listener: OnHttpListener<T>
+    ) {
+        ObservableTool.getObservableDelete(parameter, listener)
+            .subscribe(BeanObserver(tClass, listener))
+    }
+
+
+
+
+
+
 }
 

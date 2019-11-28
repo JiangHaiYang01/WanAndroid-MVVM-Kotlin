@@ -9,13 +9,34 @@ package com.allens.model_http.impl
  */
 
 
-interface OnHttpListener<T> {
+interface OnHttpListenerImpl<T> {
     //请求头
-    fun onHeard(map: Map<String, String>)
+    fun onHeard(map: HashMap<String, String>)
 
     //请求体
-    fun onMap(map: Map<String, Any>)
+    fun onMap(map: HashMap<String, Any>)
 
+
+}
+
+
+abstract class OnHttpListener<T> : OnHttpListenerImpl<T> {
+    override fun onHeard(map: HashMap<String, String>) {
+    }
+
+    override fun onMap(map: HashMap<String, Any>) {
+    }
+
+    //成功
+    abstract fun onSuccess(t: T)
+
+    //失败
+    abstract fun onError(e: Throwable)
+
+}
+
+
+interface OnBaseHttpListener<T> {
     //成功
     fun onSuccess(t: T)
 

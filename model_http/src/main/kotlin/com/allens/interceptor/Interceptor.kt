@@ -27,7 +27,6 @@ object LogInterceptor {
                 ) {
                     return
                 }
-                print("[log>>>>] $message")
                 Logger.i(message)
             }
         })

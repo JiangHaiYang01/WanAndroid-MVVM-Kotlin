@@ -16,7 +16,7 @@ open class HttpConfig {
         var connectTime: Long = 10
         var readTime: Long = 10
         var writeTime: Long = 10
-        var retryOnConnectionFailure: Boolean = true
+        var retryOnConnectionFailure: Boolean = false
         var isLog: Boolean = true
         var level: HttpLevel = HttpLevel.BODY
         var baseUrl: String = "http://badu.com/"
