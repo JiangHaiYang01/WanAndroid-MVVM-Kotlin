@@ -1,4 +1,4 @@
-package com.allens
+package com.allens.config
 
 class Config {
     companion object{

@@ -2,21 +2,22 @@ package com.allens.ui.activity
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
-import com.allens.Config
+import com.allens.config.Config
 import com.allens.LogHelper
 import com.allens.bean.LogInBean
+import com.allens.config.SpConfig
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
 import com.allens.model_http.XHttp
 import com.allens.model_http.impl.OnBaseHttpListener
 import com.allens.model_http.impl.OnHttpListener
+import com.allens.status.UserStatus
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
+import com.tencent.mmkv.MMKV
 
 class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
 
@@ -58,6 +59,23 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
                 override fun onSuccess(t: LogInBean) {
                     LogHelper.i("登录请求成功 $t")
                     if (t.errorCode == 0) {
+                        //保存登录状态
+                        MMKV.defaultMMKV().encode(SpConfig.isLogin,true)
+                        MMKV.defaultMMKV().encode(SpConfig.userPhone,t.data.nickname)
+                        MMKV.defaultMMKV().encode(SpConfig.userToken,t.data.token)
+                        MMKV.defaultMMKV().encode(SpConfig.userId,t.data.id)
+                        MMKV.defaultMMKV().encode(SpConfig.icon,t.data.icon)
+
+
+                        //通知状态变化
+                        UserStatus.isLogIn.value = true
+                        UserStatus.userPhone.value = t.data.nickname
+                        UserStatus.token.value = t.data.token
+                        UserStatus.userId.value = t.data.id
+                        UserStatus.icon.value = t.data.icon
+
+                        //退出当前界面
+                        finish()
 
                     } else {
                         Snackbar.make(bind.actLoginParent, t.errorMsg, Snackbar.LENGTH_SHORT).show()

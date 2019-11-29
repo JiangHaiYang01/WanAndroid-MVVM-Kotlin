@@ -11,27 +11,29 @@ import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
 import com.allens.tools.R
+import com.allens.tools.databinding.FgFindBinding
 import com.allens.tools.databinding.FgHomeBinding
 
-class HomeFragment :BaseMVVMFragment<FgHomeBinding,HomeModel,HomeVM>(){
+//发现界面
+class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>() {
     override fun initMVVMListener() {
     }
 
     override fun getContentViewId(): Int {
-        return R.layout.fg_home
+        return R.layout.fg_find
     }
 
-    override fun createModel(): HomeModel {
-        return HomeModel()
+    override fun createModel(): FindModel {
+        return FindModel()
     }
 
-    override fun createVMClass(): Class<HomeVM> {
-        return HomeVM::class.java
+    override fun createVMClass(): Class<FindVM> {
+        return FindVM::class.java
     }
 
 }
 
 
-class HomeModel : BaseModel
+class FindModel : BaseModel
 
-class HomeVM  : BaseVM<HomeModel>()
+class FindVM : BaseVM<FindModel>()

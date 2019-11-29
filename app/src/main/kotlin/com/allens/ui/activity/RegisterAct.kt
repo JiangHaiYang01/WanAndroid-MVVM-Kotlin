@@ -3,7 +3,7 @@ package com.allens.ui.activity
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.MutableLiveData
-import com.allens.Config
+import com.allens.config.Config
 import com.allens.LogHelper
 import com.allens.bean.LogInBean
 import com.allens.model_base.base.impl.BaseMVVMAct

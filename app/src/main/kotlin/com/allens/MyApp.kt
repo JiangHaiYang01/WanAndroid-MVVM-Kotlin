@@ -1,8 +1,10 @@
 package com.allens
 
+import com.allens.config.Config
 import com.allens.model_base.base.BaseApplication
 import com.allens.model_base.tools.FileHelper
 import com.allens.model_http.XHttp
+import com.tencent.mmkv.MMKV
 
 /**
  *
@@ -13,9 +15,19 @@ import com.allens.model_http.XHttp
  */
 class MyApp : BaseApplication() {
 
-    lateinit var xHttp: XHttp
 
     override fun onAppCreate() {
+        //日志
+        init_Log()
+        //key value 配置
+        init_MMKV()
+    }
+
+    private fun init_MMKV() {
+        MMKV.initialize(this)
+    }
+
+    private fun init_Log() {
         LogHelper.init(
             this,
             FileHelper.getBasePath() + Config.logPath,
@@ -23,8 +35,6 @@ class MyApp : BaseApplication() {
             Config.maxLogFile,
             Config.isDebug
         )
-
-
     }
 
 }

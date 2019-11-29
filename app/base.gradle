@@ -145,10 +145,22 @@ ext {
         //屏幕适配 {@link https://github.com/JessYanCoding/AndroidAutoSize}
         implementation 'me.jessyan:autosize:1.1.2'
 
+        //腾讯出品 linb(https://github.com/Tencent/MMKV/blob/master/readme_cn.md)
+        implementation 'com.tencent:mmkv:1.0.23'
+
 
         //==========================================================================================
-        // 其他第三方
+        // Android 官方
         //==========================================================================================
         implementation 'com.google.android.material:material:1.0.0'
+
+
+        //==========================================================================================
+        // jetPack
+        //==========================================================================================
+        //room
+        def room_version = "2.2.0-rc01"
+        implementation "androidx.room:room-runtime:$room_version"
+        annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
     }
 }

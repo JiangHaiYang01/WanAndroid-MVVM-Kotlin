@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="user"
+            type="com.allens.status.UserStatus" />
+
+        <variable
             name="vm"
             type="com.allens.ui.fragment.MeFgVM" />
 
@@ -31,6 +35,7 @@
             android:layout_height="80dp"
             android:layout_marginTop="15dp"
             android:background="@color/color_write"
+            android:clickable="@{!user.isLogIn().booleanValue()}"
             app:layout_constraintTop_toBottomOf="@+id/fg_me_tv_title">
 
             <ImageView
@@ -39,10 +44,10 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/fg_me_heard_def"
-                app:imgError="@{vm.defHeardImg}"
-                app:imgPlace="@{vm.defHeardImg}"
-                app:imgUrl="@{vm.heardImgUrl}"
+                app:imgError="@{@drawable/fg_me_heard_def}"
                 app:imgIsCircleCrop="@{true}"
+                app:imgPlace="@{@drawable/fg_me_heard_def}"
+                app:imgUrl="@{vm.heardImgUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@string/fg_me_tv_click_login"
+                android:text="@{user.isLogIn().booleanValue() ? user.userPhone : @string/fg_me_tv_click_login,default = @string/fg_me_tv_click_login}"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/fg_me_img_heard"

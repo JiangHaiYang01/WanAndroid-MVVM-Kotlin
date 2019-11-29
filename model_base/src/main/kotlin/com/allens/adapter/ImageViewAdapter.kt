@@ -28,8 +28,8 @@ fun ImageView.imgSrc(resId: Drawable) {
 )
 fun ImageView.loadImg(
     url: String?,
-    error: Int?,
-    placeholderRes: Int?,
+    error: Drawable?,
+    placeholderRes: Drawable?,
     isCircleCrop: Boolean = false,
     isRounded: Boolean = false,
     roundingRadius: Int = 10
