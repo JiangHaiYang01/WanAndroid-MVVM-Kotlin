@@ -14,4 +14,7 @@
     <string name="register">注册</string>
     <string name="fg_me_setting">设置</string>
     <string name="find_you_want">搜索感兴趣的内容</string>
+    <string name="fg_me_tv_star">积分</string>
+    <string name="fg_me_tv_ranking">排行榜</string>
+    <string name="fg_me_tv_grade">积分等级</string>
 </resources>

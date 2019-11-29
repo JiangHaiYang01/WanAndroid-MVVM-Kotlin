@@ -22,7 +22,6 @@ class BeanObserver<T>(private val tClass: Class<T>, private val listener: OnHttp
 
     override fun onComplete() {
         super.onComplete()
-        Logger.i("=======================complete")
         try {
             val json: String = value.string()
             val t = HttpManager.gson.fromJson(json, tClass)

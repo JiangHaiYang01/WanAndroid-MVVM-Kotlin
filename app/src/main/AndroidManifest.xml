@@ -36,6 +36,7 @@
         <activity android:name="com.allens.ui.activity.MainActivity" />
         <activity android:name="com.allens.ui.activity.LogInAct" />
         <activity android:name="com.allens.ui.activity.RegisterAct" />
+        <activity android:name="com.allens.ui.activity.SettingAct" />
     </application>
 
 </manifest>

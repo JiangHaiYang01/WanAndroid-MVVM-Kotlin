@@ -1,5 +1,6 @@
 package com.allens.ui.fragment
 
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import com.allens.LogHelper
 import com.allens.model_base.base.impl.BaseMVVMAct
@@ -31,12 +32,16 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
 
 
         //主界面
-        bind.fgMeCl.setOnClickListener { startActivity(LogInAct::class.java) }
+        bind.fgMeImgHeard.setOnClickListener { startActivity(LogInAct::class.java) }
 
         //设置
         bind.fgMeImgHeard.setOnClickListener {
             LogHelper.i("点击进入设置界面")
         }
+
+        bind.fgMeStar.setInfo(resources.getString(R.string.fg_me_tv_star))
+        bind.fgMeRank.setInfo(resources.getString(R.string.fg_me_tv_ranking))
+        bind.fgMeGrade.setInfo(resources.getString(R.string.fg_me_tv_grade))
 
 
     }
@@ -48,6 +53,13 @@ class MeFgModel : BaseModel
 
 class MeFgVM : BaseVM<MeFgModel>() {
     var heardImgUrl = "http://static.runoob.com/images/demo/demo1.jpg"
+
+    //积分
+    var integral = MediatorLiveData<String>().apply { value = "0" }
+    //排行
+    var ranking = MediatorLiveData<String>().apply { value = "0" }
+    //等级
+    var grade = MediatorLiveData<String>().apply { value = "0" }
 
 
 }
