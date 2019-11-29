@@ -18,6 +18,7 @@ import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeBinding
 import com.allens.ui.adapter.ImageBannerLoader
+import java.lang.NullPointerException
 
 class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
     override fun initMVVMListener() {
@@ -30,7 +31,7 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
                 }
                 //设置banner
                 val list = ArrayList<String>()
-                for ((index, data) in t.data.withIndex()) {
+                for (data in t.data) {
                     list.add(data.imagePath)
                 }
                 LogHelper.i("load img url $list")
