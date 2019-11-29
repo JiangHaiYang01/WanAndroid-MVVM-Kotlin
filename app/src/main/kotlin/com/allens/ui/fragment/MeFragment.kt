@@ -33,11 +33,11 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
         //主界面
         bind.fgMeCl.setOnClickListener { startActivity(LogInAct::class.java) }
 
+        //设置
+        bind.fgMeImgHeard.setOnClickListener {
+            LogHelper.i("点击进入设置界面")
+        }
 
-        //是否登录
-        UserStatus.isLogIn.observe(this, Observer {
-            LogHelper.i("me fragment 是否登录 ${it}")
-        })
 
     }
 

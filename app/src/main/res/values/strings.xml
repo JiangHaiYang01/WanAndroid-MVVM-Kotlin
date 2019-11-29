@@ -12,4 +12,5 @@
     <string name="forget_pwd">忘记密码?</string>
     <string name="register_new_user">注册新用户</string>
     <string name="register">注册</string>
+    <string name="fg_me_setting">设置</string>
 </resources>
