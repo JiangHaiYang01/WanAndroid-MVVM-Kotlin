@@ -12,6 +12,7 @@ import com.allens.model_base.base.impl.BaseVM
 import com.allens.model_http.XHttp
 import com.allens.model_http.impl.OnBaseHttpListener
 import com.allens.model_http.impl.OnHttpListener
+import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityRegisterBinding
 import com.google.android.material.snackbar.Snackbar
@@ -105,10 +106,7 @@ class RegisterModel : BaseModel {
         pwd: String?,
         listener: OnBaseHttpListener<LogInBean>
     ) {
-        XHttp.Builder()
-            .baseUrl(Config.baseURL)
-            .retryOnConnectionFailure(false)
-            .build()
+        HttpTool.xHttp
             .doPost(LogInBean::class.java, "user/register", object : OnHttpListener<LogInBean>() {
                 override fun onMap(map: HashMap<String, Any>) {
                     super.onMap(map)

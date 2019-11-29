@@ -14,6 +14,7 @@ import com.allens.model_http.XHttp
 import com.allens.model_http.impl.OnBaseHttpListener
 import com.allens.model_http.impl.OnHttpListener
 import com.allens.status.UserStatus
+import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -131,10 +132,7 @@ class LogInModel : BaseModel {
         pwd: String?,
         listener: OnBaseHttpListener<LogInBean>
     ) {
-        XHttp.Builder()
-            .baseUrl(Config.baseURL)
-            .retryOnConnectionFailure(false)
-            .build()
+        HttpTool.xHttp
             .doPost(LogInBean::class.java, "user/login", object : OnHttpListener<LogInBean>() {
                 override fun onMap(map: HashMap<String, Any>) {
                     super.onMap(map)
