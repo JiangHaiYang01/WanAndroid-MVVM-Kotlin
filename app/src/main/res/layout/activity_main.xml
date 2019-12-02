@@ -26,6 +26,8 @@
             android:id="@+id/act_main_rg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:background="@color/color_write"
             android:orientation="horizontal">
 
 
@@ -33,6 +35,7 @@
                 style="@style/BaseStyleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableTop="@drawable/act_main_select_home"
                 android:text="@string/act_main_rb_home"
                 app:color_checked="@{vm.selectColor}"
                 app:color_normal="@{vm.defColor}" />
@@ -41,6 +44,7 @@
                 style="@style/BaseStyleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableTop="@drawable/act_main_select_star"
                 android:text="@string/act_main_rb_star"
                 app:color_checked="@{vm.selectColor}"
                 app:color_normal="@{vm.defColor}" />
@@ -49,7 +53,8 @@
                 style="@style/BaseStyleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_project"
+                android:drawableTop="@drawable/act_main_select_search"
+                android:text="@string/act_main_rb_search"
                 app:color_checked="@{vm.selectColor}"
                 app:color_normal="@{vm.defColor}" />
 
@@ -57,6 +62,7 @@
                 style="@style/BaseStyleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableTop="@drawable/act_main_select_me"
                 android:text="@string/act_main_rb_me"
                 app:color_checked="@{vm.selectColor}"
                 app:color_normal="@{vm.defColor}" />
