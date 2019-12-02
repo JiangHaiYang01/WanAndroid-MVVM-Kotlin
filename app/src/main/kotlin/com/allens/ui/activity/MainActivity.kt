@@ -1,5 +1,6 @@
 package com.allens.ui.activity
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.allens.model_base.base.impl.BaseMVVMAct
@@ -43,5 +44,9 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
 class MainModel : BaseModel
 
 class MainVM : BaseVM<MainModel>() {
+    //选中颜色
+    val selectColor = Color.parseColor("#0088FF")
+    //未选中颜色
+    val defColor = Color.parseColor("#333333")
 
 }

@@ -33,25 +33,33 @@
                 style="@style/BaseStyleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_home" />
+                android:text="@string/act_main_rb_home"
+                app:color_checked="@{vm.selectColor}"
+                app:color_normal="@{vm.defColor}" />
 
             <RadioButton
                 style="@style/BaseStyleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_star" />
+                android:text="@string/act_main_rb_star"
+                app:color_checked="@{vm.selectColor}"
+                app:color_normal="@{vm.defColor}" />
 
             <RadioButton
                 style="@style/BaseStyleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_project" />
+                android:text="@string/act_main_rb_project"
+                app:color_checked="@{vm.selectColor}"
+                app:color_normal="@{vm.defColor}" />
 
             <RadioButton
                 style="@style/BaseStyleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/act_main_rb_me" />
+                android:text="@string/act_main_rb_me"
+                app:color_checked="@{vm.selectColor}"
+                app:color_normal="@{vm.defColor}" />
         </RadioGroup>
 
 

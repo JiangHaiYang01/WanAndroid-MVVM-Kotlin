@@ -1,4 +1,4 @@
-package com.allens.adapter.recyclerview
+package com.allens.adapter
 
 import android.graphics.drawable.Drawable
 import androidx.databinding.BindingAdapter

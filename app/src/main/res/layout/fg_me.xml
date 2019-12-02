@@ -79,11 +79,23 @@
             android:id="@+id/rf_me_ry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/fg_me_cl"
             app:recyclerViewLineDef="@{false}"
-            tools:itemCount="3"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_fg_me_btn" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rf_me_ry_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/rf_me_ry"
+            app:recyclerViewLineDef="@{false}"
+            tools:itemCount="2"
             tools:listitem="@layout/item_fg_me_btn" />
 
 

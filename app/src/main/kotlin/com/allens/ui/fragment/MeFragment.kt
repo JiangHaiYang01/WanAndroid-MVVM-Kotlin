@@ -38,6 +38,7 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
 
         //列表 adapter
         bind.rfMeRy.adapter = MeFragmentItemAdapter(vm.model.getItemData())
+        bind.rfMeRyBottom.adapter = MeFragmentItemAdapter(vm.model.getItemBottomData())
 
 
     }
@@ -52,9 +53,15 @@ class MeFgModel : BaseModel, MeFgModelImpl {
             FgItemDto(R.drawable.fg_me_give, "我赞过的", false),
             FgItemDto(R.drawable.fg_me_collectionset, "收藏集", false),
             FgItemDto(R.drawable.fg_me_history, "阅读过的文章", false),
-            FgItemDto(R.drawable.fg_me_setting, "意见反馈", false),
-            FgItemDto(R.drawable.fg_me_setting, "设置", false)
+            FgItemDto(R.drawable.fg_me_tag, "标签管理", false)
             )
+    }
+
+    override fun getItemBottomData(): MutableList<FgItemDto> {
+        return mutableListOf(
+            FgItemDto(R.drawable.fg_me_options, "意见反馈", false),
+            FgItemDto(R.drawable.fg_me_setting, "设置", false)
+        )
     }
 
 }
@@ -67,4 +74,5 @@ class MeFgVM : BaseVM<MeFgModel>() {
 
 interface MeFgModelImpl {
     fun getItemData(): MutableList<FgItemDto>
+    fun getItemBottomData(): MutableList<FgItemDto>
 }
