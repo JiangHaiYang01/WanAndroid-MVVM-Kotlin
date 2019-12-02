@@ -150,5 +150,12 @@ ext {
         implementation 'com.trello.rxlifecycle3:rxlifecycle-android:3.0.0'
         implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
         implementation 'com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:3.0.0'
+
+
+        //==========================================================================================
+        // kotlin
+        //==========================================================================================
+//        implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+
     }
 }

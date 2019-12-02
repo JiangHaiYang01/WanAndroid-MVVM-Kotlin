@@ -42,7 +42,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
-                android:clickable="@{!user.isLogIn().booleanValue()}"
                 android:src="@drawable/fg_me_heard_def"
                 app:imgError="@{@drawable/fg_me_heard_def}"
                 app:imgIsCircleCrop="@{true}"

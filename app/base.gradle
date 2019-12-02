@@ -161,8 +161,8 @@ ext {
         // jetPack
         //==========================================================================================
         //room
-        def room_version = "2.2.0-rc01"
-        implementation "androidx.room:room-runtime:$room_version"
-        annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+//        def room_version = "2.2.0-rc01"
+//        implementation "androidx.room:room-runtime:$room_version"
+//        annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
     }
 }

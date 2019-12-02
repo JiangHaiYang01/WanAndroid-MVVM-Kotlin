@@ -12,6 +12,7 @@ import com.allens.status.UserStatus
 import com.allens.tools.R
 import com.allens.tools.databinding.FgMeBinding
 import com.allens.ui.activity.LogInAct
+import com.allens.ui.activity.MeAct
 import com.allens.ui.adapter.MeFragmentItemAdapter
 import java.util.logging.Logger
 
@@ -34,7 +35,14 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
 
 
         //个人中心 // 登录
-        bind.fgMeCl.setOnClickListener { startActivity(LogInAct::class.java) }
+        bind.fgMeCl.setOnClickListener {
+            if (UserStatus.isLogIn.value == true) {
+                startActivity(MeAct::class.java)
+            } else {
+                startActivity(LogInAct::class.java)
+            }
+
+        }
 
         //列表 adapter
         bind.rfMeRy.adapter = MeFragmentItemAdapter(vm.model.getItemData())
@@ -54,7 +62,7 @@ class MeFgModel : BaseModel, MeFgModelImpl {
             FgItemDto(R.drawable.fg_me_collectionset, "收藏集", false),
             FgItemDto(R.drawable.fg_me_history, "阅读过的文章", false),
             FgItemDto(R.drawable.fg_me_tag, "标签管理", false)
-            )
+        )
     }
 
     override fun getItemBottomData(): MutableList<FgItemDto> {
