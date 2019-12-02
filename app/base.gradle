@@ -153,14 +153,8 @@ ext {
         //屏幕适配 {@link https://github.com/JessYanCoding/AndroidAutoSize}
         implementation 'me.jessyan:autosize:1.1.2'
 
-        //腾讯出品 linb(https://github.com/Tencent/MMKV/blob/master/readme_cn.md)
+        //腾讯出品 link(https://github.com/Tencent/MMKV/blob/master/readme_cn.md)
         implementation 'com.tencent:mmkv:1.0.23'
-
-
-        //==========================================================================================
-        // Android 官方
-        //==========================================================================================
-        implementation 'com.google.android.material:material:1.0.0'
 
 
         //==========================================================================================

@@ -1,14 +1,7 @@
 package com.allens.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.allens.LogHelper
 import com.allens.bean.BannerBean
-import com.allens.model_base.base.BaseFragment
-import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -17,8 +10,6 @@ import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeBinding
-import com.allens.ui.adapter.ImageBannerLoader
-import java.lang.NullPointerException
 
 class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
     override fun initMVVMListener() {
@@ -36,7 +27,7 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
                 }
                 LogHelper.i("load img url $list")
                 bind.fgHomeBanner.setImages(list);
-                bind.fgHomeBanner.setImageLoader(ImageBannerLoader())
+//                bind.fgHomeBanner.setImageLoader(ImageBannerLoader())
                 bind.fgHomeBanner.start()
 
             }

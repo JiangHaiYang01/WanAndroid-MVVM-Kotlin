@@ -35,29 +35,24 @@ fun ImageView.loadImg(
     roundingRadius: Int = 10
 ) {
     val builder = Glide.with(context).load(url)
-    println("自定义的image adapter ---------------------------------------start")
 
     //错误显示图片
     if (error != null) {
-        println("自定义的image adapter ---------------------------------------错误显示图片")
         builder.error(error)
     }
     //占位图
     if (placeholderRes != null) {
-        println("自定义的image adapter ---------------------------------------占位图")
         builder.placeholder(placeholderRes)
     }
 
     //圆角半径
     if (isRounded && roundingRadius > 0) {
-        println("自定义的image adapter ---------------------------------------圆角半径")
         builder.apply(RequestOptions.bitmapTransform(RoundedCorners(roundingRadius)))
     } else if (isRounded) {
         println("自定义的image adapter ---------------------------------------圆角半径 roundingRadius must >0")
     }
     //圆形
     if (isCircleCrop) {
-        println("自定义的image adapter ---------------------------------------圆形")
         builder.apply(RequestOptions.bitmapTransform(CircleCrop()))
     }
 

@@ -3,6 +3,7 @@ package com.allens.ui.fragment
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import com.allens.LogHelper
+import com.allens.data.dto.FgItemDto
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
@@ -11,6 +12,7 @@ import com.allens.status.UserStatus
 import com.allens.tools.R
 import com.allens.tools.databinding.FgMeBinding
 import com.allens.ui.activity.LogInAct
+import com.allens.ui.adapter.MeFragmentItemAdapter
 import java.util.logging.Logger
 
 class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
@@ -31,17 +33,11 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
         bind.user = UserStatus
 
 
-        //主界面
-        bind.fgMeImgHeard.setOnClickListener { startActivity(LogInAct::class.java) }
+        //个人中心 // 登录
+        bind.fgMeCl.setOnClickListener { startActivity(LogInAct::class.java) }
 
-        //设置
-        bind.fgMeImgHeard.setOnClickListener {
-            LogHelper.i("点击进入设置界面")
-        }
-
-        bind.fgMeStar.setInfo(resources.getString(R.string.fg_me_tv_star))
-        bind.fgMeRank.setInfo(resources.getString(R.string.fg_me_tv_ranking))
-        bind.fgMeGrade.setInfo(resources.getString(R.string.fg_me_tv_grade))
+        //列表 adapter
+        bind.rfMeRy.adapter = MeFragmentItemAdapter(vm.model.getItemData())
 
 
     }
@@ -49,17 +45,26 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
 }
 
 
-class MeFgModel : BaseModel
+class MeFgModel : BaseModel, MeFgModelImpl {
+    override fun getItemData(): MutableList<FgItemDto> {
+        return mutableListOf(
+            FgItemDto(R.drawable.fg_me_notify, "消息中心", false),
+            FgItemDto(R.drawable.fg_me_give, "我赞过的", false),
+            FgItemDto(R.drawable.fg_me_collectionset, "收藏集", false),
+            FgItemDto(R.drawable.fg_me_history, "阅读过的文章", false),
+            FgItemDto(R.drawable.fg_me_setting, "意见反馈", false),
+            FgItemDto(R.drawable.fg_me_setting, "设置", false)
+            )
+    }
+
+}
 
 class MeFgVM : BaseVM<MeFgModel>() {
     var heardImgUrl = "http://static.runoob.com/images/demo/demo1.jpg"
 
-    //积分
-    var integral = MediatorLiveData<String>().apply { value = "0" }
-    //排行
-    var ranking = MediatorLiveData<String>().apply { value = "0" }
-    //等级
-    var grade = MediatorLiveData<String>().apply { value = "0" }
 
+}
 
+interface MeFgModelImpl {
+    fun getItemData(): MutableList<FgItemDto>
 }
