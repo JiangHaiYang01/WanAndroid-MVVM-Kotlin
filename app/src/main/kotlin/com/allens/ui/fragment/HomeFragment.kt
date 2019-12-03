@@ -1,9 +1,8 @@
 package com.allens.ui.fragment
 
-import androidx.lifecycle.Lifecycle
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import com.allens.LogHelper
-import com.allens.bean.BannerBean
+import com.allens.bean.SystemBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -12,46 +11,63 @@ import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeBinding
-import com.allens.ui.adapter.ImageBannerLoader
+import com.allens.ui.adapter.HomeFgPagerAdapter
+import com.google.android.material.tabs.TabLayout
+import java.util.*
 
 class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
     override fun initMVVMListener() {
-        //加载轮播图
-        vm.getBanner(object : OnBaseHttpListener<BannerBean> {
-            override fun onSuccess(t: BannerBean) {
-                LogHelper.i("baner 加载成功")
+
+
+        vm.getSystemTab(object : OnBaseHttpListener<SystemBean> {
+            override fun onSuccess(t: SystemBean) {
                 if (t.errorCode != 0) {
                     return
                 }
-                //设置banner
-                val list = ArrayList<String>()
-                for (data in t.data) {
-                    list.add(data.imagePath)
+                //父类
+                val list = ArrayList<Fragment>()
+                for (info in t.data) {
+                    bind.fgHomeTlParent.addTab(bind.fgHomeTlParent.newTab().setText(info.name))
+                    list.add(HomeVpFg())
                 }
-                LogHelper.i("load img url $list")
-                bind.fgHomeBanner.setImages(list);
-                bind.fgHomeBanner.setImageLoader(ImageBannerLoader())
-                bind.fgHomeBanner.start()
-
+//                bind.fgHomeVp.adapter = HomeFgPagerAdapter(list, t, childFragmentManager)
+//                bind.fgHomeTlParent.setupWithViewPager(bind.fgHomeVp);
             }
 
             override fun onError(e: Throwable) {
-                LogHelper.i("baner 加载失败 ${e.message}")
             }
         })
+
+//        val fragments =
+//            ArrayList<Fragment>()
+//        fragments.add(HomeVpFg())
+//        fragments.add(HomeVpFg())
+//        bind.fgHomeVp.setAdapter(HomeFgPagerAdapter(fragments,childFragmentManager))
+//
+//        val arr = arrayOf<String>(
+//          "111",
+//          "222"
+//        )
+//
+//        bind.fgHomeTlParent.setupWithViewPager(bind.fgHomeVp);
+//        for (i in fragments.indices) {
+//            val tab: TabLayout.Tab = bind.fgHomeTlParent.getTabAt(i)!!
+//            tab.text = arr[i]
+//        }
+
     }
+
     override fun initMVVMBind() {
+        bind.vm = vm
     }
 
 
     override fun onStart() {
         super.onStart()
-        bind.fgHomeBanner.startAutoPlay()
     }
 
     override fun onStop() {
         super.onStop()
-        bind.fgHomeBanner.stopAutoPlay()
     }
 
     override fun getContentViewId(): Int {
@@ -71,14 +87,14 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
 
 class HomeModel : BaseModel {
 
-    fun getBanner(lifecycle: LifecycleOwner, listener: OnBaseHttpListener<BannerBean>) {
+    fun getSystemTab(lifecycle: LifecycleOwner, listener: OnBaseHttpListener<SystemBean>) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
-                BannerBean::class.java,
-                "/banner/json",
-                object : OnHttpListener<BannerBean>() {
-                    override fun onSuccess(t: BannerBean) {
+                SystemBean::class.java,
+                "tree/json",
+                object : OnHttpListener<SystemBean>() {
+                    override fun onSuccess(t: SystemBean) {
                         listener.onSuccess(t)
                     }
 
@@ -87,17 +103,16 @@ class HomeModel : BaseModel {
                     }
                 })
     }
-
 }
 
 
 class HomeVM : BaseVM<HomeModel>(), HomeModelImpl {
-
-    override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
-        model.getBanner(lifecycle, listener)
+    override fun getSystemTab(listener: OnBaseHttpListener<SystemBean>) {
+        model.getSystemTab(lifecycle, listener)
     }
+
 }
 
 interface HomeModelImpl {
-    fun getBanner(listener: OnBaseHttpListener<BannerBean>)
+    fun getSystemTab(listener: OnBaseHttpListener<SystemBean>)
 }

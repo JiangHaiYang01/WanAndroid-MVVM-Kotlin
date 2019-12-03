@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.allens.ui.fragment.HomeVM" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,16 +36,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <com.youth.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/fg_home_banner"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/fg_home_tl_parent"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginStart="20dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fg_home_search" />
+            android:background="@color/color_write"
+            app:layout_constraintTop_toBottomOf="@+id/fg_home_search"
+            app:tabIndicatorColor="@color/color_blue"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/color_blue"
+            app:tabTextColor="@color/color_gray" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/fg_home_vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fg_home_tl_parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
