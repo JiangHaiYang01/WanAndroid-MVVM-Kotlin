@@ -12,7 +12,6 @@ import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeBinding
 import com.allens.ui.adapter.HomeFgPagerAdapter
-import com.google.android.material.tabs.TabLayout
 import java.util.*
 
 class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
@@ -26,34 +25,17 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
                 }
                 //父类
                 val list = ArrayList<Fragment>()
-                for (info in t.data) {
-                    bind.fgHomeTlParent.addTab(bind.fgHomeTlParent.newTab().setText(info.name))
-                    list.add(HomeVpFg())
+                for (info in t.data.indices) {
+                    list.add(HomeVpFg(t.data[info]))
                 }
-//                bind.fgHomeVp.adapter = HomeFgPagerAdapter(list, t, childFragmentManager)
-//                bind.fgHomeTlParent.setupWithViewPager(bind.fgHomeVp);
+                bind.fgHomeVp.adapter = HomeFgPagerAdapter(list, t, childFragmentManager)
+                bind.fgHomeTlParent.setupWithViewPager(bind.fgHomeVp);
             }
 
             override fun onError(e: Throwable) {
             }
         })
 
-//        val fragments =
-//            ArrayList<Fragment>()
-//        fragments.add(HomeVpFg())
-//        fragments.add(HomeVpFg())
-//        bind.fgHomeVp.setAdapter(HomeFgPagerAdapter(fragments,childFragmentManager))
-//
-//        val arr = arrayOf<String>(
-//          "111",
-//          "222"
-//        )
-//
-//        bind.fgHomeTlParent.setupWithViewPager(bind.fgHomeVp);
-//        for (i in fragments.indices) {
-//            val tab: TabLayout.Tab = bind.fgHomeTlParent.getTabAt(i)!!
-//            tab.text = arr[i]
-//        }
 
     }
 

@@ -7,7 +7,7 @@ import com.allens.bean.SystemBean
 
 class HomeFgPagerAdapter(
     private val list: List<Fragment>,
-
+    private val bean: SystemBean,
     fragmentManager: FragmentManager
 ) :
     FragmentPagerAdapter(fragmentManager) {
@@ -19,8 +19,8 @@ class HomeFgPagerAdapter(
         return list.size
     }
 
-//
-//    override fun getPageTitle(position: Int): CharSequence? {
-//        return bean.data[position].name
-//    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return bean.data[position].name
+    }
 }

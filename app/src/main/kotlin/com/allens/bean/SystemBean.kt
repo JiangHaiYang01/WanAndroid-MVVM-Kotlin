@@ -1,12 +1,12 @@
 package com.allens.bean
 
 data class SystemBean(
-    val `data`: List<Data>,
+    val `data`: List<SystemResultBean>,
     val errorCode: Int,
     val errorMsg: String
 )
 
-data class Data(
+data class SystemResultBean(
     val children: List<Children>,
     val courseId: Int,
     val id: Int,
