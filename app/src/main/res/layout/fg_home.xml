@@ -53,7 +53,7 @@
         <View
             android:id="@+id/fg_home_tl_line"
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="1dp"
             android:background="@color/color_background"
             app:layout_constraintTop_toBottomOf="@+id/fg_home_tl_parent" />
 

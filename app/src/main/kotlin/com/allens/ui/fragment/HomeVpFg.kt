@@ -1,13 +1,18 @@
 package com.allens.ui.fragment
 
 import android.widget.TextView
-import com.allens.LogHelper
+import androidx.lifecycle.LifecycleOwner
+import com.allens.bean.HomeDetailBean
 import com.allens.bean.SystemResultBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
+import com.allens.model_http.impl.OnBaseHttpListener
+import com.allens.model_http.impl.OnHttpListener
+import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeVpBinding
+import com.allens.ui.adapter.HomeDetailAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 
@@ -30,21 +35,46 @@ class HomeVpFg(private val data: SystemResultBean) :
         }
 
 
+        //默认加载第一个
+        getDetailData(pos = 0)
+
+
         //选中事件监听
         bind.fgHomeVpTlParent.addOnTabSelectedListener(object :
             BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabReselected(ta1: TabLayout.Tab?) {
-                LogHelper.i(" onTabReselected =================> ${ta1?.position}     ${ta1?.isSelected}")
             }
 
             override fun onTabUnselected(ta1: TabLayout.Tab?) {
-                LogHelper.i(" onTabUnselected =================> ${ta1?.position}     ${ta1?.isSelected}")
                 setTabSelect(ta1)
             }
 
             override fun onTabSelected(ta1: TabLayout.Tab?) {
-                LogHelper.i(" onTabSelected =================> ${ta1?.position}     ${ta1?.isSelected}")
                 setTabSelect(ta1)
+
+                getDetailData(pos = ta1?.position)
+            }
+        })
+
+
+    }
+
+    //请求数据源
+    fun getDetailData(pos: Int?) {
+        if (pos == null) {
+            return
+        }
+        vm.getDetail(0, data.children[pos].id, object : OnBaseHttpListener<HomeDetailBean> {
+            override fun onSuccess(t: HomeDetailBean) {
+                if (t.errorCode != 0) {
+                    return
+                }
+
+                bind.fgHomeTlRv.adapter = HomeDetailAdapter(t.data.datas)
+
+            }
+
+            override fun onError(e: Throwable) {
             }
         })
     }
@@ -78,8 +108,35 @@ class HomeVpFg(private val data: SystemResultBean) :
 
 
 class HomeVPModel : BaseModel {
+    fun getDetail(
+        lifecycleOwner: LifecycleOwner,
+        curPage: Int,
+        cid: Int,
+        listener: OnBaseHttpListener<HomeDetailBean>
+    ) {
+        HttpTool.xHttp
+            .doGet(
+                lifecycleOwner,
+                HomeDetailBean::class.java,
+                "article/list/$curPage/json?cid=$cid",
+                object : OnHttpListener<HomeDetailBean>() {
+                    override fun onSuccess(t: HomeDetailBean) {
+                        listener.onSuccess(t)
+                    }
 
+                    override fun onError(e: Throwable) {
+                        listener.onError(e)
+                    }
+                })
+    }
 }
 
 
-class HomeVPVM : BaseVM<HomeVPModel>()
+class HomeVPVM : BaseVM<HomeVPModel>() {
+    fun getDetail(
+        curPage: Int,
+        cid: Int, listener: OnBaseHttpListener<HomeDetailBean>
+    ) {
+        model.getDetail(lifecycle, curPage, cid, listener)
+    }
+}
