@@ -8,5 +8,8 @@ class SpConfig {
         const val userPhone = "userPhone"
         const val icon = "icon"
         const val cookie = "cookie"
+        const val level = "level"
+        const val coinCount = "coinCount"
+        const val rank = "rank"
     }
 }

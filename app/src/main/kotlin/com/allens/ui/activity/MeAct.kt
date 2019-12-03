@@ -25,12 +25,14 @@ class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
         bind.actMeInfoView1.setInfo("等级")
 
 
+
         //获取用户积分排行
         vm.getUserInfoDetail(object : OnBaseHttpListener<UserDetailBean> {
             override fun onSuccess(t: UserDetailBean) {
                 if (t.errorCode != 0) {
                     return
                 }
+                UserStatus.setUserRank(t)
             }
 
             override fun onError(e: Throwable) {
@@ -69,9 +71,6 @@ class MeActModel : BaseModel {
                 UserDetailBean::class.java,
                 "lg/coin/userinfo/json",
                 object : OnHttpListener<UserDetailBean>() {
-                    override fun onMap(map: HashMap<String, Any>) {
-                        super.onMap(map)
-                    }
 
                     override fun onSuccess(t: UserDetailBean) {
                         listener.onSuccess(t)
@@ -93,6 +92,8 @@ class MeActVM : BaseVM<MeActModel>(), MeActModelImpl {
         "https://c-ssl.duitang.com/uploads/item/201811/13/20181113104440_5w4kR.thumb.700_0.jpeg"
 
     var heardImgUrl = "http://static.runoob.com/images/demo/demo1.jpg"
+
+
     override fun getUserInfoDetail(listener: OnBaseHttpListener<UserDetailBean>) {
         model.getUserInfoDetail(listener)
     }

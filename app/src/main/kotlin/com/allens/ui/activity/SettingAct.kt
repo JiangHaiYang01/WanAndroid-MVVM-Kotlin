@@ -25,15 +25,7 @@ class SettingAct : BaseMVVMAct<ActivitySettinngBinding, SettingModel, SettingVm>
                             .show()
                         return
                     }
-                    MMKV.defaultMMKV().clearAll()
-
-
-                    //通知状态变化
-                    UserStatus.isLogIn.value = false
-                    UserStatus.userPhone.value = null
-                    UserStatus.token.value = null
-                    UserStatus.userId.value = null
-                    UserStatus.icon.value = null
+                   UserStatus.logOut(t)
 
                     //退出当前界面
                     finish()

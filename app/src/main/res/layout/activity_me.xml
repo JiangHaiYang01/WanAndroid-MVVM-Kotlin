@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools">
 
     <data>
 
@@ -95,7 +96,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="6dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/act_me_tv_name" />
+            app:layout_constraintTop_toBottomOf="@+id/act_me_tv_name"
+            custom:infoViewSetData="@{user.level.toString()}" />
 
         <com.allens.ui.view.InfoView
             android:id="@+id/act_me_info_view_2"
@@ -104,7 +106,8 @@
             app:layout_constraintLeft_toRightOf="@+id/act_me_info_view_1"
             app:layout_constraintRight_toLeftOf="@+id/act_me_info_view_3"
             app:layout_constraintTop_toBottomOf="@+id/act_me_tv_name"
-            app:layout_constraintTop_toTopOf="@+id/act_me_info_view_1" />
+            app:layout_constraintTop_toTopOf="@+id/act_me_info_view_1"
+            custom:infoViewSetData="@{user.coinCount.toString()}" />
 
         <com.allens.ui.view.InfoView
             android:id="@+id/act_me_info_view_3"
@@ -113,7 +116,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/act_me_tv_name"
-            app:layout_constraintTop_toTopOf="@+id/act_me_info_view_1" />
+            app:layout_constraintTop_toTopOf="@+id/act_me_info_view_1"
+            custom:infoViewSetData="@{user.rank.toString()}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

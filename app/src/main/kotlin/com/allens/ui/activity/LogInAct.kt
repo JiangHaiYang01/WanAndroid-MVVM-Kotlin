@@ -37,7 +37,6 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
     override fun initMVVMListener() {
 
 
-
         bind.etPwd.addTextChangedListener(LoginTextWatcher(0, vm))
 
         bind.etPhone.addTextChangedListener(LoginTextWatcher(1, vm))
@@ -61,23 +60,9 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
             LogHelper.i("点击登录 账号 ${vm.number.value} 密码 ${vm.pwd.value}")
             vm.login(vm.number.value, vm.pwd.value, object : OnBaseHttpListener<LogInBean> {
                 override fun onSuccess(t: LogInBean) {
-                    LogHelper.i("登录请求成功 $t")
+                    LogHelper.i("登录请求成功 ")
                     if (t.errorCode == 0) {
-                        //保存登录状态
-                        MMKV.defaultMMKV().encode(SpConfig.isLogin,true)
-                        MMKV.defaultMMKV().encode(SpConfig.userPhone,t.data.nickname)
-                        MMKV.defaultMMKV().encode(SpConfig.userToken,t.data.token)
-                        MMKV.defaultMMKV().encode(SpConfig.userId,t.data.id)
-                        MMKV.defaultMMKV().encode(SpConfig.icon,t.data.icon)
-
-
-                        //通知状态变化
-                        UserStatus.isLogIn.value = true
-                        UserStatus.userPhone.value = t.data.nickname
-                        UserStatus.token.value = t.data.token
-                        UserStatus.userId.value = t.data.id
-                        UserStatus.icon.value = t.data.icon
-
+                        UserStatus.login(t)
                         //退出当前界面
                         finish()
 

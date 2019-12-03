@@ -2,6 +2,9 @@ package com.allens.status
 
 import androidx.lifecycle.MutableLiveData
 import com.allens.LogHelper
+import com.allens.bean.LogInBean
+import com.allens.bean.LogOutBean
+import com.allens.bean.UserDetailBean
 import com.allens.config.SpConfig
 import com.tencent.mmkv.MMKV
 
@@ -30,6 +33,53 @@ object UserStatus {
     //cookie
     var cookie =
         MutableLiveData<String>().apply { value = MMKV.defaultMMKV().decodeString(SpConfig.cookie) }
+    //总积分
+    var coinCount =
+        MutableLiveData<Int>().apply { value = MMKV.defaultMMKV().decodeInt(SpConfig.coinCount) }
+    // 等级
+    var level =
+        MutableLiveData<Int>().apply { value = MMKV.defaultMMKV().decodeInt(SpConfig.level) }
+    // 当前排名
+    var rank =
+        MutableLiveData<Int>().apply { value = MMKV.defaultMMKV().decodeInt(SpConfig.rank) }
 
 
+    fun login(t: LogInBean) {
+        //保存登录状态
+        MMKV.defaultMMKV().encode(SpConfig.isLogin, true)
+        MMKV.defaultMMKV().encode(SpConfig.userPhone, t.data.nickname)
+        MMKV.defaultMMKV().encode(SpConfig.userToken, t.data.token)
+        MMKV.defaultMMKV().encode(SpConfig.userId, t.data.id)
+        MMKV.defaultMMKV().encode(SpConfig.icon, t.data.icon)
+
+
+        //通知状态变化
+        isLogIn.value = true
+        userPhone.value = t.data.nickname
+        token.value = t.data.token
+        userId.value = t.data.id
+        icon.value = t.data.icon
+    }
+
+    fun logOut(t: LogOutBean) {
+        MMKV.defaultMMKV().clearAll()
+
+
+        //通知状态变化
+        isLogIn.value = false
+        userPhone.value = null
+        token.value = null
+        userId.value = null
+        icon.value = null
+    }
+
+    fun setUserRank(t: UserDetailBean) {
+        MMKV.defaultMMKV().encode(SpConfig.coinCount, t.data.coinCount)
+        MMKV.defaultMMKV().encode(SpConfig.level, t.data.level)
+        MMKV.defaultMMKV().encode(SpConfig.rank, t.data.rank)
+
+        coinCount.value = t.data.coinCount
+        level.value = t.data.level
+        rank.value = t.data.rank
+    }
 }
