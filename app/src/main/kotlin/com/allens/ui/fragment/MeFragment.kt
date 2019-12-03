@@ -13,10 +13,12 @@ import com.allens.tools.R
 import com.allens.tools.databinding.FgMeBinding
 import com.allens.ui.activity.LogInAct
 import com.allens.ui.activity.MeAct
+import com.allens.ui.activity.SettingAct
 import com.allens.ui.adapter.MeFragmentItemAdapter
 import java.util.logging.Logger
 
-class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
+class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>(),
+    MeFragmentItemAdapter.OnMeFragmentItemClickListener {
     override fun createModel(): MeFgModel {
         return MeFgModel()
     }
@@ -29,9 +31,13 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
         return R.layout.fg_me
     }
 
-    override fun initMVVMListener() {
+    override fun initMVVMBind() {
         bind.vm = vm
         bind.user = UserStatus
+
+    }
+
+    override fun initMVVMListener() {
 
 
         //个人中心 // 登录
@@ -45,10 +51,24 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
         }
 
         //列表 adapter
-        bind.rfMeRy.adapter = MeFragmentItemAdapter(vm.model.getItemData())
-        bind.rfMeRyBottom.adapter = MeFragmentItemAdapter(vm.model.getItemBottomData())
+        bind.rfMeRy.adapter = MeFragmentItemAdapter(vm.model.getItemData(), this)
+        bind.rfMeRyBottom.adapter = MeFragmentItemAdapter(vm.model.getItemBottomData(), this)
 
 
+    }
+
+    //点击事件
+    override fun onFragmentItemClick(pos: Int, item: FgItemDto) {
+        when (item.tag) {
+            //设置
+            6 -> {
+                if (UserStatus.isLogIn.value == true) {
+                    startActivity(SettingAct::class.java)
+                } else {
+                    startActivity(LogInAct::class.java)
+                }
+            }
+        }
     }
 
 }
@@ -57,18 +77,18 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>() {
 class MeFgModel : BaseModel, MeFgModelImpl {
     override fun getItemData(): MutableList<FgItemDto> {
         return mutableListOf(
-            FgItemDto(R.drawable.fg_me_notify, "消息中心", false),
-            FgItemDto(R.drawable.fg_me_give, "我赞过的", false),
-            FgItemDto(R.drawable.fg_me_collectionset, "收藏集", false),
-            FgItemDto(R.drawable.fg_me_history, "阅读过的文章", false),
-            FgItemDto(R.drawable.fg_me_tag, "标签管理", false)
+            FgItemDto(R.drawable.fg_me_notify, "消息中心", false, 0),
+            FgItemDto(R.drawable.fg_me_give, "我赞过的", false, 1),
+            FgItemDto(R.drawable.fg_me_collectionset, "收藏集", false, 2),
+            FgItemDto(R.drawable.fg_me_history, "阅读过的文章", false, 3),
+            FgItemDto(R.drawable.fg_me_tag, "标签管理", false, 4)
         )
     }
 
     override fun getItemBottomData(): MutableList<FgItemDto> {
         return mutableListOf(
-            FgItemDto(R.drawable.fg_me_options, "意见反馈", false),
-            FgItemDto(R.drawable.fg_me_setting, "设置", false)
+            FgItemDto(R.drawable.fg_me_options, "意见反馈", false, 5),
+            FgItemDto(R.drawable.fg_me_setting, "设置", false, 6)
         )
     }
 

@@ -1,10 +1,11 @@
 package com.allens.model_http.manager
 
-import com.allens.model_http.XHttp
+import com.allens.interceptor.ReceivedCookieInterceptor
 import com.allens.model_http.config.HttpConfig
 import com.allens.model_http.interceptor.HeardInterceptor
 import com.allens.model_http.interceptor.LogInterceptor
 import com.google.gson.Gson
+import com.orhanobut.logger.Logger
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -51,9 +52,20 @@ object HttpManager {
         if (HttpConfig.isLog)
             okHttpBuilder.addInterceptor(LogInterceptor.register(HttpConfig.level))
         val map = HttpConfig.heardMap
-        if (map != null && map.isNullOrEmpty()) {
+        if (!map.isNullOrEmpty()) {
             okHttpBuilder.addInterceptor(HeardInterceptor.register(map))
         }
+
+        //cookie 拦截器
+        val cookiesListener = HttpConfig.cookieListener
+        val onCookieInterceptor = HttpConfig.onCookieInterceptor
+        if (cookiesListener != null && onCookieInterceptor != null)
+            okHttpBuilder.addInterceptor(
+                ReceivedCookieInterceptor.register(
+                    cookiesListener,
+                    onCookieInterceptor
+                )
+            )
     }
 
     private fun createRetrofit(): Retrofit {

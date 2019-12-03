@@ -5,6 +5,9 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.allens.impl.OnCookieInterceptor
+import com.allens.impl.OnHeardListener
+import com.allens.interceptor.OnCookieListener
 import com.allens.model_http.config.HttpConfig
 import com.allens.model_http.config.HttpLevel
 import com.allens.model_http.impl.ApiService
@@ -18,6 +21,7 @@ import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
+import kotlin.collections.HashMap
 
 
 /**
@@ -61,13 +65,24 @@ class XHttp {
             return this
         }
 
-        fun addLogFilter(listener: OnLogFilterListener?): Builder {
+        fun addLogFilter(listener: OnLogFilterListener): Builder {
             HttpConfig.logFilterListener = listener
             return this
         }
 
-        fun addHead(map: Map<String, String>?): Builder {
-            HttpConfig.heardMap = map
+        fun addHead(listener: OnHeardListener): Builder {
+            val hashMap = HashMap<String, String>()
+            listener.onHeardMap(hashMap)
+            HttpConfig.heardMap = hashMap
+            return this
+        }
+
+        fun addCookieInterceptor(
+            cookieListener: OnCookieListener,
+            onCookieInterceptor: OnCookieInterceptor
+        ): Builder {
+            HttpConfig.cookieListener = cookieListener
+            HttpConfig.onCookieInterceptor = onCookieInterceptor
             return this
         }
 
@@ -86,8 +101,6 @@ class XHttp {
     //==============================================================================================
     // 绑定生命周期
     //==============================================================================================
-
-
 
 
     //==============================================================================================

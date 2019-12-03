@@ -1,5 +1,7 @@
 package com.allens.ui.fragment
 
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import com.allens.LogHelper
 import com.allens.bean.BannerBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
@@ -10,6 +12,7 @@ import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeBinding
+import com.allens.ui.adapter.ImageBannerLoader
 
 class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
     override fun initMVVMListener() {
@@ -27,7 +30,7 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
                 }
                 LogHelper.i("load img url $list")
                 bind.fgHomeBanner.setImages(list);
-//                bind.fgHomeBanner.setImageLoader(ImageBannerLoader())
+                bind.fgHomeBanner.setImageLoader(ImageBannerLoader())
                 bind.fgHomeBanner.start()
 
             }
@@ -36,6 +39,8 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
                 LogHelper.i("baner 加载失败 ${e.message}")
             }
         })
+    }
+    override fun initMVVMBind() {
     }
 
 
@@ -64,27 +69,32 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
 }
 
 
-class HomeModel : BaseModel, HomeModelImpl {
+class HomeModel : BaseModel {
 
-    override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
+    fun getBanner(lifecycle: LifecycleOwner, listener: OnBaseHttpListener<BannerBean>) {
         HttpTool.xHttp
-            .doGet(BannerBean::class.java, "/banner/json", object : OnHttpListener<BannerBean>() {
-                override fun onSuccess(t: BannerBean) {
-                    listener.onSuccess(t)
-                }
+            .doGet(
+                lifecycle,
+                BannerBean::class.java,
+                "/banner/json",
+                object : OnHttpListener<BannerBean>() {
+                    override fun onSuccess(t: BannerBean) {
+                        listener.onSuccess(t)
+                    }
 
-                override fun onError(e: Throwable) {
-                    listener.onError(e)
-                }
-            })
+                    override fun onError(e: Throwable) {
+                        listener.onError(e)
+                    }
+                })
     }
 
 }
 
 
 class HomeVM : BaseVM<HomeModel>(), HomeModelImpl {
+
     override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
-        model.getBanner(listener)
+        model.getBanner(lifecycle, listener)
     }
 }
 

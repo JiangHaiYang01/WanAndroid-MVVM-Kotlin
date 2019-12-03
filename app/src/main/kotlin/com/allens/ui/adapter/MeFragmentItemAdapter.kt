@@ -8,7 +8,8 @@ import com.chad.library.adapter.base.BaseViewHolder
 
 //使用 kotlin  写adapter
 class MeFragmentItemAdapter(
-    data: MutableList<FgItemDto>
+    data: MutableList<FgItemDto>,
+    private val listener: OnMeFragmentItemClickListener
 ) :
     BaseQuickAdapter<FgItemDto, BaseViewHolder>(R.layout.item_fg_me_btn, data) {
     override fun convert(helper: BaseViewHolder?, item: FgItemDto?) {
@@ -23,6 +24,13 @@ class MeFragmentItemAdapter(
             .setImageResource(R.id.item_fg_me_img, item.icon)
             .setVisible(R.id.item_fg_me_tv_right, item.isShowRight)
 
+        helper.itemView.setOnClickListener {
+            listener.onFragmentItemClick(helper.layoutPosition, item)
+        }
+    }
 
+    interface OnMeFragmentItemClickListener {
+        fun onFragmentItemClick(pos: Int, item: FgItemDto);
     }
 }
+

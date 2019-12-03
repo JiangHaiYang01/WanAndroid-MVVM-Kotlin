@@ -1,5 +1,7 @@
 package com.allens.model_http.config
 
+import com.allens.impl.OnCookieInterceptor
+import com.allens.interceptor.OnCookieListener
 import com.allens.model_http.impl.OnLogFilterListener
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -21,6 +23,8 @@ open class HttpConfig {
         var level: HttpLevel = HttpLevel.BODY
         var baseUrl: String = "http://badu.com/"
         var logFilterListener: OnLogFilterListener? = null
+        var cookieListener: OnCookieListener? = null
+        var onCookieInterceptor: OnCookieInterceptor? = null
         var heardMap: Map<String, String>? = null
     }
 }

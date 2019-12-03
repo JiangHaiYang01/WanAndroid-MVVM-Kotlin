@@ -27,6 +27,9 @@ object UserStatus {
     //头像
     var icon =
         MutableLiveData<String>().apply { value = MMKV.defaultMMKV().decodeString(SpConfig.icon) }
+    //cookie
+    var cookie =
+        MutableLiveData<String>().apply { value = MMKV.defaultMMKV().decodeString(SpConfig.cookie) }
 
 
 }

@@ -25,7 +25,7 @@ interface BaseMVVMImpl<M : BaseModel> : LifecycleObserver {
     fun registerModel(model: M)
 
     //注册 Lifecycle
-    fun registerLifecycle(lifecycle: Lifecycle);
+    fun registerLifecycleOwner(lifecycle: LifecycleOwner)
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
     fun onAny(
@@ -63,12 +63,12 @@ interface MVVMCallback<M : BaseModel, T : Any> {
 abstract class BaseVM<M : BaseModel> : BaseMVVMImpl<M>, ViewModel() {
     lateinit var model: M
 
-    lateinit var lifecycle: Lifecycle
+    lateinit var lifecycle: LifecycleOwner
     override fun registerModel(model: M) {
         this.model = model
     }
 
-    override fun registerLifecycle(lifecycle: Lifecycle) {
+    override fun registerLifecycleOwner(lifecycle: LifecycleOwner) {
         this.lifecycle = lifecycle
     }
 
@@ -106,15 +106,18 @@ abstract class BaseMVVMAct<V : ViewDataBinding, M : BaseModel, VM : BaseVM<M>> :
         //绑定生命周期
         lifecycle.addObserver(vm)
         vm.registerModel(createModel())
-        vm.registerLifecycle(lifecycle)
+        //注册生命周期
+        vm.registerLifecycleOwner(this)
         bind = DataBindingUtil.setContentView(this, getContentViewId())
         //用LiveData配合DataBinding的话，要手动将生成的Binding布局类和LifecycleOwner关联起来
         bind.lifecycleOwner = this
 
+        initMVVMBind()
         initMVVMListener()
     }
 
 
+    abstract fun initMVVMBind()
     abstract fun initMVVMListener()
 }
 
@@ -135,6 +138,8 @@ abstract class BaseMVVMFragment<V : ViewDataBinding, M : BaseModel, VM : BaseVM<
         //绑定生命周期
         lifecycle.addObserver(vm)
         vm.registerModel(createModel())
+        //注册生命周期
+        vm.registerLifecycleOwner(this)
         bind = DataBindingUtil.inflate(inflater, getContentViewId(), container, false)
         //用LiveData配合DataBinding的话，要手动将生成的Binding布局类和LifecycleOwner关联起来
         bind.lifecycleOwner = this
@@ -152,10 +157,12 @@ abstract class BaseMVVMFragment<V : ViewDataBinding, M : BaseModel, VM : BaseVM<
 
 
     override fun initListener() {
+        initMVVMBind()
         initMVVMListener()
     }
 
 
+    abstract fun initMVVMBind()
     abstract fun initMVVMListener()
 }
 

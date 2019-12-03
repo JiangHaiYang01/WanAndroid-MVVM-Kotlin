@@ -28,8 +28,11 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
         return R.layout.activity_main
     }
 
-    override fun initMVVMListener() {
+    override fun initMVVMBind() {
         bind.vm = vm
+    }
+
+    override fun initMVVMListener() {
 
         TabHelper(
             supportFragmentManager,

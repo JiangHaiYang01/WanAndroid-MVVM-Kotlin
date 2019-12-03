@@ -35,13 +35,16 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
     }
 
     override fun initMVVMListener() {
-        bind.vm = vm
 
 
 
         bind.etPwd.addTextChangedListener(LoginTextWatcher(0, vm))
 
         bind.etPhone.addTextChangedListener(LoginTextWatcher(1, vm))
+
+
+        bind.etPhone.setText("18856907654")
+        bind.etPwd.setText("470988")
 
         bind.loginImgDelete.setOnClickListener {
             bind.etPhone.setText("")
@@ -96,6 +99,10 @@ class LogInAct : BaseMVVMAct<ActivityLoginBinding, LogInModel, LogInVM>() {
             LogHelper.i("点击注册新用户")
             startActivity(RegisterAct::class.java)
         }
+    }
+
+    override fun initMVVMBind() {
+        bind.vm = vm
     }
 }
 

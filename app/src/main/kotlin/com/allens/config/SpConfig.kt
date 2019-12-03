@@ -7,5 +7,6 @@ class SpConfig {
         const val userId = "userId"
         const val userPhone = "userPhone"
         const val icon = "icon"
+        const val cookie = "cookie"
     }
 }

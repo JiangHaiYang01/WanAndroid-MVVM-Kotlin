@@ -31,6 +31,8 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>() {
         return FindVM::class.java
     }
 
+    override fun initMVVMBind() {
+    }
 }
 
 

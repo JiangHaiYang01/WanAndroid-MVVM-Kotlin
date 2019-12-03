@@ -18,8 +18,11 @@ import com.allens.tools.databinding.ActivityRegisterBinding
 import com.google.android.material.snackbar.Snackbar
 
 class RegisterAct : BaseMVVMAct<ActivityRegisterBinding, RegisterModel, RegisterVM>() {
-    override fun initMVVMListener() {
+
+    override fun initMVVMBind() {
         bind.vm = vm
+    }
+    override fun initMVVMListener() {
 
 
 
