@@ -12,6 +12,7 @@ import com.allens.tools.databinding.ActivityMainBinding
 import com.allens.ui.fragment.FindFragment
 import com.allens.ui.fragment.HomeFragment
 import com.allens.ui.fragment.MeFragment
+import com.google.android.material.tabs.TabLayout
 import java.util.*
 
 class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
@@ -33,6 +34,27 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
     }
 
     override fun initMVVMListener() {
+
+        val list = arrayListOf("首页", "沸点", "发现", "我的")
+        list.forEach {
+            val tab = bind.actMainTl.newTab()
+            tab.setCustomView(R.layout.view_act_main_tab)
+            bind.actMainTl.addTab(tab)
+        }
+
+        bind.actMainTl.addOnTabSelectedListener(object :
+            TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+
+
+            }
+        })
 
         TabHelper(
             supportFragmentManager,

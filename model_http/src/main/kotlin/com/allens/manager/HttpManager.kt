@@ -1,8 +1,8 @@
 package com.allens.model_http.manager
 
+import com.allens.interceptor.HeardInterceptor
 import com.allens.interceptor.ReceivedCookieInterceptor
 import com.allens.model_http.config.HttpConfig
-import com.allens.model_http.interceptor.HeardInterceptor
 import com.allens.model_http.interceptor.LogInterceptor
 import com.google.gson.Gson
 import com.orhanobut.logger.Logger

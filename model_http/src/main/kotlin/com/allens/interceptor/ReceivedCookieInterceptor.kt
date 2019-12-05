@@ -7,7 +7,7 @@ import okhttp3.Response
 //cookie 拦截器
 class ReceivedCookiesInterceptorImpl(
     val listener: OnCookieListener,
-    val interceptor: OnCookieInterceptor
+    private val interceptor: OnCookieInterceptor
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
