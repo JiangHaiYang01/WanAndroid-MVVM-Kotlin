@@ -6,6 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply from: 'base.gradle'
 apply from: 'config.gradle'
+apply from: '../defConfig.gradle'
 
 android {
 }
