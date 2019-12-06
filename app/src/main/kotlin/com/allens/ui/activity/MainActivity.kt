@@ -1,8 +1,6 @@
 package com.allens.ui.activity
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -12,8 +10,6 @@ import com.allens.tools.databinding.ActivityMainBinding
 import com.allens.ui.fragment.FindFragment
 import com.allens.ui.fragment.HomeFragment
 import com.allens.ui.fragment.MeFragment
-import com.google.android.material.tabs.TabLayout
-import java.util.*
 
 class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
     override fun createModel(): MainModel {
@@ -35,27 +31,6 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
 
     override fun initMVVMListener() {
 
-        val list = arrayListOf("首页", "沸点", "发现", "我的")
-        list.forEach {
-            val tab = bind.actMainTl.newTab()
-            tab.setCustomView(R.layout.view_act_main_tab)
-            bind.actMainTl.addTab(tab)
-        }
-
-        bind.actMainTl.addOnTabSelectedListener(object :
-            TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
-            override fun onTabReselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(p0: TabLayout.Tab?) {
-
-
-            }
-        })
-
         TabHelper(
             supportFragmentManager,
             listOf(HomeFragment(), HomeFragment(), FindFragment(), MeFragment()),
@@ -70,8 +45,12 @@ class MainModel : BaseModel
 
 class MainVM : BaseVM<MainModel>() {
     //选中颜色
-    val selectColor = Color.parseColor("#0088FF")
+    val selectColor = Color.parseColor("#333333")
     //未选中颜色
-    val defColor = Color.parseColor("#333333")
+    val defColor = Color.parseColor("#AAB0BE")
+
+    //tab宽高
+    val tabHeight = 80
+    val tabWidth = 80
 
 }

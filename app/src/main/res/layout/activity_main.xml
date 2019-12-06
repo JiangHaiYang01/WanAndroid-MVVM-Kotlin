@@ -23,61 +23,59 @@
             android:layout_weight="1" />
 
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/act_main_tl"
+        <RadioGroup
+            android:id="@+id/act_main_rg"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
             android:background="@color/color_write"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="0dp"
-            app:tabRippleColor="@null" />
+            android:orientation="horizontal">
 
 
-        <!--        <RadioGroup-->
-        <!--            android:id="@+id/act_main_rg"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
+            <RadioButton
+                style="@style/BaseStyleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:radioButtonBoundsRight="@{vm.tabHeight}"
+                app:radioButtonBoundsBottom="@{vm.tabWidth}"
+                app:radioButtonTopSize="@{@drawable/act_main_select_home}"
+                android:text="@string/act_main_rb_home"
+                app:color_checked="@{vm.selectColor}"
+                app:color_normal="@{vm.defColor}" />
 
-        <!--            android:background="@color/color_write"-->
-        <!--            android:orientation="horizontal">-->
+            <RadioButton
+                style="@style/BaseStyleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:radioButtonBoundsRight="@{vm.tabHeight}"
+                app:radioButtonBoundsBottom="@{vm.tabWidth}"
+                app:radioButtonTopSize="@{@drawable/act_main_select_home}"
+                android:text="@string/act_main_rb_star"
+                app:color_checked="@{vm.selectColor}"
+                app:color_normal="@{vm.defColor}" />
 
+            <RadioButton
+                style="@style/BaseStyleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:radioButtonBoundsRight="@{vm.tabHeight}"
+                app:radioButtonBoundsBottom="@{vm.tabWidth}"
+                app:radioButtonTopSize="@{@drawable/act_main_select_search}"
+                android:text="@string/act_main_rb_search"
+                app:color_checked="@{vm.selectColor}"
+                app:color_normal="@{vm.defColor}" />
 
-        <!--            <RadioButton-->
-        <!--                style="@style/BaseStyleRadioButton"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:drawableTop="@drawable/act_main_select_home"-->
-        <!--                android:text="@string/act_main_rb_home"-->
-        <!--                app:color_checked="@{vm.selectColor}"-->
-        <!--                app:color_normal="@{vm.defColor}" />-->
-
-        <!--            <RadioButton-->
-        <!--                style="@style/BaseStyleRadioButton"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:drawableTop="@drawable/act_main_select_star"-->
-        <!--                android:text="@string/act_main_rb_star"-->
-        <!--                app:color_checked="@{vm.selectColor}"-->
-        <!--                app:color_normal="@{vm.defColor}" />-->
-
-        <!--            <RadioButton-->
-        <!--                style="@style/BaseStyleRadioButton"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:drawableTop="@drawable/act_main_select_search"-->
-        <!--                android:text="@string/act_main_rb_search"-->
-        <!--                app:color_checked="@{vm.selectColor}"-->
-        <!--                app:color_normal="@{vm.defColor}" />-->
-
-        <!--            <RadioButton-->
-        <!--                style="@style/BaseStyleRadioButton"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:drawableTop="@drawable/act_main_select_me"-->
-        <!--                android:text="@string/act_main_rb_me"-->
-        <!--                app:color_checked="@{vm.selectColor}"-->
-        <!--                app:color_normal="@{vm.defColor}" />-->
-        <!--        </RadioGroup>-->
+            <RadioButton
+                style="@style/BaseStyleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:radioButtonBoundsRight="@{vm.tabHeight}"
+                app:radioButtonBoundsBottom="@{vm.tabWidth}"
+                app:radioButtonTopSize="@{@drawable/act_main_select_me}"
+                android:text="@string/act_main_rb_me"
+                app:color_checked="@{vm.selectColor}"
+                app:color_normal="@{vm.defColor}" />
+        </RadioGroup>
 
 
     </LinearLayout>
