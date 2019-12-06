@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply from: 'http_base.gradle'
 apply from: 'http_maven.gradle'
+apply from: '../defConfig.gradle'
 
 android {
     compileSdkVersion 29
