@@ -2,7 +2,9 @@ package com.allens.ui.fragment
 
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
+import com.allens.LogHelper
 import com.allens.bean.HomeDetailBean
+import com.allens.bean.HomeDetailResultDataBean
 import com.allens.bean.SystemResultBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
@@ -34,9 +36,8 @@ class HomeVpFg(private val data: SystemResultBean) :
             bind.fgHomeVpTlParent.addTab(tab)
         }
 
-
-        //默认加载第一个
-        getDetailData(pos = 0)
+        //自动刷新
+        bind.fgHomeRefresh.autoRefresh()
 
 
         //选中事件监听
@@ -51,33 +52,73 @@ class HomeVpFg(private val data: SystemResultBean) :
 
             override fun onTabSelected(ta1: TabLayout.Tab?) {
                 setTabSelect(ta1)
-
-                getDetailData(pos = ta1?.position)
+                if (ta1 != null) {
+                    vm.pageIndex = 0
+                    vm.data.clear()
+                    vm.index = ta1.position
+                    //自动刷新
+                    bind.fgHomeRefresh.autoRefresh()
+                }
             }
         })
 
-        bind.fgHomeRefresh.setEnableRefresh(true)
-        
 
+        bind.fgHomeRefresh.setOnRefreshListener {
+            LogHelper.i("下拉刷新 ----> ${data.children[vm.index].name}")
+            refresh(vm.index)
+        }
 
+        bind.fgHomeRefresh.setOnLoadMoreListener {
+            LogHelper.i("加载更多 ----> ${data.children[vm.index].name} pageIndex ${vm.pageIndex}")
+            loadMore(vm.index, vm.pageIndex)
+        }
+    }
+
+    private fun loadMore(pos: Int?, pageIndex: Int) {
+        if (pos == null) {
+            return
+        }
+        vm.getDetail(pageIndex, data.children[pos].id, object : OnBaseHttpListener<HomeDetailBean> {
+            override fun onSuccess(t: HomeDetailBean) {
+                bind.fgHomeRefresh.finishLoadMore()
+                if (t.errorCode != 0) {
+                    return
+                }
+                vm.pageIndex = vm.pageIndex + 1
+                vm.data.addAll(t.data.datas)
+
+                vm.adapter.notifyDataSetChanged()
+            }
+
+            override fun onError(e: Throwable) {
+                //加载失败了
+                bind.fgHomeRefresh.finishLoadMore()
+            }
+        })
     }
 
     //请求数据源
-    fun getDetailData(pos: Int?) {
+    private fun refresh(pos: Int?) {
         if (pos == null) {
             return
         }
         vm.getDetail(0, data.children[pos].id, object : OnBaseHttpListener<HomeDetailBean> {
             override fun onSuccess(t: HomeDetailBean) {
+                bind.fgHomeRefresh.finishRefresh()
                 if (t.errorCode != 0) {
+                    bind.fgHomeTlRv.adapter = vm.adapter
                     return
                 }
-
-                bind.fgHomeTlRv.adapter = HomeDetailAdapter(t.data.datas)
+                vm.pageIndex = vm.pageIndex + 1
+                vm.data.addAll(t.data.datas)
+                bind.fgHomeTlRv.adapter = vm.adapter
 
             }
 
             override fun onError(e: Throwable) {
+                //加载失败了
+                bind.fgHomeTlRv.adapter = vm.adapter
+                bind.fgHomeRefresh.finishRefresh()
             }
         })
     }
@@ -136,6 +177,20 @@ class HomeVPModel : BaseModel {
 
 
 class HomeVPVM : BaseVM<HomeVPModel>() {
+
+
+    //当前显示第几个
+    var index = 0
+    //当前加载第几页
+    var pageIndex = 0
+
+    //数据源
+    var data: MutableList<HomeDetailResultDataBean> = mutableListOf()
+
+    //数据源
+    val adapter: HomeDetailAdapter = HomeDetailAdapter(data)
+
+
     fun getDetail(
         curPage: Int,
         cid: Int, listener: OnBaseHttpListener<HomeDetailBean>

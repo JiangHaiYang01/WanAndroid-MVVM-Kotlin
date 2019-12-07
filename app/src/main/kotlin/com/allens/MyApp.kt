@@ -61,17 +61,20 @@ class MyApp : BaseApplication() {
                 return header
             }
         })
-//
-//        //设置全局的Footer构建器
-//        SmartRefreshLayout.setDefaultRefreshFooterCreator(object : DefaultRefreshFooterCreator {
-//            override fun createRefreshFooter(
-//                context: Context,
-//                layout: RefreshLayout
-//            ): RefreshFooter {
-//                //指定为经典Footer，默认是 BallPulseFooter
-//                return ClassicsFooter(context).setDrawableSize(20f)
-//            }
-//        })
+
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator(object : DefaultRefreshFooterCreator {
+            override fun createRefreshFooter(
+                context: Context,
+                layout: RefreshLayout
+            ): RefreshFooter {
+                //指定为经典Footer，默认是 BallPulseFooter
+                return ClassicsFooter(context)
+                    .setDrawableSize(10F)
+                    .setTextSizeTitle(10f)
+                    .setDrawableArrowSize(18f)
+            }
+        })
     }
 
     private fun registerMMKV() {

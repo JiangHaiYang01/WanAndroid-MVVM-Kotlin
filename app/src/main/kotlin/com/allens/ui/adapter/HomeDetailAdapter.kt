@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 
 //使用 kotlin  写adapter
 class HomeDetailAdapter(
-    data: List<HomeDetailResultDataBean>
+    data: MutableList<HomeDetailResultDataBean>?
 ) :
     BaseQuickAdapter<HomeDetailResultDataBean, BaseViewHolder>(R.layout.item_home_detail, data) {
     override fun convert(helper: BaseViewHolder?, item: HomeDetailResultDataBean?) {

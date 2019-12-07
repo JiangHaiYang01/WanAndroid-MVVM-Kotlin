@@ -16,6 +16,7 @@ object HttpTool {
     var xHttp = XHttp.Builder()
         .baseUrl(Config.baseURL)
         .level(HttpLevel.BODY)
+        .isLog(true)
         .retryOnConnectionFailure(false)
         .addCookieInterceptor(object : OnCookieListener {
             override fun onCookies(cookie: HashSet<String>) {
