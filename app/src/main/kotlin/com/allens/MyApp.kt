@@ -5,10 +5,13 @@ import com.allens.config.Config
 import com.allens.model_base.base.BaseApplication
 import com.allens.model_base.tools.FileHelper
 import com.allens.tools.R
+import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
 import com.tencent.mmkv.MMKV
 
@@ -58,6 +61,17 @@ class MyApp : BaseApplication() {
                 return header
             }
         })
+//
+//        //设置全局的Footer构建器
+//        SmartRefreshLayout.setDefaultRefreshFooterCreator(object : DefaultRefreshFooterCreator {
+//            override fun createRefreshFooter(
+//                context: Context,
+//                layout: RefreshLayout
+//            ): RefreshFooter {
+//                //指定为经典Footer，默认是 BallPulseFooter
+//                return ClassicsFooter(context).setDrawableSize(20f)
+//            }
+//        })
     }
 
     private fun registerMMKV() {
