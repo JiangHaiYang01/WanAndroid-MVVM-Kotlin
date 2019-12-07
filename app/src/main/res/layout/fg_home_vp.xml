@@ -33,12 +33,21 @@
             android:background="@color/color_background" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fg_home_tl_rv"
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/fg_home_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_home_detail" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fg_home_tl_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_home_detail" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
     </LinearLayout>
 </layout>

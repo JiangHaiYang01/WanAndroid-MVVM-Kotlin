@@ -56,6 +56,9 @@ class HomeVpFg(private val data: SystemResultBean) :
             }
         })
 
+        bind.fgHomeRefresh.setEnableRefresh(true)
+        
+
 
     }
 
