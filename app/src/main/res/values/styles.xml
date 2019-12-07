@@ -15,7 +15,6 @@
     </style>
 
 
-
     <!-- title 样式 -->
     <style name="style_title">
         <item name="android:layout_width">match_parent</item>
@@ -49,6 +48,12 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_marginStart">25dp</item>
         <item name="android:layout_marginEnd">25dp</item>
+    </style>
+
+
+    <!--main_home_tb_tv_size -->
+    <style name="style_act_main_home_tb">
+        <item name="android:textSize">12sp</item>
     </style>
 
 </resources>
