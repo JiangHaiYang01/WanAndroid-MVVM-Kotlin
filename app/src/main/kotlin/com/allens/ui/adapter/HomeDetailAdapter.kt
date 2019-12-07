@@ -1,5 +1,7 @@
 package com.allens.ui.adapter
 
+import android.widget.ImageView
+import android.widget.TextView
 import com.allens.bean.HomeDetailResultDataBean
 import com.allens.tools.R
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -28,8 +30,30 @@ class HomeDetailAdapter(
         helper.setText(R.id.item_home_detail_tv_user_title, item.title)
         helper.setText(R.id.item_home_detail_tv_time, item.niceDate)
         helper.itemView.setOnClickListener {
+            listener?.onClickHomeDetailItem(item)
+        }
+
+        helper.getView<ImageView>(R.id.item_home_detail_img_user_heard).setOnClickListener {
+            listener?.onClickHomeDetailAuthor(item)
+        }
+
+        helper.getView<TextView>(R.id.item_home_detail_tv_user_name).setOnClickListener {
+            listener?.onClickHomeDetailAuthor(item)
         }
     }
 
+
+    var listener: OnHomeDetailAdapterListener? = null
+
+    fun setOnHomeDetailAdapterListener(listener: OnHomeDetailAdapterListener?) {
+        this.listener = listener
+    }
+}
+
+
+interface OnHomeDetailAdapterListener {
+    fun onClickHomeDetailAuthor(item: HomeDetailResultDataBean)
+
+    fun onClickHomeDetailItem(item: HomeDetailResultDataBean)
 }
 

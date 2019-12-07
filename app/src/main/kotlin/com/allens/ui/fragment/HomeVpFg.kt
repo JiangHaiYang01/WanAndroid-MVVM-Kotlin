@@ -1,5 +1,6 @@
 package com.allens.ui.fragment
 
+import android.os.Bundle
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import com.allens.LogHelper
@@ -14,7 +15,9 @@ import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeVpBinding
+import com.allens.ui.activity.AuthorAct
 import com.allens.ui.adapter.HomeDetailAdapter
+import com.allens.ui.adapter.OnHomeDetailAdapterListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 
@@ -38,6 +41,23 @@ class HomeVpFg(private val data: SystemResultBean) :
 
         //自动刷新
         bind.fgHomeRefresh.autoRefresh()
+
+
+        vm.adapter.setOnHomeDetailAdapterListener(object : OnHomeDetailAdapterListener {
+            override fun onClickHomeDetailAuthor(item: HomeDetailResultDataBean) {
+                LogHelper.i("home fg 点击 作者 ${item.author}")
+                if (item.author.isEmpty()) {
+                    return
+                }
+                val bundle = Bundle()
+                bundle.putString("author", item.author)
+                startActivity(AuthorAct::class.java, bundle)
+            }
+
+            override fun onClickHomeDetailItem(item: HomeDetailResultDataBean) {
+                LogHelper.i("home fg 点击 item ${item.author}")
+            }
+        })
 
 
         //选中事件监听

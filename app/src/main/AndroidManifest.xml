@@ -38,6 +38,7 @@
         <activity android:name="com.allens.ui.activity.RegisterAct" />
         <activity android:name="com.allens.ui.activity.SettingAct" />
         <activity android:name="com.allens.ui.activity.MeAct" />
+        <activity android:name="com.allens.ui.activity.AuthorAct" />
     </application>
 
 </manifest>
