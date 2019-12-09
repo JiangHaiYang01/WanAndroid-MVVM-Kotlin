@@ -1,7 +1,7 @@
 package com.allens.ui.activity
 
 import com.allens.LogHelper
-import com.allens.bean.UserDetailBean
+import com.allens.bean.user_detail.UserDetailBean
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM

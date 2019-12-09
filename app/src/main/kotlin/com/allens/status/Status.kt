@@ -1,10 +1,9 @@
 package com.allens.status
 
 import androidx.lifecycle.MutableLiveData
-import com.allens.LogHelper
-import com.allens.bean.LogInBean
-import com.allens.bean.LogOutBean
-import com.allens.bean.UserDetailBean
+import com.allens.bean.login.LogInBean
+import com.allens.bean.logout.LogOutBean
+import com.allens.bean.user_detail.UserDetailBean
 import com.allens.config.SpConfig
 import com.tencent.mmkv.MMKV
 

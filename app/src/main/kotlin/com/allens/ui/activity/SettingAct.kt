@@ -1,8 +1,6 @@
 package com.allens.ui.activity
 
-import androidx.lifecycle.LifecycleOwner
-import com.allens.bean.LogInBean
-import com.allens.bean.LogOutBean
+import com.allens.bean.logout.LogOutBean
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -13,7 +11,6 @@ import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivitySettinngBinding
 import com.google.android.material.snackbar.Snackbar
-import com.tencent.mmkv.MMKV
 
 class SettingAct : BaseMVVMAct<ActivitySettinngBinding, SettingModel, SettingVm>() {
     override fun initMVVMListener() {

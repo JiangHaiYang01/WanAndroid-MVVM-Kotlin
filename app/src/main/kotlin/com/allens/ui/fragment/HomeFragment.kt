@@ -1,8 +1,7 @@
 package com.allens.ui.fragment
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
-import com.allens.bean.SystemBean
+import com.allens.bean.home_system_tab.HomeSystemTabBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -18,8 +17,8 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
     override fun initMVVMListener() {
 
 
-        vm.getSystemTab(object : OnBaseHttpListener<SystemBean> {
-            override fun onSuccess(t: SystemBean) {
+        vm.getSystemTab(object : OnBaseHttpListener<HomeSystemTabBean> {
+            override fun onSuccess(t: HomeSystemTabBean) {
                 if (t.errorCode != 0) {
                     return
                 }
@@ -69,14 +68,14 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
 
 class HomeModel : BaseModel(), HomeModelImpl {
 
-    override fun getSystemTab(listener: OnBaseHttpListener<SystemBean>) {
+    override fun getSystemTab(listener: OnBaseHttpListener<HomeSystemTabBean>) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
-                SystemBean::class.java,
+                HomeSystemTabBean::class.java,
                 "tree/json",
-                object : OnHttpListener<SystemBean>() {
-                    override fun onSuccess(t: SystemBean) {
+                object : OnHttpListener<HomeSystemTabBean>() {
+                    override fun onSuccess(t: HomeSystemTabBean) {
                         listener.onSuccess(t)
                     }
 
@@ -89,12 +88,12 @@ class HomeModel : BaseModel(), HomeModelImpl {
 
 
 class HomeVM : BaseVM<HomeModel>(), HomeModelImpl {
-    override fun getSystemTab(listener: OnBaseHttpListener<SystemBean>) {
+    override fun getSystemTab(listener: OnBaseHttpListener<HomeSystemTabBean>) {
         model.getSystemTab(listener)
     }
 
 }
 
 interface HomeModelImpl {
-    fun getSystemTab(listener: OnBaseHttpListener<SystemBean>)
+    fun getSystemTab(listener: OnBaseHttpListener<HomeSystemTabBean>)
 }

@@ -1,22 +1,6 @@
-package com.allens.bean
+package com.allens.bean.home_system_detail
 
-data class HomeDetailBean(
-    val `data`: HomeDetailResultBean,
-    val errorCode: Int,
-    val errorMsg: String
-)
-
-data class HomeDetailResultBean(
-    val curPage: Int,
-    val datas: List<HomeDetailResultDataBean>,
-    val offset: Int,
-    val over: Boolean,
-    val pageCount: Int,
-    val size: Int,
-    val total: Int
-)
-
-data class HomeDetailResultDataBean(
+data class DataX(
     val apkLink: String,
     val audit: Int,
     val author: String,

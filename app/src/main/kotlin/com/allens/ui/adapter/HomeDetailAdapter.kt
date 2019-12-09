@@ -2,7 +2,7 @@ package com.allens.ui.adapter
 
 import android.widget.ImageView
 import android.widget.TextView
-import com.allens.bean.HomeDetailResultDataBean
+import com.allens.bean.home_system_detail.DataX
 import com.allens.tools.R
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -10,10 +10,10 @@ import com.chad.library.adapter.base.BaseViewHolder
 
 //使用 kotlin  写adapter
 class HomeDetailAdapter(
-    data: MutableList<HomeDetailResultDataBean>?
+    data: MutableList<DataX>?
 ) :
-    BaseQuickAdapter<HomeDetailResultDataBean, BaseViewHolder>(R.layout.item_home_detail, data) {
-    override fun convert(helper: BaseViewHolder?, item: HomeDetailResultDataBean?) {
+    BaseQuickAdapter<DataX, BaseViewHolder>(R.layout.item_home_detail, data) {
+    override fun convert(helper: BaseViewHolder?, item: DataX?) {
 
         if (helper == null) {
             return
@@ -52,8 +52,8 @@ class HomeDetailAdapter(
 
 
 interface OnHomeDetailAdapterListener {
-    fun onClickHomeDetailAuthor(item: HomeDetailResultDataBean)
+    fun onClickHomeDetailAuthor(item: DataX)
 
-    fun onClickHomeDetailItem(item: HomeDetailResultDataBean)
+    fun onClickHomeDetailItem(item: DataX)
 }
 

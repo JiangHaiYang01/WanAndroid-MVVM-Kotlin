@@ -3,8 +3,7 @@ package com.allens.ui.fragment.hot_detail
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import com.allens.LogHelper
-import com.allens.bean.HomeDetailBean
-import com.allens.bean.HomeDetailResultDataBean
+import com.allens.bean.home_system_detail.DataX
 import com.allens.bean.offlicial_tab.OfflicialTabInfoBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
@@ -180,7 +179,7 @@ class OfficialVM : BaseVM<OfficialModel>(), OfficialModelImpl {
     var pageIndex = 0
 
     //数据源
-    var data: MutableList<HomeDetailResultDataBean> = mutableListOf()
+    var data: MutableList<DataX> = mutableListOf()
 
     //数据源
     val adapter: HomeDetailAdapter = HomeDetailAdapter(data)

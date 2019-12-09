@@ -1,7 +1,7 @@
 package com.allens.ui.activity
 
 import androidx.lifecycle.LifecycleOwner
-import com.allens.bean.HomeDetailBean
+import com.allens.bean.home_system_detail.DataX
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -37,15 +37,15 @@ class AuthorModel : BaseModel(), AuthorModelImpl {
     override fun getDetailByAuthor(
         curPage: Int,
         author: String,
-        listener: OnBaseHttpListener<HomeDetailBean>
+        listener: OnBaseHttpListener<DataX>
     ) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
-                HomeDetailBean::class.java,
+                DataX::class.java,
                 "article/list/$curPage/json?author=$author",
-                object : OnHttpListener<HomeDetailBean>() {
-                    override fun onSuccess(t: HomeDetailBean) {
+                object : OnHttpListener<DataX>() {
+                    override fun onSuccess(t: DataX) {
                         listener.onSuccess(t)
                     }
 
@@ -61,7 +61,7 @@ class AuthorVM : BaseVM<AuthorModel>(), AuthorModelImpl {
     override fun getDetailByAuthor(
         curPage: Int,
         author: String,
-        listener: OnBaseHttpListener<HomeDetailBean>
+        listener: OnBaseHttpListener<DataX>
     ) {
         model.getDetailByAuthor(curPage, author, listener)
     }
@@ -71,6 +71,6 @@ interface AuthorModelImpl {
     fun getDetailByAuthor(
         curPage: Int,
         author: String,
-        listener: OnBaseHttpListener<HomeDetailBean>
+        listener: OnBaseHttpListener<DataX>
     )
 }

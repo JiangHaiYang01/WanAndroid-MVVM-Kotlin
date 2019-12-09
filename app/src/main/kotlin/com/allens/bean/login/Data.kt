@@ -1,12 +1,6 @@
-package com.allens.bean
+package com.allens.bean.login
 
-data class LogInBean(
-    val `data`: LogInResultBean,
-    val errorCode: Int,
-    val errorMsg: String
-)
-
-data class LogInResultBean(
+data class Data(
     val admin: Boolean,
     val chapterTops: List<Any>,
     val collectIds: List<Any>,

@@ -2,11 +2,10 @@ package com.allens.ui.fragment
 
 import android.os.Bundle
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
 import com.allens.LogHelper
-import com.allens.bean.HomeDetailBean
-import com.allens.bean.HomeDetailResultDataBean
-import com.allens.bean.SystemResultBean
+import com.allens.bean.home_system_detail.DataX
+import com.allens.bean.home_system_detail.HomeSystemDetailBean
+import com.allens.bean.home_system_tab.Data
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -21,7 +20,7 @@ import com.allens.ui.adapter.OnHomeDetailAdapterListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 
-class HomeVpFg(private val data: SystemResultBean) :
+class HomeVpFg(private val data: Data) :
     BaseMVVMFragment<FgHomeVpBinding, HomeVPModel, HomeVPVM>() {
     override fun initMVVMBind() {
         bind.vm = vm
@@ -44,7 +43,7 @@ class HomeVpFg(private val data: SystemResultBean) :
 
 
         vm.adapter.setOnHomeDetailAdapterListener(object : OnHomeDetailAdapterListener {
-            override fun onClickHomeDetailAuthor(item: HomeDetailResultDataBean) {
+            override fun onClickHomeDetailAuthor(item: DataX) {
                 LogHelper.i("home fg 点击 作者 ${item.author}")
                 if (item.author.isEmpty()) {
                     return
@@ -54,7 +53,7 @@ class HomeVpFg(private val data: SystemResultBean) :
                 startActivity(AuthorAct::class.java, bundle)
             }
 
-            override fun onClickHomeDetailItem(item: HomeDetailResultDataBean) {
+            override fun onClickHomeDetailItem(item: DataX) {
                 LogHelper.i("home fg 点击 item ${item.author}")
             }
         })
@@ -98,8 +97,8 @@ class HomeVpFg(private val data: SystemResultBean) :
         if (pos == null) {
             return
         }
-        vm.getDetail(pageIndex, data.children[pos].id, object : OnBaseHttpListener<HomeDetailBean> {
-            override fun onSuccess(t: HomeDetailBean) {
+        vm.getDetail(pageIndex, data.children[pos].id, object : OnBaseHttpListener<HomeSystemDetailBean> {
+            override fun onSuccess(t: HomeSystemDetailBean) {
                 bind.fgHomeRefresh.finishLoadMore()
                 if (t.errorCode != 0) {
                     return
@@ -122,8 +121,8 @@ class HomeVpFg(private val data: SystemResultBean) :
         if (pos == null) {
             return
         }
-        vm.getDetail(0, data.children[pos].id, object : OnBaseHttpListener<HomeDetailBean> {
-            override fun onSuccess(t: HomeDetailBean) {
+        vm.getDetail(0, data.children[pos].id, object : OnBaseHttpListener<HomeSystemDetailBean> {
+            override fun onSuccess(t: HomeSystemDetailBean) {
                 bind.fgHomeRefresh.finishRefresh()
                 if (t.errorCode != 0) {
                     bind.fgHomeTlRv.adapter = vm.adapter
@@ -175,15 +174,15 @@ class HomeVPModel : BaseModel(), HomeVPModelImpl {
     override fun getDetail(
         curPage: Int,
         cid: Int,
-        listener: OnBaseHttpListener<HomeDetailBean>
+        listener: OnBaseHttpListener<HomeSystemDetailBean>
     ) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
-                HomeDetailBean::class.java,
+                HomeSystemDetailBean::class.java,
                 "article/list/$curPage/json?cid=$cid",
-                object : OnHttpListener<HomeDetailBean>() {
-                    override fun onSuccess(t: HomeDetailBean) {
+                object : OnHttpListener<HomeSystemDetailBean>() {
+                    override fun onSuccess(t: HomeSystemDetailBean) {
                         listener.onSuccess(t)
                     }
 
@@ -204,7 +203,7 @@ class HomeVPVM : BaseVM<HomeVPModel>(), HomeVPModelImpl {
     var pageIndex = 0
 
     //数据源
-    var data: MutableList<HomeDetailResultDataBean> = mutableListOf()
+    var data: MutableList<com.allens.bean.home_system_detail.DataX> = mutableListOf()
 
     //数据源
     val adapter: HomeDetailAdapter = HomeDetailAdapter(data)
@@ -212,7 +211,7 @@ class HomeVPVM : BaseVM<HomeVPModel>(), HomeVPModelImpl {
 
     override fun getDetail(
         curPage: Int,
-        cid: Int, listener: OnBaseHttpListener<HomeDetailBean>
+        cid: Int, listener: OnBaseHttpListener<HomeSystemDetailBean>
     ) {
         model.getDetail(curPage, cid, listener)
     }
@@ -221,6 +220,6 @@ class HomeVPVM : BaseVM<HomeVPModel>(), HomeVPModelImpl {
 interface HomeVPModelImpl {
     fun getDetail(
         curPage: Int,
-        cid: Int, listener: OnBaseHttpListener<HomeDetailBean>
+        cid: Int, listener: OnBaseHttpListener<HomeSystemDetailBean>
     )
 }
