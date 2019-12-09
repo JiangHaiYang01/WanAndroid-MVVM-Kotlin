@@ -83,12 +83,13 @@ class HomeVpFg(private val data: Data) :
 
 
         bind.fgHomeRefresh.setOnRefreshListener {
-            LogHelper.i("下拉刷新 ----> ${data.children[vm.index].name}")
+            LogHelper.i("home  下拉刷新 ----> ${data.children[vm.index].name}")
+            vm.pageIndex = 0
             refresh(vm.index)
         }
 
         bind.fgHomeRefresh.setOnLoadMoreListener {
-            LogHelper.i("加载更多 ----> ${data.children[vm.index].name} pageIndex ${vm.pageIndex}")
+            LogHelper.i("home  加载更多 ----> ${data.children[vm.index].name} pageIndex ${vm.pageIndex}")
             loadMore(vm.index, vm.pageIndex)
         }
     }
@@ -97,23 +98,29 @@ class HomeVpFg(private val data: Data) :
         if (pos == null) {
             return
         }
-        vm.getDetail(pageIndex, data.children[pos].id, object : OnBaseHttpListener<HomeSystemDetailBean> {
-            override fun onSuccess(t: HomeSystemDetailBean) {
-                bind.fgHomeRefresh.finishLoadMore()
-                if (t.errorCode != 0) {
-                    return
+        vm.getDetail(
+            pageIndex,
+            data.children[pos].id,
+            object : OnBaseHttpListener<HomeSystemDetailBean> {
+                override fun onSuccess(t: HomeSystemDetailBean) {
+                    bind.fgHomeRefresh.finishLoadMore()
+                    if (t.errorCode != 0) {
+                        return
+                    }
+                    if (t.data.datas.isNullOrEmpty()) {
+                        return
+                    }
+                    vm.pageIndex = vm.pageIndex + 1
+                    vm.data.addAll(t.data.datas)
+
+                    vm.adapter.notifyDataSetChanged()
                 }
-                vm.pageIndex = vm.pageIndex + 1
-                vm.data.addAll(t.data.datas)
 
-                vm.adapter.notifyDataSetChanged()
-            }
-
-            override fun onError(e: Throwable) {
-                //加载失败了
-                bind.fgHomeRefresh.finishLoadMore()
-            }
-        })
+                override fun onError(e: Throwable) {
+                    //加载失败了
+                    bind.fgHomeRefresh.finishLoadMore()
+                }
+            })
     }
 
     //请求数据源
@@ -121,25 +128,28 @@ class HomeVpFg(private val data: Data) :
         if (pos == null) {
             return
         }
-        vm.getDetail(0, data.children[pos].id, object : OnBaseHttpListener<HomeSystemDetailBean> {
-            override fun onSuccess(t: HomeSystemDetailBean) {
-                bind.fgHomeRefresh.finishRefresh()
-                if (t.errorCode != 0) {
+        vm.getDetail(
+            vm.pageIndex,
+            data.children[pos].id,
+            object : OnBaseHttpListener<HomeSystemDetailBean> {
+                override fun onSuccess(t: HomeSystemDetailBean) {
+                    bind.fgHomeRefresh.finishRefresh()
+                    if (t.errorCode != 0) {
+                        bind.fgHomeTlRv.adapter = vm.adapter
+                        return
+                    }
+                    vm.pageIndex = vm.pageIndex + 1
+                    vm.data.addAll(t.data.datas)
                     bind.fgHomeTlRv.adapter = vm.adapter
-                    return
+
                 }
-                vm.pageIndex = vm.pageIndex + 1
-                vm.data.addAll(t.data.datas)
-                bind.fgHomeTlRv.adapter = vm.adapter
 
-            }
-
-            override fun onError(e: Throwable) {
-                //加载失败了
-                bind.fgHomeTlRv.adapter = vm.adapter
-                bind.fgHomeRefresh.finishRefresh()
-            }
-        })
+                override fun onError(e: Throwable) {
+                    //加载失败了
+                    bind.fgHomeTlRv.adapter = vm.adapter
+                    bind.fgHomeRefresh.finishRefresh()
+                }
+            })
     }
 
 

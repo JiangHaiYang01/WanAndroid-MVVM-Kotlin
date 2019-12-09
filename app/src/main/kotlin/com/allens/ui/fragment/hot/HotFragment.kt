@@ -51,20 +51,20 @@ class HotFgVM : BaseVM<HotModel>() {
 
 
     var tabList = mutableListOf<String>(
-        "关注",
-        "推荐",
-        "热门",
-        "公众号",
-        "开源推荐",
-        "常用网站",
+//        "关注",
+//        "推荐",
+//        "热门",
+//        "公众号",
+//        "开源推荐",
+//        "常用网站",
         "问答"
     )
     var fragList = mutableListOf<BaseFragment>(
-        OfficialFg(),
-        OfficialFg(),
-        OfficialFg(),
-        OfficialFg(),
-        OfficialFg(),
-        OfficialFg(),
+//        OfficialFg(),
+//        OfficialFg(),
+//        OfficialFg(),
+//        OfficialFg(),
+//        OfficialFg(),
+//        OfficialFg(),
         OfficialFg())
 }

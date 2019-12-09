@@ -14,6 +14,7 @@ import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHotOfficialBinding
 import com.allens.ui.adapter.HomeDetailAdapter
+import com.allens.ui.adapter.OfficialDetailAdapter
 import com.google.android.material.tabs.TabLayout
 
 //公众号
@@ -52,7 +53,7 @@ class OfficialFg : BaseMVVMFragment<FgHotOfficialBinding, OfficialModel, Officia
                 bind.fgHomeRefresh.autoRefresh()
                 //添加选择器
                 addOfficialTabSelect(t)
-                //
+                //下拉刷新  加载更多
                 addRefresh(t);
             }
         })
@@ -60,28 +61,56 @@ class OfficialFg : BaseMVVMFragment<FgHotOfficialBinding, OfficialModel, Officia
 
     private fun addRefresh(t: OfflicialTabInfoBean) {
         bind.fgHomeRefresh.setOnRefreshListener {
-            LogHelper.i("下拉刷新 ----> ${t.data[vm.index].name}")
+            LogHelper.i("公众号 下拉刷新 ----> ${t.data[vm.index].name} ")
             refresh(vm.index, t)
         }
 
         bind.fgHomeRefresh.setOnLoadMoreListener {
-            LogHelper.i("加载更多 ----> ${t.data[vm.index].name} pageIndex ${vm.pageIndex}")
-//            loadMore(vm.index, vm.pageIndex)
+            LogHelper.i("公众号 加载更多 ----> ${t.data[vm.index].name} pageIndex ${vm.pageIndex}")
+            loadMore(vm.index, vm.pageIndex, t)
         }
     }
 
-    private fun refresh(index: Int, t: OfflicialTabInfoBean) {
+    private fun loadMore(index: Int, pageIndex: Int, t: OfflicialTabInfoBean) {
         val id = t.data[index].id
-        vm.getOfficialDetail(id, 0, object : OnBaseHttpListener<OfflicialDetailBean> {
+        vm.getOfficialDetail(id, pageIndex, object : OnBaseHttpListener<OfflicialDetailBean> {
             override fun onError(e: Throwable) {
-
+                bind.fgHomeRefresh.finishLoadMore()
             }
 
             override fun onSuccess(t: OfflicialDetailBean) {
-                if(t.errorCode!= 0){
+                bind.fgHomeRefresh.finishLoadMore()
+                if (t.errorCode != 0) {
                     return
                 }
+                if (t.data.datas.isNullOrEmpty()) {
+                    return
+                }
+                vm.data.addAll(t.data.datas)
+                vm.adapter.notifyDataSetChanged()
+                vm.pageIndex = vm.pageIndex + 1
+            }
+        })
+    }
 
+    private fun refresh(index: Int, t: OfflicialTabInfoBean) {
+        vm.pageIndex = 0
+        val id = t.data[index].id
+        vm.getOfficialDetail(id, vm.pageIndex, object : OnBaseHttpListener<OfflicialDetailBean> {
+            override fun onError(e: Throwable) {
+                bind.fgHomeRefresh.finishRefresh()
+                bind.fgHomeTlRv.adapter = vm.adapter
+            }
+
+            override fun onSuccess(t: OfflicialDetailBean) {
+                bind.fgHomeRefresh.finishRefresh()
+                if (t.errorCode != 0) {
+                    bind.fgHomeTlRv.adapter = vm.adapter
+                    return
+                }
+                vm.data.addAll(t.data.datas)
+                bind.fgHomeTlRv.adapter = vm.adapter
+                vm.pageIndex = vm.pageIndex + 1
             }
         })
     }
@@ -192,7 +221,7 @@ class OfficialVM : BaseVM<OfficialModel>(), OfficialModelImpl {
     var data: MutableList<DataX> = mutableListOf()
 
     //数据源
-//    val adapter: HomeDetailAdapter = HomeDetailAdapter(data)
+    val adapter: OfficialDetailAdapter = OfficialDetailAdapter(data)
 
 
     override fun getOfficialTab(listener: OnBaseHttpListener<OfflicialTabInfoBean>) {
