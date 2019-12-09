@@ -2,7 +2,8 @@ package com.allens.ui.fragment.hot.hot_detail
 
 import android.widget.TextView
 import com.allens.LogHelper
-import com.allens.bean.home_system_detail.DataX
+import com.allens.bean.offlicial_detail.DataX
+import com.allens.bean.offlicial_detail.OfflicialDetailBean
 import com.allens.bean.offlicial_tab.OfflicialTabInfoBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
@@ -70,8 +71,19 @@ class OfficialFg : BaseMVVMFragment<FgHotOfficialBinding, OfficialModel, Officia
     }
 
     private fun refresh(index: Int, t: OfflicialTabInfoBean) {
-        var id =  t.data[index].id
-//        vm.getOfficialDetail(id,0,object :OnBaseHttpListener<>)
+        val id = t.data[index].id
+        vm.getOfficialDetail(id, 0, object : OnBaseHttpListener<OfflicialDetailBean> {
+            override fun onError(e: Throwable) {
+
+            }
+
+            override fun onSuccess(t: OfflicialDetailBean) {
+                if(t.errorCode!= 0){
+                    return
+                }
+
+            }
+        })
     }
 
 
@@ -148,15 +160,15 @@ class OfficialModel : BaseModel(), OfficialModelImpl {
     override fun getOfficialDetail(
         id: Int,
         pageIndex: Int,
-        listener: OnBaseHttpListener<OfflicialTabInfoBean>
+        listener: OnBaseHttpListener<OfflicialDetailBean>
     ) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
-                OfflicialTabInfoBean::class.java,
+                OfflicialDetailBean::class.java,
                 "wxarticle/list/$id/$pageIndex/json",
-                object : OnHttpListener<OfflicialTabInfoBean>() {
-                    override fun onSuccess(t: OfflicialTabInfoBean) {
+                object : OnHttpListener<OfflicialDetailBean>() {
+                    override fun onSuccess(t: OfflicialDetailBean) {
                         listener.onSuccess(t)
                     }
 
@@ -180,7 +192,7 @@ class OfficialVM : BaseVM<OfficialModel>(), OfficialModelImpl {
     var data: MutableList<DataX> = mutableListOf()
 
     //数据源
-    val adapter: HomeDetailAdapter = HomeDetailAdapter(data)
+//    val adapter: HomeDetailAdapter = HomeDetailAdapter(data)
 
 
     override fun getOfficialTab(listener: OnBaseHttpListener<OfflicialTabInfoBean>) {
@@ -190,9 +202,9 @@ class OfficialVM : BaseVM<OfficialModel>(), OfficialModelImpl {
     override fun getOfficialDetail(
         id: Int,
         pageIndex: Int,
-        listener: OnBaseHttpListener<OfflicialTabInfoBean>
+        listener: OnBaseHttpListener<OfflicialDetailBean>
     ) {
-        model.getOfficialDetail(id,pageIndex,listener)
+        model.getOfficialDetail(id, pageIndex, listener)
     }
 
 }
@@ -206,6 +218,6 @@ interface OfficialModelImpl {
     fun getOfficialDetail(
         id: Int,
         pageIndex: Int,
-        listener: OnBaseHttpListener<OfflicialTabInfoBean>
+        listener: OnBaseHttpListener<OfflicialDetailBean>
     )
 }

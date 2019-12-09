@@ -48,12 +48,14 @@ class HomeDetailAdapter(
     fun setOnHomeDetailAdapterListener(listener: OnHomeDetailAdapterListener?) {
         this.listener = listener
     }
+
+    interface OnHomeDetailAdapterListener {
+        fun onClickHomeDetailAuthor(item: DataX)
+
+        fun onClickHomeDetailItem(item: DataX)
+    }
+
+
 }
 
-
-interface OnHomeDetailAdapterListener {
-    fun onClickHomeDetailAuthor(item: DataX)
-
-    fun onClickHomeDetailItem(item: DataX)
-}
 

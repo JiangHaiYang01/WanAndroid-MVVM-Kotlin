@@ -16,7 +16,6 @@ import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeVpBinding
 import com.allens.ui.activity.AuthorAct
 import com.allens.ui.adapter.HomeDetailAdapter
-import com.allens.ui.adapter.OnHomeDetailAdapterListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
 
@@ -42,7 +41,8 @@ class HomeVpFg(private val data: Data) :
         bind.fgHomeRefresh.autoRefresh()
 
 
-        vm.adapter.setOnHomeDetailAdapterListener(object : OnHomeDetailAdapterListener {
+        vm.adapter.setOnHomeDetailAdapterListener(object :
+            HomeDetailAdapter.OnHomeDetailAdapterListener {
             override fun onClickHomeDetailAuthor(item: DataX) {
                 LogHelper.i("home fg 点击 作者 ${item.author}")
                 if (item.author.isEmpty()) {
