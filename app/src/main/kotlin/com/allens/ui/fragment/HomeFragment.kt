@@ -67,9 +67,9 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
 }
 
 
-class HomeModel : BaseModel() {
+class HomeModel : BaseModel(), HomeModelImpl {
 
-    fun getSystemTab(lifecycle: LifecycleOwner, listener: OnBaseHttpListener<SystemBean>) {
+    override fun getSystemTab(listener: OnBaseHttpListener<SystemBean>) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
@@ -90,7 +90,7 @@ class HomeModel : BaseModel() {
 
 class HomeVM : BaseVM<HomeModel>(), HomeModelImpl {
     override fun getSystemTab(listener: OnBaseHttpListener<SystemBean>) {
-        model.getSystemTab(lifecycle, listener)
+        model.getSystemTab(listener)
     }
 
 }

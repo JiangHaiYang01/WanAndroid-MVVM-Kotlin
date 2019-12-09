@@ -171,16 +171,15 @@ class HomeVpFg(private val data: SystemResultBean) :
 }
 
 
-class HomeVPModel : BaseModel() {
-    fun getDetail(
-        lifecycleOwner: LifecycleOwner,
+class HomeVPModel : BaseModel(), HomeVPModelImpl {
+    override fun getDetail(
         curPage: Int,
         cid: Int,
         listener: OnBaseHttpListener<HomeDetailBean>
     ) {
         HttpTool.xHttp
             .doGet(
-                lifecycleOwner,
+                lifecycle,
                 HomeDetailBean::class.java,
                 "article/list/$curPage/json?cid=$cid",
                 object : OnHttpListener<HomeDetailBean>() {
@@ -196,7 +195,7 @@ class HomeVPModel : BaseModel() {
 }
 
 
-class HomeVPVM : BaseVM<HomeVPModel>() {
+class HomeVPVM : BaseVM<HomeVPModel>(), HomeVPModelImpl {
 
 
     //当前显示第几个
@@ -211,10 +210,17 @@ class HomeVPVM : BaseVM<HomeVPModel>() {
     val adapter: HomeDetailAdapter = HomeDetailAdapter(data)
 
 
-    fun getDetail(
+    override fun getDetail(
         curPage: Int,
         cid: Int, listener: OnBaseHttpListener<HomeDetailBean>
     ) {
-        model.getDetail(lifecycle, curPage, cid, listener)
+        model.getDetail(curPage, cid, listener)
     }
+}
+
+interface HomeVPModelImpl {
+    fun getDetail(
+        curPage: Int,
+        cid: Int, listener: OnBaseHttpListener<HomeDetailBean>
+    )
 }

@@ -9,6 +9,7 @@ import com.allens.tools.R
 import com.allens.tools.databinding.ActivityMainBinding
 import com.allens.ui.fragment.FindFragment
 import com.allens.ui.fragment.HomeFragment
+import com.allens.ui.fragment.HotFragment
 import com.allens.ui.fragment.MeFragment
 
 class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
@@ -33,7 +34,7 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
 
         TabHelper(
             supportFragmentManager,
-            listOf(HomeFragment(), HomeFragment(), FindFragment(), MeFragment()),
+            listOf(HomeFragment(), HotFragment(), FindFragment(), MeFragment()),
             bind.actMainRg,
             R.id.act_main_fl
         ).showTabToFragment()

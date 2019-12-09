@@ -25,7 +25,7 @@ class SettingAct : BaseMVVMAct<ActivitySettinngBinding, SettingModel, SettingVm>
                             .show()
                         return
                     }
-                   UserStatus.logOut(t)
+                    UserStatus.logOut(t)
 
                     //退出当前界面
                     finish()
@@ -58,8 +58,8 @@ class SettingAct : BaseMVVMAct<ActivitySettinngBinding, SettingModel, SettingVm>
 }
 
 
-class SettingModel : BaseModel() {
-    fun logOut(lifecycle: LifecycleOwner, listener: OnBaseHttpListener<LogOutBean>) {
+class SettingModel : BaseModel(), SettingModelImpl {
+    override fun logOut(listener: OnBaseHttpListener<LogOutBean>) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
@@ -80,7 +80,7 @@ class SettingModel : BaseModel() {
 
 class SettingVm : BaseVM<SettingModel>(), SettingModelImpl {
     override fun logOut(listener: OnBaseHttpListener<LogOutBean>) {
-        model.logOut(lifecycle, listener)
+        model.logOut(listener)
     }
 
 }

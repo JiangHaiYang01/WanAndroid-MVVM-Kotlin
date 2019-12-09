@@ -118,36 +118,40 @@ class LoginTextWatcher(private val type: Int, private val vm: LogInVM) : TextWat
 }
 
 
-class LogInModel : BaseModel() {
-    fun login(
+class LogInModel : BaseModel(), LogInModelImpl {
+    override fun login(
         number: String?,
         pwd: String?,
         listener: OnBaseHttpListener<LogInBean>
     ) {
         HttpTool.xHttp
-            .doPost(LogInBean::class.java, "user/login", object : OnHttpListener<LogInBean>() {
-                override fun onMap(map: HashMap<String, Any>) {
-                    super.onMap(map)
-                    if (!number.isNullOrEmpty()) {
-                        map["username"] = number
+            .doPost(
+                lifecycle,
+                LogInBean::class.java,
+                "user/login",
+                object : OnHttpListener<LogInBean>() {
+                    override fun onMap(map: HashMap<String, Any>) {
+                        super.onMap(map)
+                        if (!number.isNullOrEmpty()) {
+                            map["username"] = number
+                        }
+                        if (!pwd.isNullOrEmpty()) {
+                            map["password"] = pwd
+                        }
                     }
-                    if (!pwd.isNullOrEmpty()) {
-                        map["password"] = pwd
+
+                    override fun onSuccess(t: LogInBean) {
+                        listener.onSuccess(t)
                     }
-                }
 
-                override fun onSuccess(t: LogInBean) {
-                    listener.onSuccess(t)
-                }
-
-                override fun onError(e: Throwable) {
-                    listener.onError(e)
-                }
-            })
+                    override fun onError(e: Throwable) {
+                        listener.onError(e)
+                    }
+                })
     }
 }
 
-class LogInVM : BaseVM<LogInModel>() {
+class LogInVM : BaseVM<LogInModel>(), LogInModelImpl {
 
 
     //是否显示密码
@@ -159,8 +163,17 @@ class LogInVM : BaseVM<LogInModel>() {
     //账号
     var number: MutableLiveData<String> = MutableLiveData()
 
-    fun login(number: String?, pwd: String?, listener: OnBaseHttpListener<LogInBean>) {
+    override fun login(number: String?, pwd: String?, listener: OnBaseHttpListener<LogInBean>) {
         model.login(number, pwd, listener)
     }
 
+}
+
+
+interface LogInModelImpl {
+    fun login(
+        number: String?,
+        pwd: String?,
+        listener: OnBaseHttpListener<LogInBean>
+    )
 }

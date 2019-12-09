@@ -33,16 +33,15 @@ class AuthorAct : BaseMVVMAct<ActivityAuthorBinding, AuthorModel, AuthorVM>() {
 }
 
 
-class AuthorModel : BaseModel() {
-    fun getDetailByAuthor(
-        lifecycleOwner: LifecycleOwner,
+class AuthorModel : BaseModel(), AuthorModelImpl {
+    override fun getDetailByAuthor(
         curPage: Int,
         author: String,
         listener: OnBaseHttpListener<HomeDetailBean>
     ) {
         HttpTool.xHttp
             .doGet(
-                lifecycleOwner,
+                lifecycle,
                 HomeDetailBean::class.java,
                 "article/list/$curPage/json?author=$author",
                 object : OnHttpListener<HomeDetailBean>() {
@@ -58,12 +57,20 @@ class AuthorModel : BaseModel() {
 }
 
 
-class AuthorVM : BaseVM<AuthorModel>() {
-    fun getDetailByAuthor(
+class AuthorVM : BaseVM<AuthorModel>(), AuthorModelImpl {
+    override fun getDetailByAuthor(
         curPage: Int,
         author: String,
         listener: OnBaseHttpListener<HomeDetailBean>
     ) {
-        model.getDetailByAuthor(lifecycle, curPage, author, listener)
+        model.getDetailByAuthor(curPage, author, listener)
     }
+}
+
+interface AuthorModelImpl {
+    fun getDetailByAuthor(
+        curPage: Int,
+        author: String,
+        listener: OnBaseHttpListener<HomeDetailBean>
+    )
 }

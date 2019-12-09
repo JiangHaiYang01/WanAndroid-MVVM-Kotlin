@@ -25,7 +25,6 @@ class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
         bind.actMeInfoView1.setInfo("等级")
 
 
-
         //获取用户积分排行
         vm.getUserInfoDetail(object : OnBaseHttpListener<UserDetailBean> {
             override fun onSuccess(t: UserDetailBean) {
@@ -62,12 +61,13 @@ class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
 
 }
 
-class MeActModel : BaseModel() {
+class MeActModel : BaseModel(), MeActModelImpl {
     //获取积分排行
-    fun getUserInfoDetail(listener: OnBaseHttpListener<UserDetailBean>) {
+    override fun getUserInfoDetail(listener: OnBaseHttpListener<UserDetailBean>) {
 
         HttpTool.xHttp
             .doGet(
+                lifecycle,
                 UserDetailBean::class.java,
                 "lg/coin/userinfo/json",
                 object : OnHttpListener<UserDetailBean>() {

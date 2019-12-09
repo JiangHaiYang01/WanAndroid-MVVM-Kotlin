@@ -22,8 +22,8 @@ class RegisterAct : BaseMVVMAct<ActivityRegisterBinding, RegisterModel, Register
     override fun initMVVMBind() {
         bind.vm = vm
     }
-    override fun initMVVMListener() {
 
+    override fun initMVVMListener() {
 
 
         bind.etPwd.addTextChangedListener(RegisterTextWatcher(0, vm))
@@ -103,37 +103,41 @@ class RegisterTextWatcher(private val type: Int, private val vm: RegisterVM) : T
 
 }
 
-class RegisterModel : BaseModel() {
-    fun register(
+class RegisterModel : BaseModel(), RegisterModelImpl {
+    override fun register(
         number: String?,
         pwd: String?,
         listener: OnBaseHttpListener<LogInBean>
     ) {
         HttpTool.xHttp
-            .doPost(LogInBean::class.java, "user/register", object : OnHttpListener<LogInBean>() {
-                override fun onMap(map: HashMap<String, Any>) {
-                    super.onMap(map)
-                    if (!number.isNullOrEmpty()) {
-                        map["username"] = number
+            .doPost(
+                lifecycle,
+                LogInBean::class.java,
+                "user/register",
+                object : OnHttpListener<LogInBean>() {
+                    override fun onMap(map: HashMap<String, Any>) {
+                        super.onMap(map)
+                        if (!number.isNullOrEmpty()) {
+                            map["username"] = number
+                        }
+                        if (!pwd.isNullOrEmpty()) {
+                            map["password"] = pwd
+                            map["repassword"] = pwd
+                        }
                     }
-                    if (!pwd.isNullOrEmpty()) {
-                        map["password"] = pwd
-                        map["repassword"] = pwd
+
+                    override fun onSuccess(t: LogInBean) {
+                        listener.onSuccess(t)
                     }
-                }
 
-                override fun onSuccess(t: LogInBean) {
-                    listener.onSuccess(t)
-                }
-
-                override fun onError(e: Throwable) {
-                    listener.onError(e)
-                }
-            })
+                    override fun onError(e: Throwable) {
+                        listener.onError(e)
+                    }
+                })
     }
 }
 
-class RegisterVM : BaseVM<RegisterModel>() {
+class RegisterVM : BaseVM<RegisterModel>(), RegisterModelImpl {
 
     //是否显示密码
     var isShowPwd: MutableLiveData<Boolean> = MutableLiveData()
@@ -144,8 +148,16 @@ class RegisterVM : BaseVM<RegisterModel>() {
     //账号
     var number: MutableLiveData<String> = MutableLiveData()
 
-    fun register(number: String?, pwd: String?, listener: OnBaseHttpListener<LogInBean>) {
+    override fun register(number: String?, pwd: String?, listener: OnBaseHttpListener<LogInBean>) {
         model.register(number, pwd, listener)
     }
 
+}
+
+interface RegisterModelImpl {
+    fun register(
+        number: String?,
+        pwd: String?,
+        listener: OnBaseHttpListener<LogInBean>
+    )
 }
