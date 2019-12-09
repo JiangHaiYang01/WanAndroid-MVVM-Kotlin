@@ -8,6 +8,7 @@ import com.allens.tools.R
 import com.allens.tools.databinding.FgHotBinding
 import com.allens.ui.adapter.HotFgPagerAdapter
 import com.allens.ui.fragment.hot.hot_detail.OfficialFg
+import com.allens.ui.fragment.hot.hot_detail.ProjectFg
 
 class HotFragment : BaseMVVMFragment<FgHotBinding, HotModel, HotFgVM>() {
     override fun createModel(): HotModel {
@@ -54,17 +55,18 @@ class HotFgVM : BaseVM<HotModel>() {
 //        "关注",
 //        "推荐",
 //        "热门",
-//        "公众号",
-//        "开源推荐",
+        "公众号",
+        "开源推荐"
 //        "常用网站",
-        "问答"
+//        "问答"
     )
     var fragList = mutableListOf<BaseFragment>(
 //        OfficialFg(),
 //        OfficialFg(),
 //        OfficialFg(),
+        OfficialFg(),
+        ProjectFg()
 //        OfficialFg(),
-//        OfficialFg(),
-//        OfficialFg(),
-        OfficialFg())
+//        OfficialFg()
+        )
 }
