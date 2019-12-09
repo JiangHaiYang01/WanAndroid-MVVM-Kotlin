@@ -1,6 +1,5 @@
-package com.allens.ui.fragment
+package com.allens.ui.fragment.hot
 
-import androidx.fragment.app.Fragment
 import com.allens.model_base.base.BaseFragment
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
@@ -8,8 +7,7 @@ import com.allens.model_base.base.impl.BaseVM
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHotBinding
 import com.allens.ui.adapter.HotFgPagerAdapter
-import com.allens.ui.fragment.hot_detail.OfficialFg
-import java.util.ArrayList
+import com.allens.ui.fragment.hot.hot_detail.OfficialFg
 
 class HotFragment : BaseMVVMFragment<FgHotBinding, HotModel, HotFgVM>() {
     override fun createModel(): HotModel {

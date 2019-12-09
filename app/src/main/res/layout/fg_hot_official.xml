@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.allens.ui.fragment.hot_detail.OfficialVM" />
+            type="com.allens.ui.fragment.hot.hot_detail.OfficialVM" />
 
     </data>
 

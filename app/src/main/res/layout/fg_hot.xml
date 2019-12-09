@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.allens.ui.fragment.HotFgVM" />
+            type="com.allens.ui.fragment.hot.HotFgVM" />
 
     </data>
 

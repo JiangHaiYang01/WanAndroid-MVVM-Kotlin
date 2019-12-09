@@ -1,7 +1,6 @@
-package com.allens.ui.fragment.hot_detail
+package com.allens.ui.fragment.hot.hot_detail
 
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
 import com.allens.LogHelper
 import com.allens.bean.home_system_detail.DataX
 import com.allens.bean.offlicial_tab.OfflicialTabInfoBean
@@ -15,7 +14,6 @@ import com.allens.tools.R
 import com.allens.tools.databinding.FgHotOfficialBinding
 import com.allens.ui.adapter.HomeDetailAdapter
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fg_home_vp.view.*
 
 //公众号
 class OfficialFg : BaseMVVMFragment<FgHotOfficialBinding, OfficialModel, OfficialVM>() {

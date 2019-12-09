@@ -1,4 +1,4 @@
-package com.allens.ui.fragment
+package com.allens.ui.fragment.home
 
 import androidx.fragment.app.Fragment
 import com.allens.bean.home_system_tab.HomeSystemTabBean
@@ -87,7 +87,8 @@ class HomeModel : BaseModel(), HomeModelImpl {
 }
 
 
-class HomeVM : BaseVM<HomeModel>(), HomeModelImpl {
+class HomeVM : BaseVM<HomeModel>(),
+    HomeModelImpl {
     override fun getSystemTab(listener: OnBaseHttpListener<HomeSystemTabBean>) {
         model.getSystemTab(listener)
     }

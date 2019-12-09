@@ -1,4 +1,4 @@
-package com.allens.ui.fragment
+package com.allens.ui.fragment.home
 
 import android.os.Bundle
 import android.widget.TextView
@@ -194,7 +194,8 @@ class HomeVPModel : BaseModel(), HomeVPModelImpl {
 }
 
 
-class HomeVPVM : BaseVM<HomeVPModel>(), HomeVPModelImpl {
+class HomeVPVM : BaseVM<HomeVPModel>(),
+    HomeVPModelImpl {
 
 
     //当前显示第几个

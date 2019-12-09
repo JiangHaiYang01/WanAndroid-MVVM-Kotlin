@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.allens.ui.fragment.HomeVM" />
+            type="com.allens.ui.fragment.home.HomeVM" />
 
     </data>
 
