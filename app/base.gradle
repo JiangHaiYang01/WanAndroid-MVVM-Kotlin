@@ -6,13 +6,13 @@ ext {
         // 引入model
         //==========================================================================================
         implementation 'com.allens:logger:1.0.0'
-//        implementation 'com.allens:base:1.0.0'
-//        implementation 'com.allens:http:1.0.0'
+        implementation 'com.allens:base:1.0.0'
+        implementation 'com.allens:http:1.0.0'
 
 
 
-        implementation project(":model_base")
-        implementation project(":model_http")
+//        implementation project(":model_base")
+//        implementation project(":model_http")
 
 
         //==========================================================================================

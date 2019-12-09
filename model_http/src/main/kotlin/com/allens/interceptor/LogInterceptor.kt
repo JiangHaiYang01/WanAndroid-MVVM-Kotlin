@@ -27,7 +27,7 @@ object LogInterceptor {
                         return
                     }
                 }
-                Logger.i(message)
+                Logger.i("http----> $message ")
             }
         })
         interceptor.level = HttpLevel.conversion(level)
