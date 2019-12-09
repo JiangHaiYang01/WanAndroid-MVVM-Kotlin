@@ -62,7 +62,7 @@ class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
 
 }
 
-class MeActModel : BaseModel {
+class MeActModel : BaseModel() {
     //获取积分排行
     fun getUserInfoDetail(listener: OnBaseHttpListener<UserDetailBean>) {
 

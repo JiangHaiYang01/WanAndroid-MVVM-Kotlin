@@ -67,7 +67,7 @@ class HomeFragment : BaseMVVMFragment<FgHomeBinding, HomeModel, HomeVM>() {
 }
 
 
-class HomeModel : BaseModel {
+class HomeModel : BaseModel() {
 
     fun getSystemTab(lifecycle: LifecycleOwner, listener: OnBaseHttpListener<SystemBean>) {
         HttpTool.xHttp

@@ -1,50 +1,50 @@
-package com.allens.ui.activity
+package com.allens.ui.fragment.hot_detail
 
 import androidx.lifecycle.LifecycleOwner
+import com.allens.LogHelper
 import com.allens.bean.HomeDetailBean
-import com.allens.model_base.base.impl.BaseMVVMAct
+import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
 import com.allens.model_http.impl.OnBaseHttpListener
 import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
-import com.allens.tools.databinding.ActivityAuthorBinding
+import com.allens.tools.databinding.FgHotOfficialBinding
+import kotlinx.android.synthetic.main.fg_home_vp.view.*
 
-class AuthorAct : BaseMVVMAct<ActivityAuthorBinding, AuthorModel, AuthorVM>() {
-    override fun createModel(): AuthorModel {
-        return AuthorModel()
+//公众号
+class OfficialFg : BaseMVVMFragment<FgHotOfficialBinding, OfficialModel, OfficialVM>() {
+    override fun createModel(): OfficialModel {
+        return OfficialModel()
     }
 
-    override fun createVMClass(): Class<AuthorVM> {
-        return AuthorVM::class.java
+    override fun createVMClass(): Class<OfficialVM> {
+        return OfficialVM::class.java
     }
 
     override fun getContentViewId(): Int {
-        return R.layout.activity_author
+        return R.layout.fg_hot_official
     }
 
     override fun initMVVMBind() {
+        bind.vm = vm
     }
 
     override fun initMVVMListener() {
     }
-
 }
 
 
-class AuthorModel : BaseModel() {
-    fun getDetailByAuthor(
-        lifecycleOwner: LifecycleOwner,
-        curPage: Int,
-        author: String,
+class OfficialModel : BaseModel() {
+    fun getOfficialTab(
         listener: OnBaseHttpListener<HomeDetailBean>
     ) {
         HttpTool.xHttp
             .doGet(
-                lifecycleOwner,
+                lifecycle,
                 HomeDetailBean::class.java,
-                "article/list/$curPage/json?author=$author",
+                "wxarticle/chapters/json",
                 object : OnHttpListener<HomeDetailBean>() {
                     override fun onSuccess(t: HomeDetailBean) {
                         listener.onSuccess(t)
@@ -58,12 +58,4 @@ class AuthorModel : BaseModel() {
 }
 
 
-class AuthorVM : BaseVM<AuthorModel>() {
-    fun getDetailByAuthor(
-        curPage: Int,
-        author: String,
-        listener: OnBaseHttpListener<HomeDetailBean>
-    ) {
-        model.getDetailByAuthor(lifecycle, curPage, author, listener)
-    }
-}
+class OfficialVM : BaseVM<OfficialModel>()

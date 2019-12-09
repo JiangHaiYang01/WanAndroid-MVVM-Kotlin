@@ -70,6 +70,7 @@ abstract class BaseVM<M : BaseModel> : BaseMVVMImpl<M>, ViewModel() {
 
     override fun registerLifecycleOwner(lifecycle: LifecycleOwner) {
         this.lifecycle = lifecycle
+        model.registerLifecycleOwner(lifecycle)
     }
 
 

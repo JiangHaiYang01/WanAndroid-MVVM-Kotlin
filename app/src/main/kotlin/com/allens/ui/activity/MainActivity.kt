@@ -41,7 +41,7 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
 
 }
 
-class MainModel : BaseModel
+class MainModel : BaseModel()
 
 class MainVM : BaseVM<MainModel>() {
     //选中颜色

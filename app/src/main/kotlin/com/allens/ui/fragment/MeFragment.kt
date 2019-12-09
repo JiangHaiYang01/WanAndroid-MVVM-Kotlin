@@ -74,7 +74,7 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>(),
 }
 
 
-class MeFgModel : BaseModel, MeFgModelImpl {
+class MeFgModel : BaseModel(), MeFgModelImpl {
     override fun getItemData(): MutableList<FgItemDto> {
         return mutableListOf(
             FgItemDto(R.drawable.fg_me_notify, "消息中心", false, 0),

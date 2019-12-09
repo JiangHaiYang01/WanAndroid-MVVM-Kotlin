@@ -103,7 +103,7 @@ class RegisterTextWatcher(private val type: Int, private val vm: RegisterVM) : T
 
 }
 
-class RegisterModel : BaseModel {
+class RegisterModel : BaseModel() {
     fun register(
         number: String?,
         pwd: String?,

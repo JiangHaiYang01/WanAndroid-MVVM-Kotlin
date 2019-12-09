@@ -118,7 +118,7 @@ class LoginTextWatcher(private val type: Int, private val vm: LogInVM) : TextWat
 }
 
 
-class LogInModel : BaseModel {
+class LogInModel : BaseModel() {
     fun login(
         number: String?,
         pwd: String?,

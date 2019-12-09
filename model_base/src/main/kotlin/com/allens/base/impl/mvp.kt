@@ -74,8 +74,20 @@ interface BaseView {
 
 }
 
+abstract class BaseModel() :  BaseModelImpl {
 
-interface BaseModel
+    lateinit var lifecycle: LifecycleOwner
+
+    override fun registerLifecycleOwner(lifecycle: LifecycleOwner) {
+        this.lifecycle = lifecycle
+    }
+}
+
+
+interface BaseModelImpl {
+    //注册 Lifecycle
+    fun registerLifecycleOwner(lifecycle: LifecycleOwner)
+}
 
 
 interface BasePresenterImpl<M : BaseModel, V : BaseView> : LifecycleObserver {

@@ -36,6 +36,6 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>() {
 }
 
 
-class FindModel : BaseModel
+class FindModel : BaseModel()
 
 class FindVM : BaseVM<FindModel>()

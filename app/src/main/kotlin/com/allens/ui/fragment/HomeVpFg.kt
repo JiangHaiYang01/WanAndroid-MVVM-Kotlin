@@ -171,7 +171,7 @@ class HomeVpFg(private val data: SystemResultBean) :
 }
 
 
-class HomeVPModel : BaseModel {
+class HomeVPModel : BaseModel() {
     fun getDetail(
         lifecycleOwner: LifecycleOwner,
         curPage: Int,

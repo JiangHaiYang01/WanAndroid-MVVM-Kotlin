@@ -58,7 +58,7 @@ class SettingAct : BaseMVVMAct<ActivitySettinngBinding, SettingModel, SettingVm>
 }
 
 
-class SettingModel : BaseModel {
+class SettingModel : BaseModel() {
     fun logOut(lifecycle: LifecycleOwner, listener: OnBaseHttpListener<LogOutBean>) {
         HttpTool.xHttp
             .doGet(
