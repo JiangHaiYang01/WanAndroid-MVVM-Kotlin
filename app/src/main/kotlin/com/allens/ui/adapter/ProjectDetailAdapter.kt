@@ -4,6 +4,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.allens.bean.project_detail.DataX
 import com.allens.tools.R
+import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 
@@ -22,10 +23,13 @@ class ProjectDetailAdapter(
             return
         }
         helper.setText(R.id.item_home_detail_tv_user_title, item.title)
+        helper.setText(R.id.item_home_detail_tv_user_info, item.desc)
+
         helper.setText(R.id.item_home_detail_tv_time, item.niceDate)
         helper.itemView.setOnClickListener {
             listener?.onClickHomeDetailItem(item)
         }
+        Glide.with(mContext).load(item.envelopePic).into(helper.getView(R.id.item_home_detail_img))
 
     }
 

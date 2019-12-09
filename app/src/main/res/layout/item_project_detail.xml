@@ -13,34 +13,34 @@
         android:background="@color/color_write"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/item_home_detail_img_user_heard"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:src="@drawable/fg_me_heard_def"
-            app:imgError="@{@drawable/fg_me_heard_def}"
-            app:imgIsCircleCrop="@{true}"
-            app:imgPlace="@{@drawable/fg_me_heard_def}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry" />
+        <!--        <ImageView-->
+        <!--            android:id="@+id/item_home_detail_img_user_heard"-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:paddingStart="20dp"-->
+        <!--            android:paddingTop="10dp"-->
+        <!--            android:paddingBottom="10dp"-->
+        <!--            android:src="@drawable/fg_me_heard_def"-->
+        <!--            app:imgError="@{@drawable/fg_me_heard_def}"-->
+        <!--            app:imgIsCircleCrop="@{true}"-->
+        <!--            app:imgPlace="@{@drawable/fg_me_heard_def}"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:ignore="RtlSymmetry" />-->
 
-        <TextView
-            android:id="@+id/item_home_detail_tv_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:paddingStart="10dp"
-            android:text="在雨季等你"
-            android:textColor="@color/color_black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/item_home_detail_img_user_heard"
-            app:layout_constraintLeft_toRightOf="@+id/item_home_detail_img_user_heard"
-            app:layout_constraintTop_toTopOf="@+id/item_home_detail_img_user_heard"
-            tools:ignore="RtlSymmetry" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/item_home_detail_tv_user_name"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:paddingStart="10dp"-->
+        <!--            android:text="在雨季等你"-->
+        <!--            android:textColor="@color/color_black"-->
+        <!--            android:textSize="12sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/item_home_detail_img_user_heard"-->
+        <!--            app:layout_constraintLeft_toRightOf="@+id/item_home_detail_img_user_heard"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/item_home_detail_img_user_heard"-->
+        <!--            tools:ignore="RtlSymmetry" />-->
 
 
         <TextView
@@ -48,13 +48,43 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:text="Gradle多渠道打包(动态设定App名称，应用图标，替换常量，更改包名，变更渠道)"
             android:textColor="@color/color_black"
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_home_detail_tv_user_name" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/item_home_detail_tv_user_info"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="40dp"
+            android:ellipsize="end"
+            android:lines="4"
+            android:text="Gradle多渠道打包(动态设定App名称，应用图标，替换常量，更改包名，变更渠道)"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_home_detail_img"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/item_home_detail_img"
+            app:layout_constraintTop_toBottomOf="@+id/item_home_detail_tv_user_title" />
+
+
+        <ImageView
+            android:id="@+id/item_home_detail_img"
+            android:layout_width="80dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_home_detail_tv_user_title" />
 
 
         <ImageView
@@ -64,8 +94,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/item_home_detail_time"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_home_detail_tv_user_title" />
+            app:layout_constraintBottom_toBottomOf="@+id/item_home_detail_img"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
             android:id="@+id/item_home_detail_tv_time"
@@ -84,7 +114,7 @@
             android:layout_height="10dp"
             android:layout_marginTop="10dp"
             android:background="@color/color_background"
-            app:layout_constraintTop_toBottomOf="@+id/item_home_detail_tv_time" />
+            app:layout_constraintTop_toBottomOf="@+id/item_home_detail_img" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
