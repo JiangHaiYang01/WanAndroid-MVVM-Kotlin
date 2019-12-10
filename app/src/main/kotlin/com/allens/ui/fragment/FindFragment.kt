@@ -127,7 +127,7 @@ class FindModel : BaseModel(), FindModelImpl {
             .doGet(
                 lifecycle,
                 HomeDetailBean::class.java,
-                "article/list/$pageIndex/json",
+                "user_article/list/$pageIndex/json",
                 object : OnHttpListener<HomeDetailBean>() {
                     override fun onSuccess(t: HomeDetailBean) {
                         listener.onSuccess(t)

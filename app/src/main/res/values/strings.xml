@@ -1,6 +1,6 @@
 <resources>
     <string name="act_main_rb_home">首页</string>
-    <string name="act_main_rb_star">关注</string>
+    <string name="act_main_rb_star">体系</string>
     <string name="act_main_rb_search">发现</string>
     <string name="act_main_rb_me">我的</string>
     <string name="fg_me_tv_click_login">登录 / 注册</string>
@@ -21,5 +21,7 @@
 
     <string name="act_me_edit">编辑</string>
     <string name="setting_log_out">退出账号</string>
+
+
     <string name="web_detail">文章详情</string>
 </resources>
