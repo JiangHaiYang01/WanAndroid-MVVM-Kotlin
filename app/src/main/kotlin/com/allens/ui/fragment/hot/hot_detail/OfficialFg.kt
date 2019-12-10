@@ -1,5 +1,6 @@
 package com.allens.ui.fragment.hot.hot_detail
 
+import android.os.Bundle
 import android.widget.TextView
 import com.allens.LogHelper
 import com.allens.bean.offlicial_detail.DataX
@@ -13,6 +14,7 @@ import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHotOfficialBinding
+import com.allens.ui.activity.WebAct
 import com.allens.ui.adapter.HomeDetailAdapter
 import com.allens.ui.adapter.OfficialDetailAdapter
 import com.google.android.material.tabs.TabLayout
@@ -54,7 +56,17 @@ class OfficialFg : BaseMVVMFragment<FgHotOfficialBinding, OfficialModel, Officia
                 //添加选择器
                 addOfficialTabSelect(t)
                 //下拉刷新  加载更多
-                addRefresh(t);
+                addRefresh(t)
+            }
+        })
+
+
+        vm.adapter.setOnDetailAdapterListener(object :
+            OfficialDetailAdapter.OnDetailAdapterListener {
+            override fun onClickHomeDetailItem(item: DataX) {
+                val bundle = Bundle()
+                bundle.putString(WebAct.WEB_URL, item.link)
+                startActivity(WebAct::class.java, bundle)
             }
         })
     }
