@@ -26,11 +26,14 @@ class FindDetailAdapter(
             helper.setText(R.id.item_home_detail_tv_user_name, item.author)
         }
         helper.setText(R.id.item_home_detail_tv_user_title, item.title)
-        helper.setText(R.id.item_home_detail_tv_time, item.niceDate)
-        helper.setText(
-            R.id.item_home_detail_tv_tab,
-            item.superChapterName + " / " + item.chapterName
-        )
+            .setText(R.id.item_home_detail_tv_time, item.niceDate)
+            .setText(
+                R.id.item_home_detail_tv_tab,
+                item.superChapterName + " / " + item.chapterName
+            )
+            .setVisible(R.id.item_find_detail_img_new,item.fresh)
+
+
         helper.itemView.setOnClickListener {
             listener?.onClickHomeDetailItem(item)
         }

@@ -43,6 +43,15 @@
             tools:ignore="RtlSymmetry" />
 
 
+        <ImageView
+            android:id="@+id/item_find_detail_img_new"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/item_find_detail_new"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <TextView
             android:id="@+id/item_home_detail_tv_tab"
             android:layout_width="wrap_content"
