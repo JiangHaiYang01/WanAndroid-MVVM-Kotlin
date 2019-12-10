@@ -7,6 +7,7 @@ import com.allens.model_base.base.impl.BaseVM
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHotBinding
 import com.allens.ui.adapter.HotFgPagerAdapter
+import com.allens.ui.fragment.hot.hot_detail.HotTabFragment
 import com.allens.ui.fragment.hot.hot_detail.OfficialFg
 import com.allens.ui.fragment.hot.hot_detail.ProjectFg
 
@@ -53,7 +54,7 @@ class HotFgVM : BaseVM<HotModel>() {
 
     var tabList = mutableListOf<String>(
 //        "关注",
-//        "推荐",
+        "推荐",
 //        "热门",
         "公众号",
         "开源推荐"
@@ -63,7 +64,7 @@ class HotFgVM : BaseVM<HotModel>() {
     var fragList = mutableListOf<BaseFragment>(
 //        OfficialFg(),
 //        OfficialFg(),
-//        OfficialFg(),
+        HotTabFragment(),
         OfficialFg(),
         ProjectFg()
 //        OfficialFg(),
