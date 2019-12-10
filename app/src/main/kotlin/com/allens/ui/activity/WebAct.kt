@@ -41,6 +41,10 @@ class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>() {
         bind.actWebImgBack.setOnClickListener {
             finish()
         }
+
+        bind.actWebImgMore.setOnClickListener {
+
+        }
     }
 
 }
