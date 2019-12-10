@@ -11,6 +11,7 @@ import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityWebBinding
+import dialog.SheetDialog
 
 
 class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>() {
@@ -49,6 +50,18 @@ class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>() {
 
         bind.actWebImgMore.setOnClickListener {
             LogHelper.i("web act 点击更多")
+            SheetDialog(this)
+                .builder()
+                .setTitle("测试")
+                .addSheetItem("点击更多")
+                .addSheetItem("点击更多点击更多点击更多")
+                .show()
+//            IosSheetDialog(this)
+//                .builder()
+//                .setTitle("测试")
+//                .addSheetItem("1",null)
+//                .addSheetItem("1",null)
+//                .show()
 
         }
     }

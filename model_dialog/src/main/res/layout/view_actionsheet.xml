@@ -47,8 +47,8 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_cancel"
         android:gravity="center"
-        android:text="取消"
-        android:textColor="#333333"
-        android:textSize="17sp" />
+        android:text="@string/cancel"
+        android:textColor="#FD4A2E"
+        android:textSize="14sp" />
 
 </LinearLayout>
