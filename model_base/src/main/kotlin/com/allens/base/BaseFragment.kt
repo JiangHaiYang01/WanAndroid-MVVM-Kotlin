@@ -126,14 +126,14 @@ abstract class BaseFragment : Fragment(), BaseView {
     }
 
     override fun startActivity(clz: Class<*>, bundle: Bundle) {
-        val intent = Intent()
-        activity?.let { intent.setClass(it, clz) }
+        val intent = Intent(activity, clz)
+        intent.putExtras(bundle)
         startActivity(intent)
     }
 
     override fun startActivityForResult(cls: Class<*>, bundle: Bundle, requestCode: Int) {
-        val intent = Intent()
-        activity?.let { intent.setClass(it, cls) }
+        val intent = Intent(activity, cls)
+        intent.putExtras(bundle)
         startActivityForResult(intent, requestCode)
     }
 

@@ -1,5 +1,6 @@
 package com.allens.ui.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import com.allens.LogHelper
@@ -15,6 +16,7 @@ import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHomeVpBinding
 import com.allens.ui.activity.AuthorAct
+import com.allens.ui.activity.WebAct
 import com.allens.ui.adapter.HomeDetailAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.BaseOnTabSelectedListener
@@ -54,7 +56,14 @@ class HomeVpFg(private val data: Data) :
             }
 
             override fun onClickHomeDetailItem(item: DataX) {
-                LogHelper.i("home fg 点击 item ${item.author}")
+                LogHelper.i("home fg 点击 item ${item.author} url ${item.link}")
+
+                val bundle = Bundle()
+                bundle.putString(WebAct.WEB_URL, item.link)
+                val intent = Intent(activity, WebAct::class.java)
+                intent.putExtras(bundle)
+//                startActivity(intent)
+                startActivity(WebAct::class.java, bundle)
             }
         })
 

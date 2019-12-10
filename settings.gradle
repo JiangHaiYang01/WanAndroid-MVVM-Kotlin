@@ -1,2 +1,2 @@
-include ':app', ':model_log', ':model_base', ':model_http'
+include ':app', ':model_log', ':model_base', ':model_http', ':model_webview'
 rootProject.name='tools'
