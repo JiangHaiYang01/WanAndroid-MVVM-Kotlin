@@ -22,6 +22,7 @@
 
 
             <ImageView
+                android:id="@+id/act_web_img_back"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="20dp"

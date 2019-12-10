@@ -35,6 +35,12 @@ class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>() {
         val url = intent.getStringExtra(WEB_URL)
         LogHelper.i("web view load $url")
         bind.actWeb.loadUrl(url)
+
+
+
+        bind.actWebImgBack.setOnClickListener {
+            finish()
+        }
     }
 
 }

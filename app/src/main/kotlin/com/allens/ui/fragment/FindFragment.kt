@@ -17,7 +17,9 @@ import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgFindBinding
 import com.allens.tools.databinding.FgHomeBinding
+import com.allens.ui.activity.WebAct
 import com.allens.ui.adapter.BannerAdapter
+import com.youth.banner.listener.OnBannerListener
 
 //发现界面
 class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>() {
@@ -61,6 +63,13 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>() {
                 }
                 bind.banner.setImages(listOf)
                 bind.banner.start()
+
+
+                bind.banner.setOnBannerListener {
+                    val bundle = Bundle()
+                    bundle.putString(WebAct.WEB_URL, t.data[it].url)
+                    startActivity(WebAct::class.java, bundle)
+                }
             }
         })
     }
