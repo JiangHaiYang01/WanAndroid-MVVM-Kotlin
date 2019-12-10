@@ -1,13 +1,11 @@
 package com.allens.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.allens.LogHelper
 import com.allens.bean.baner.BanerBean
-import com.allens.model_base.base.BaseFragment
-import com.allens.model_base.base.impl.BaseMVVMAct
+import com.allens.bean.home_detail.DataX
+import com.allens.bean.home_detail.HomeDetailBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -16,13 +14,12 @@ import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgFindBinding
-import com.allens.tools.databinding.FgHomeBinding
 import com.allens.ui.activity.WebAct
-import com.allens.ui.adapter.BannerAdapter
-import com.youth.banner.listener.OnBannerListener
+import com.allens.ui.adapter.FindDetailAdapter
 
 //发现界面
-class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>() {
+class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>(),
+    FindDetailAdapter.OnHomeDetailAdapterListener {
 
 
     override fun getContentViewId(): Int {
@@ -42,52 +39,73 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>() {
     }
 
     override fun initMVVMListener() {
-        //轮播图
-        banner()
+        vm.adapter.setOnHomeDetailAdapterListener(this)
+        refresh()
     }
 
-    private fun banner() {
-        vm.getBaner(object : OnBaseHttpListener<BanerBean> {
-            override fun onError(e: Throwable) {
-
-            }
-
-            override fun onSuccess(t: BanerBean) {
-                if (t.errorCode != 0) {
-                    return
+    private fun refresh() {
+        //自动刷新
+        bind.fgFindRefresh.autoRefresh()
+        bind.fgFindRefresh.setOnRefreshListener {
+            LogHelper.i("发现 界面  下拉刷新")
+            vm.pageIndex = 0
+            vm.getHome(0, object : OnBaseHttpListener<HomeDetailBean> {
+                override fun onError(e: Throwable) {
+                    bind.fgFindRefresh.finishRefresh()
                 }
-                bind.banner.setImageLoader(BannerAdapter())
-                val listOf = mutableListOf<String>()
-                t.data.forEach {
-                    listOf.add(it.imagePath)
+
+                override fun onSuccess(t: HomeDetailBean) {
+                    bind.fgFindRefresh.finishRefresh()
+                    if (t.errorCode != 0) {
+                        return
+                    }
+                    vm.data.addAll(t.data.datas)
+                    bind.fgHomeTlRv.adapter = vm.adapter
+                    vm.pageIndex = vm.pageIndex + 1
+
                 }
-                bind.banner.setImages(listOf)
-                bind.banner.start()
+            })
+        }
 
-
-                bind.banner.setOnBannerListener {
-                    val bundle = Bundle()
-                    bundle.putString(WebAct.WEB_URL, t.data[it].url)
-                    startActivity(WebAct::class.java, bundle)
+        bind.fgFindRefresh.setOnLoadMoreListener {
+            LogHelper.i("发现 界面  加载更多 pageIndex ${vm.pageIndex}")
+            vm.getHome(vm.pageIndex, object : OnBaseHttpListener<HomeDetailBean> {
+                override fun onError(e: Throwable) {
+                    bind.fgFindRefresh.finishLoadMore()
                 }
-            }
-        })
+
+                override fun onSuccess(t: HomeDetailBean) {
+                    bind.fgFindRefresh.finishLoadMore()
+                    if (t.errorCode != 0) {
+                        return
+                    }
+                    vm.data.addAll(t.data.datas)
+                    vm.adapter.notifyDataSetChanged()
+                    vm.pageIndex = vm.pageIndex + 1
+
+                }
+            })
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-        bind.banner.startAutoPlay()
+    override fun onClickHomeDetailAuthor(item: DataX) {
+
     }
 
-    override fun onStop() {
-        super.onStop()
-        bind.banner.stopAutoPlay()
+    override fun onClickHomeDetailItem(item: DataX) {
+        LogHelper.i("find fg 点击 item ${item.author} url ${item.link}")
+
+        val bundle = Bundle()
+        bundle.putString(WebAct.WEB_URL, item.link)
+        val intent = Intent(activity, WebAct::class.java)
+        intent.putExtras(bundle)
+        startActivity(WebAct::class.java, bundle)
     }
+
 }
 
-
 class FindModel : BaseModel(), FindModelImpl {
-    override fun getBaner(listener: OnBaseHttpListener<BanerBean>) {
+    override fun getBanner(listener: OnBaseHttpListener<BanerBean>) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
@@ -104,17 +122,47 @@ class FindModel : BaseModel(), FindModelImpl {
                 })
     }
 
+    override fun getHome(pageIndex: Int, listener: OnBaseHttpListener<HomeDetailBean>) {
+        HttpTool.xHttp
+            .doGet(
+                lifecycle,
+                HomeDetailBean::class.java,
+                "article/list/$pageIndex/json",
+                object : OnHttpListener<HomeDetailBean>() {
+                    override fun onSuccess(t: HomeDetailBean) {
+                        listener.onSuccess(t)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.onError(e)
+                    }
+                })
+    }
+
 
 }
 
 class FindVM : BaseVM<FindModel>(), FindModelImpl {
-    override fun getBaner(listener: OnBaseHttpListener<BanerBean>) {
-        model.getBaner(listener)
+
+    var pageIndex: Int = 0
+
+    var data = mutableListOf<DataX>()
+
+    var adapter = FindDetailAdapter(data)
+
+
+    override fun getBanner(listener: OnBaseHttpListener<BanerBean>) {
+        model.getBanner(listener)
+    }
+
+    override fun getHome(pageIndex: Int, listener: OnBaseHttpListener<HomeDetailBean>) {
+        model.getHome(pageIndex, listener)
     }
 
 }
 
 
 interface FindModelImpl {
-    fun getBaner(listener: OnBaseHttpListener<BanerBean>)
+    fun getBanner(listener: OnBaseHttpListener<BanerBean>)
+    fun getHome(pageIndex: Int, listener: OnBaseHttpListener<HomeDetailBean>)
 }

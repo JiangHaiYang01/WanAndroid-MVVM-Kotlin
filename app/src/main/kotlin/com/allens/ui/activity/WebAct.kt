@@ -33,7 +33,6 @@ class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>() {
 
     override fun initMVVMListener() {
         val url = intent.getStringExtra(WEB_URL)
-        LogHelper.i("web view load $url")
         bind.actWeb.loadUrl(url)
 
 
