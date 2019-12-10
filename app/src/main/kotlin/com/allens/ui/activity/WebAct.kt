@@ -12,6 +12,7 @@ class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>() {
 
     companion object {
         const val WEB_URL = "URL"
+        const val WEB_ID = "ID"
     }
 
 

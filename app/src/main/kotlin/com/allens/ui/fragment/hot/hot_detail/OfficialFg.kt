@@ -66,6 +66,7 @@ class OfficialFg : BaseMVVMFragment<FgHotOfficialBinding, OfficialModel, Officia
             override fun onClickHomeDetailItem(item: DataX) {
                 val bundle = Bundle()
                 bundle.putString(WebAct.WEB_URL, item.link)
+                bundle.putInt(WebAct.WEB_ID, item.id)
                 startActivity(WebAct::class.java, bundle)
             }
         })

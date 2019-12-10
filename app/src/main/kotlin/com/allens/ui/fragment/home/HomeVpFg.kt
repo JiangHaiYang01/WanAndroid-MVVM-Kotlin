@@ -56,10 +56,11 @@ class HomeVpFg(private val data: Data) :
             }
 
             override fun onClickHomeDetailItem(item: DataX) {
-                LogHelper.i("home fg 点击 item ${item.author} url ${item.link}")
+                LogHelper.i("home fg 点击 item ${item.author} url ${item.link} id ${item.id}")
 
                 val bundle = Bundle()
                 bundle.putString(WebAct.WEB_URL, item.link)
+                bundle.putInt(WebAct.WEB_ID, item.id)
                 val intent = Intent(activity, WebAct::class.java)
                 intent.putExtras(bundle)
                 startActivity(WebAct::class.java, bundle)

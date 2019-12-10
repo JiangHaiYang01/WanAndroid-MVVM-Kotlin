@@ -97,6 +97,7 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>(),
 
         val bundle = Bundle()
         bundle.putString(WebAct.WEB_URL, item.link)
+        bundle.putInt(WebAct.WEB_ID, item.id)
         val intent = Intent(activity, WebAct::class.java)
         intent.putExtras(bundle)
         startActivity(WebAct::class.java, bundle)
