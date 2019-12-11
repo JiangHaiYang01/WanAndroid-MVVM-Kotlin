@@ -51,7 +51,7 @@ class HomeVpFg(private val data: Data) :
                     return
                 }
                 val bundle = Bundle()
-                bundle.putString("author", item.author)
+                bundle.putString(AuthorAct.Author, item.author)
                 startActivity(AuthorAct::class.java, bundle)
             }
 
