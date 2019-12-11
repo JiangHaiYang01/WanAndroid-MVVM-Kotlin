@@ -10,7 +10,8 @@ import com.allens.ui.dialog.ShareDialog
 import dialog.SheetDialog
 
 
-class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>() {
+class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>(),
+    ShareDialog.OnShareDialogListener {
 
     companion object {
         const val WEB_URL = "URL"
@@ -46,11 +47,16 @@ class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>() {
 
         bind.actWebImgMore.setOnClickListener {
             LogHelper.i("web act 点击更多")
-            ShareDialog(this)
+            val shareDialog = ShareDialog(this, this)
+            shareDialog
                 .create()
                 .show()
 
         }
+    }
+
+    override fun onCollection() {
+        LogHelper.i("收藏")
     }
 
 }
