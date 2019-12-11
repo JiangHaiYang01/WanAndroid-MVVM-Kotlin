@@ -137,14 +137,14 @@ abstract class BaseActivity : AppCompatActivity(), BaseView, OnTouchHelperListen
     }
 
     override fun startActivity(clz: Class<*>, bundle: Bundle) {
-        val intent = Intent()
-        intent.setClass(this, clz)
+        val intent = Intent(this, clz)
+        intent.putExtras(bundle)
         startActivity(intent)
     }
 
     override fun startActivityForResult(cls: Class<*>, bundle: Bundle, requestCode: Int) {
         val intent = Intent()
-        intent.setClass(this, cls)
+        intent.putExtras(bundle)
         startActivityForResult(intent, requestCode)
     }
 

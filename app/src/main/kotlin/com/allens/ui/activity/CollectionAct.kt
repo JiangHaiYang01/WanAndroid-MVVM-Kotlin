@@ -88,6 +88,7 @@ class CollectionAct : BaseMVVMAct<ActivityCollectionBinding, CollectionModel, Co
     }
 
     override fun onClickHomeDetailItem(item: DataX) {
+        LogHelper.i("收藏 点击 item ${item.author} url ${item.link} id ${item.id}")
         val bundle = Bundle()
         bundle.putString(WebAct.WEB_URL, item.link)
         bundle.putInt(WebAct.WEB_ID, item.id)
