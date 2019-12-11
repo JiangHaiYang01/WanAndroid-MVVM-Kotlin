@@ -34,6 +34,10 @@ class CollectionAct : BaseMVVMAct<ActivityCollectionBinding, CollectionModel, Co
     }
 
     override fun initMVVMListener() {
+
+        bind.title.setTitle(resources.getString(R.string.act_title_collection))
+        bind.title.setBack(this)
+
         vm.adapter.setOnHomeDetailAdapterListener(this)
         refresh()
     }

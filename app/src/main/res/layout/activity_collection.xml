@@ -16,22 +16,11 @@
         android:orientation="vertical">
 
 
-<!--        <ImageView-->
-<!--            android:id="@+id/act_web_img_back"-->
-<!--            android:layout_width="18dp"-->
-<!--            android:layout_height="18dp"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            android:src="@drawable/toolbar_back"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-
-        <TextView
-            android:id="@+id/fg_me_tv_title"
-            style="@style/style_title"
-            android:text="@string/act_title_collection"
+        <com.allens.ui.view.TitleView
+            android:id="@+id/title"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/fg_find_refresh"
@@ -39,7 +28,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fg_me_tv_title">
+            app:layout_constraintTop_toBottomOf="@+id/title">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fg_home_tl_rv"
