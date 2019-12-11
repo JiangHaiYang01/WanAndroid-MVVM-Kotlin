@@ -59,6 +59,7 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>(),
                     if (t.errorCode != 0) {
                         return
                     }
+                    vm.data.clear()
                     vm.data.addAll(t.data.datas)
                     bind.fgHomeTlRv.adapter = vm.adapter
                     vm.pageIndex = vm.pageIndex + 1
