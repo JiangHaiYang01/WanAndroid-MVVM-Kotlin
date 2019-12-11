@@ -3,7 +3,7 @@ package com.allens.ui.fragment.hot.hot_detail
 import android.content.Intent
 import android.os.Bundle
 import com.allens.LogHelper
-import com.allens.bean.baner.BanerBean
+import com.allens.bean.baner.BannerBean
 import com.allens.bean.home_detail.DataX
 import com.allens.bean.home_detail.HomeDetailBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
@@ -13,7 +13,6 @@ import com.allens.model_http.impl.OnBaseHttpListener
 import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
-import com.allens.tools.databinding.FgFindBinding
 import com.allens.tools.databinding.FgHotTabBinding
 import com.allens.ui.activity.WebAct
 import com.allens.ui.adapter.FindDetailAdapter
@@ -108,14 +107,14 @@ class HotTabFragment : BaseMVVMFragment<FgHotTabBinding, HotTabModel, HotTabVM>(
 }
 
 class HotTabModel : BaseModel(), HotTabModelImpl {
-    override fun getBanner(listener: OnBaseHttpListener<BanerBean>) {
+    override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
-                BanerBean::class.java,
+                BannerBean::class.java,
                 "banner/json",
-                object : OnHttpListener<BanerBean>() {
-                    override fun onSuccess(t: BanerBean) {
+                object : OnHttpListener<BannerBean>() {
+                    override fun onSuccess(t: BannerBean) {
                         listener.onSuccess(t)
                     }
 
@@ -154,7 +153,7 @@ class HotTabVM : BaseVM<HotTabModel>(), HotTabModelImpl {
     var adapter = FindDetailAdapter(data)
 
 
-    override fun getBanner(listener: OnBaseHttpListener<BanerBean>) {
+    override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
         model.getBanner(listener)
     }
 
@@ -166,6 +165,6 @@ class HotTabVM : BaseVM<HotTabModel>(), HotTabModelImpl {
 
 
 interface HotTabModelImpl {
-    fun getBanner(listener: OnBaseHttpListener<BanerBean>)
+    fun getBanner(listener: OnBaseHttpListener<BannerBean>)
     fun getHome(pageIndex: Int, listener: OnBaseHttpListener<HomeDetailBean>)
 }

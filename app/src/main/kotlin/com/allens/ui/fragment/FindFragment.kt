@@ -3,7 +3,7 @@ package com.allens.ui.fragment
 import android.content.Intent
 import android.os.Bundle
 import com.allens.LogHelper
-import com.allens.bean.baner.BanerBean
+import com.allens.bean.baner.BannerBean
 import com.allens.bean.home_detail.DataX
 import com.allens.bean.home_detail.HomeDetailBean
 import com.allens.model_base.base.impl.BaseMVVMFragment
@@ -106,14 +106,14 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>(),
 }
 
 class FindModel : BaseModel(), FindModelImpl {
-    override fun getBanner(listener: OnBaseHttpListener<BanerBean>) {
+    override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
         HttpTool.xHttp
             .doGet(
                 lifecycle,
-                BanerBean::class.java,
+                BannerBean::class.java,
                 "banner/json",
-                object : OnHttpListener<BanerBean>() {
-                    override fun onSuccess(t: BanerBean) {
+                object : OnHttpListener<BannerBean>() {
+                    override fun onSuccess(t: BannerBean) {
                         listener.onSuccess(t)
                     }
 
@@ -152,7 +152,7 @@ class FindVM : BaseVM<FindModel>(), FindModelImpl {
     var adapter = FindDetailAdapter(data)
 
 
-    override fun getBanner(listener: OnBaseHttpListener<BanerBean>) {
+    override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
         model.getBanner(listener)
     }
 
@@ -164,6 +164,6 @@ class FindVM : BaseVM<FindModel>(), FindModelImpl {
 
 
 interface FindModelImpl {
-    fun getBanner(listener: OnBaseHttpListener<BanerBean>)
+    fun getBanner(listener: OnBaseHttpListener<BannerBean>)
     fun getHome(pageIndex: Int, listener: OnBaseHttpListener<HomeDetailBean>)
 }
