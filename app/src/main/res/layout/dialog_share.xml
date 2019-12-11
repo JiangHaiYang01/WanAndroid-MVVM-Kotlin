@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_write"
+    android:orientation="vertical">
+
+    <com.google.android.material.tabs.TabLayout
+
+        android:id="@+id/dialog_tl_top"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingTop="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabPaddingBottom="0dp"
+        app:tabRippleColor="@null"
+        app:tabSelectedTextColor="@color/color_black"
+        app:tabTextAppearance="@style/style_act_main_home_tb"
+        app:tabTextColor="@color/color_black" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_background" />
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/dialog_tl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingTop="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabPaddingBottom="0dp"
+        app:tabRippleColor="@null"
+        app:tabSelectedTextColor="@color/color_black"
+        app:tabTextAppearance="@style/style_act_main_home_tb"
+        app:tabTextColor="@color/color_black" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_background" />
+
+
+    <TextView
+        android:background="@color/color_background"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/color_black"
+        android:textSize="14sp" />
+
+</LinearLayout>
