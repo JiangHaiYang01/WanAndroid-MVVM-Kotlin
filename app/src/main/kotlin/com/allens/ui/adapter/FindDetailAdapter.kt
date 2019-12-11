@@ -20,10 +20,10 @@ class FindDetailAdapter(
         if (item == null) {
             return
         }
-        if (item.author.isEmpty()) {
+        if (item.shareUser.isEmpty()) {
             helper.setText(R.id.item_home_detail_tv_user_name, "未知")
         } else {
-            helper.setText(R.id.item_home_detail_tv_user_name, item.author)
+            helper.setText(R.id.item_home_detail_tv_user_name, item.shareUser)
         }
         helper.setText(R.id.item_home_detail_tv_user_title, item.title)
             .setText(R.id.item_home_detail_tv_time, item.niceDate)

@@ -14,6 +14,7 @@ import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgHotTabBinding
+import com.allens.ui.activity.AuthorAct
 import com.allens.ui.activity.WebAct
 import com.allens.ui.adapter.FindDetailAdapter
 
@@ -90,7 +91,12 @@ class HotTabFragment : BaseMVVMFragment<FgHotTabBinding, HotTabModel, HotTabVM>(
     }
 
     override fun onClickHomeDetailAuthor(item: DataX) {
-
+        if (item.author.isEmpty()) {
+            return
+        }
+        val bundle = Bundle()
+        bundle.putString(AuthorAct.Author, item.author)
+        startActivity(AuthorAct::class.java, bundle)
     }
 
     override fun onClickHomeDetailItem(item: DataX) {
