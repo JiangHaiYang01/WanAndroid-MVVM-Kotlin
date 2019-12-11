@@ -10,7 +10,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import com.allens.lib_ios_dialog.R
 
-class SheetDialog(private val context: Context) : ButtonDialog(context = context) {
+class SheetDialog(private val context: Context) : BottomDialog(context = context) {
 
 
     //cancel 的样式
@@ -73,8 +73,8 @@ class SheetDialog(private val context: Context) : ButtonDialog(context = context
 
     }
 
-    override fun builder(): SheetDialog {
-        super.builder()
+    override fun create(): SheetDialog {
+        super.create()
         return this
     }
 
@@ -83,7 +83,7 @@ class SheetDialog(private val context: Context) : ButtonDialog(context = context
     // line
     //==============================================================================================
 
-    fun hideLine(isShowLine: Boolean): SheetDialog {
+    fun showLine(isShowLine: Boolean): SheetDialog {
         this.isShowLine = isShowLine
         return this
     }
@@ -164,22 +164,9 @@ class SheetDialog(private val context: Context) : ButtonDialog(context = context
         return this
     }
 
-
     //==============================================================================================
-    // dialog
+    // add
     //==============================================================================================
-    //点击其他位置是否能够取消
-    fun setCanceledOnTouchOutside(cancel: Boolean): SheetDialog {
-        dialog.setCanceledOnTouchOutside(cancel)
-        return this
-    }
-
-
-    // 是否点击返回能够取消
-    fun setCancelable(cancel: Boolean): SheetDialog {
-        dialog.setCancelable(cancel)
-        return this
-    }
 
 
     fun addSheetItem(itemName: String): SheetDialog {
@@ -202,6 +189,27 @@ class SheetDialog(private val context: Context) : ButtonDialog(context = context
         itemList.add(SheetItem(itemName, color, listener))
         return this
     }
+
+    //==============================================================================================
+    // dialog
+    //==============================================================================================
+    //点击其他位置是否能够取消
+    fun setCanceledOnTouchOutside(cancel: Boolean): SheetDialog {
+        dialog.setCanceledOnTouchOutside(cancel)
+        return this
+    }
+
+
+    // 是否点击返回能够取消
+    fun setCancelable(cancel: Boolean): SheetDialog {
+        dialog.setCancelable(cancel)
+        return this
+    }
+
+    override fun getDialogWidth(): Double {
+        return 0.9
+    }
+
 
     override fun show() {
         prepareShow()
@@ -229,8 +237,8 @@ class SheetDialog(private val context: Context) : ButtonDialog(context = context
 
             val index = it
 
-            //是否添加title
-            if (isShowLine && it == 0) {
+            //是否添加title 下面的line
+            if (isShowLine && it == 0 && showTitle) {
                 addLine()
             }
 
@@ -244,14 +252,29 @@ class SheetDialog(private val context: Context) : ButtonDialog(context = context
 
             textView.setTextColor(itemList[index].color)
 
-            when (index) {
-                itemList.size - 1 -> {
-                    textView.setBackgroundResource(bg_multiple_bottom)
+            if (showTitle) {
+                when (index) {
+                    itemList.size - 1 -> {
+                        textView.setBackgroundResource(bg_multiple_bottom)
+                    }
+                    else -> {
+                        textView.setBackgroundResource(bg_multiple_center)
+                    }
                 }
-                else -> {
-                    textView.setBackgroundResource(bg_multiple_center)
+            } else {
+                when (index) {
+                    0 -> {
+                        textView.setBackgroundResource(bg_multiple_top)
+                    }
+                    itemList.size - 1 -> {
+                        textView.setBackgroundResource(bg_multiple_bottom)
+                    }
+                    else -> {
+                        textView.setBackgroundResource(bg_multiple_center)
+                    }
                 }
             }
+
 
             textView.layoutParams =
                 LinearLayout.LayoutParams(
@@ -266,7 +289,9 @@ class SheetDialog(private val context: Context) : ButtonDialog(context = context
             }
             itemList[it].listener?.onSheetItem(it, textView, itemList[it].name)
             linearLayout.addView(textView)
-            addLine()
+            if (isShowLine && index < itemList.size - 1) {
+                addLine()
+            }
         }
     }
 
@@ -300,10 +325,12 @@ data class SheetItem(
 )
 
 
-interface OnSheetItemClickListener {
-    fun onSheetItemClick(which: Int)
+abstract class OnSheetItemClickListener {
+    abstract fun onSheetItemClick(which: Int)
 
-    fun onSheetItem(index: Int, textView: TextView, title: String)
+    fun onSheetItem(index: Int, textView: TextView, title: String) {
+
+    }
 
 
 }
