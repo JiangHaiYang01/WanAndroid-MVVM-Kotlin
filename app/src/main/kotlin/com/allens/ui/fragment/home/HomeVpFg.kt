@@ -120,6 +120,7 @@ class HomeVpFg(private val data: Data) :
                         return
                     }
                     vm.pageIndex = vm.pageIndex + 1
+                    vm.data.clear()
                     vm.data.addAll(t.data.datas)
 
                     vm.adapter.notifyDataSetChanged()

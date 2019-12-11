@@ -121,6 +121,7 @@ class ProjectFg : BaseMVVMFragment<FgHotProjectBinding, ProjectModel, ProjectVM>
                     bind.fgHomeTlRv.adapter = vm.adapter
                     return
                 }
+                vm.data.clear()
                 vm.data.addAll(t.data.datas)
                 bind.fgHomeTlRv.adapter = vm.adapter
                 vm.pageIndex = vm.pageIndex + 1

@@ -54,7 +54,7 @@
     <TextView
         android:background="@color/color_background"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/cancel"
