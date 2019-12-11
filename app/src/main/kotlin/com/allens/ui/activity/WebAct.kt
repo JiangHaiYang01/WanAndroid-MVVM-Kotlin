@@ -68,28 +68,12 @@ class WebAct : BaseMVVMAct<ActivityWebBinding, WebModel, WebVM>(),
         }
         vm.collection(id, object : OnBaseHttpListener<CollectionBean> {
             override fun onError(e: Throwable) {
-                Snackbar.make(
-                    findViewById(R.id.act_web_ll_parent),
-                    "请检查网络后重试~",
-                    Snackbar.LENGTH_SHORT
-                ).show()
             }
 
             override fun onSuccess(t: CollectionBean) {
                 if (t.errorCode != 0) {
-                    Snackbar.make(
-                        findViewById(R.id.act_web_ll_parent),
-                        t.errorMsg,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
                     return
                 }
-
-                Snackbar.make(
-                    findViewById(R.id.act_web_ll_parent),
-                    "收藏成功",
-                    Snackbar.LENGTH_SHORT
-                ).show()
             }
         })
     }

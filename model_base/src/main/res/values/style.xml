@@ -24,7 +24,7 @@
 
 
     <!-- 水波纹 -->
-    <style name="baseStyleWater">
+    <style name="BaseStyleWater">
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
