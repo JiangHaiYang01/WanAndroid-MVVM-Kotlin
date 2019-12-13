@@ -11,7 +11,6 @@ import com.allens.model_base.base.impl.BaseVM
 import com.allens.status.UserStatus
 import com.allens.tools.R
 import com.allens.tools.databinding.FgMeBinding
-import com.allens.ui.activity.CollectionAct
 import com.allens.ui.activity.LogInAct
 import com.allens.ui.activity.MeAct
 import com.allens.ui.activity.SettingAct
@@ -63,7 +62,7 @@ class MeFragment : BaseMVVMFragment<FgMeBinding, MeFgModel, MeFgVM>(),
         when (item.tag) {
             //收藏集
             2->{
-                startActivity(CollectionAct::class.java)
+//                startActivity(CollectionAct::class.java)
             }
             //设置
             6 -> {

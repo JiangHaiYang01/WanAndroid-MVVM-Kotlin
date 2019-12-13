@@ -20,6 +20,7 @@ import com.allens.ui.fragment.hot.hot_detail.HotTabFragment
 import com.allens.ui.fragment.hot.hot_detail.NewProjectFg
 import com.allens.ui.fragment.hot.hot_detail.OfficialFg
 import com.allens.ui.fragment.hot.hot_detail.ProjectFg
+import com.allens.ui.fragment.me.CollectionFragment
 import com.google.android.material.snackbar.Snackbar
 
 class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
@@ -90,7 +91,7 @@ class MeActVM : BaseVM<MeActModel>(), MeActModelImpl {
         "我的分享"
     )
     var fragList = mutableListOf<BaseFragment>(
-        NewProjectFg(),
+        CollectionFragment(),
         OfficialFg(),
         ProjectFg()
     )

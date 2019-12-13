@@ -1,21 +1,20 @@
-package com.allens.ui.activity
+package com.allens.ui.fragment.me
 
 import android.content.Intent
 import android.os.Bundle
 import com.allens.LogHelper
 import com.allens.bean.collection_detail.CollectionDetailBean
 import com.allens.bean.collection_detail.DataX
-import com.allens.model_base.base.impl.BaseMVVMAct
-import com.allens.model_base.base.impl.BaseModel
-import com.allens.model_base.base.impl.BaseVM
+import com.allens.model_base.base.impl.*
 import com.allens.model_http.impl.OnBaseHttpListener
 import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
-import com.allens.tools.databinding.ActivityCollectionBinding
+import com.allens.tools.databinding.FgCollectionBinding
+import com.allens.ui.activity.WebAct
 import com.allens.ui.adapter.CollectionDetailAdapter
 
-class CollectionAct : BaseMVVMAct<ActivityCollectionBinding, CollectionModel, CollectionVM>(),
+class CollectionFragment : BaseMVVMFragment<FgCollectionBinding, CollectionModel, CollectionVM>(),
     CollectionDetailAdapter.OnHomeDetailAdapterListener {
     override fun createModel(): CollectionModel {
         return CollectionModel()
@@ -26,7 +25,7 @@ class CollectionAct : BaseMVVMAct<ActivityCollectionBinding, CollectionModel, Co
     }
 
     override fun getContentViewId(): Int {
-        return R.layout.activity_collection
+        return R.layout.fg_collection
     }
 
     override fun initMVVMBind() {
@@ -34,9 +33,6 @@ class CollectionAct : BaseMVVMAct<ActivityCollectionBinding, CollectionModel, Co
     }
 
     override fun initMVVMListener() {
-
-        bind.title.setTitle(resources.getString(R.string.act_title_collection))
-        bind.title.setBack(this)
 
         vm.adapter.setOnHomeDetailAdapterListener(this)
         refresh()
@@ -96,14 +92,15 @@ class CollectionAct : BaseMVVMAct<ActivityCollectionBinding, CollectionModel, Co
         val bundle = Bundle()
         bundle.putString(WebAct.WEB_URL, item.link)
         bundle.putInt(WebAct.WEB_ID, item.id)
-        val intent = Intent(this, WebAct::class.java)
+        val intent = Intent(activity, WebAct::class.java)
         intent.putExtras(bundle)
         startActivity(WebAct::class.java, bundle)
     }
 }
 
 
-class CollectionModel : BaseModel(), CollectionModelImpl {
+class CollectionModel : BaseModel(),
+    CollectionModelImpl {
 
     override fun getDetail(pageIndex: Int, listener: OnBaseHttpListener<CollectionDetailBean>) {
         HttpTool.xHttp
@@ -123,7 +120,8 @@ class CollectionModel : BaseModel(), CollectionModelImpl {
     }
 }
 
-class CollectionVM : BaseVM<CollectionModel>(), CollectionModelImpl {
+class CollectionVM : BaseVM<CollectionModel>(),
+    CollectionModelImpl {
 
     var pageIndex: Int = 0
 

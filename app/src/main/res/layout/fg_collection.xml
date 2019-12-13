@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.allens.ui.activity.CollectionVM" />
+            type="com.allens.ui.fragment.me.CollectionVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,19 +16,13 @@
         android:orientation="vertical">
 
 
-        <com.allens.ui.view.TitleView
-            android:id="@+id/title"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"/>
-
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/fg_find_refresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fg_home_tl_rv"
