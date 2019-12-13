@@ -24,6 +24,11 @@ class ProjectDetailAdapter(
         }
         helper.setText(R.id.item_home_detail_tv_user_title, item.title)
         helper.setText(R.id.item_home_detail_tv_user_info, item.desc)
+        helper.setText(R.id.item_home_detail_tv_user_name, item.author)
+        helper.setText(
+            R.id.item_home_detail_tv_tab,
+            item.chapterName + " / " + item.superChapterName
+        )
 
         helper.setText(R.id.item_home_detail_tv_time, item.niceDate)
         helper.itemView.setOnClickListener {
