@@ -14,6 +14,7 @@ import com.allens.model_http.impl.OnHttpListener
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.FgFindBinding
+import com.allens.ui.activity.ShareUserDetailAct
 import com.allens.ui.activity.WebAct
 import com.allens.ui.adapter.FindDetailAdapter
 
@@ -90,7 +91,9 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>(),
     }
 
     override fun onClickHomeDetailAuthor(item: DataX) {
-
+        val bundle = Bundle()
+        bundle.putInt(ShareUserDetailAct.USERID, item.userId)
+        startActivity(ShareUserDetailAct::class.java, bundle)
     }
 
     override fun onClickHomeDetailItem(item: DataX) {

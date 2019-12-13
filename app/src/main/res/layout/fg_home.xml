@@ -11,60 +11,70 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_write">
 
-
-        <TextView
-            android:id="@+id/fg_home_search"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/fg_home_toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/bg_tv_find"
-            android:gravity="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:text="@string/find_you_want"
-            android:textColor="#BBBBBB"
-            android:textSize="12sp"
+            android:background="@color/color_write"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/fg_home_tl_parent"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/color_write"
-            app:layout_constraintTop_toBottomOf="@+id/fg_home_search"
-            app:tabTextAppearance="@style/style_act_main_home_tb"
-            app:tabIndicatorColor="@color/color_blue"
-            app:tabIndicatorFullWidth="false"
-            app:tabMode="scrollable"
-            app:tabRippleColor="@null"
-            app:tabSelectedTextColor="@color/color_blue"
-            app:tabTextColor="@color/color_gray" />
+            <TextView
+                android:id="@+id/fg_home_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/bg_tv_find"
+                android:gravity="center"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/find_you_want"
+                android:textColor="#BBBBBB"
+                android:textSize="12sp"
+                app:layout_scrollFlags="scroll" />
 
-        <View
-            android:id="@+id/fg_home_tl_line"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_background"
-            app:layout_constraintTop_toBottomOf="@+id/fg_home_tl_parent" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/fg_home_tl_parent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_write"
+                app:layout_constraintTop_toBottomOf="@+id/fg_home_toolbar"
+                app:tabIndicatorColor="@color/color_blue"
+                app:tabIndicatorFullWidth="false"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@null"
+                app:tabSelectedTextColor="@color/color_blue"
+                app:tabTextAppearance="@style/style_act_main_home_tb"
+                app:tabTextColor="@color/color_gray" />
+
+            <View
+                android:id="@+id/fg_home_tl_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_background"
+                app:layout_constraintTop_toBottomOf="@+id/fg_home_tl_parent" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/fg_home_vp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fg_home_tl_line" />
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -1,6 +1,7 @@
 package com.allens.ui.activity
 
 import com.allens.LogHelper
+import com.allens.bean.home_detail.DataX
 import com.allens.bean.user_detail.UserDetailBean
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
@@ -11,6 +12,8 @@ import com.allens.status.UserStatus
 import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityMeBinding
+import com.allens.ui.adapter.FindDetailAdapter
+import com.allens.ui.adapter.MeDetailAdapter
 import com.google.android.material.snackbar.Snackbar
 
 class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
@@ -38,6 +41,14 @@ class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
 
             }
         })
+
+
+        for(index in 1..40){
+            vm.data.add("1111")
+        }
+
+
+        bind.actMeRy.adapter = vm.adapter
 
     }
 
@@ -97,6 +108,10 @@ class MeActVM : BaseVM<MeActModel>(), MeActModelImpl {
     override fun getUserInfoDetail(listener: OnBaseHttpListener<UserDetailBean>) {
         model.getUserInfoDetail(listener)
     }
+
+    var data = mutableListOf<String>()
+
+    var adapter = MeDetailAdapter(data)
 
 
 }
