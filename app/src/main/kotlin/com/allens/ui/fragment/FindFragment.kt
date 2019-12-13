@@ -110,22 +110,6 @@ class FindFragment : BaseMVVMFragment<FgFindBinding, FindModel, FindVM>(),
 }
 
 class FindModel : BaseModel(), FindModelImpl {
-    override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
-        HttpTool.xHttp
-            .doGet(
-                lifecycle,
-                BannerBean::class.java,
-                "banner/json",
-                object : OnHttpListener<BannerBean>() {
-                    override fun onSuccess(t: BannerBean) {
-                        listener.onSuccess(t)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        listener.onError(e)
-                    }
-                })
-    }
 
     override fun getHome(pageIndex: Int, listener: OnBaseHttpListener<HomeDetailBean>) {
         HttpTool.xHttp
@@ -156,9 +140,6 @@ class FindVM : BaseVM<FindModel>(), FindModelImpl {
     var adapter = FindDetailAdapter(data)
 
 
-    override fun getBanner(listener: OnBaseHttpListener<BannerBean>) {
-        model.getBanner(listener)
-    }
 
     override fun getHome(pageIndex: Int, listener: OnBaseHttpListener<HomeDetailBean>) {
         model.getHome(pageIndex, listener)
@@ -168,6 +149,6 @@ class FindVM : BaseVM<FindModel>(), FindModelImpl {
 
 
 interface FindModelImpl {
-    fun getBanner(listener: OnBaseHttpListener<BannerBean>)
+
     fun getHome(pageIndex: Int, listener: OnBaseHttpListener<HomeDetailBean>)
 }

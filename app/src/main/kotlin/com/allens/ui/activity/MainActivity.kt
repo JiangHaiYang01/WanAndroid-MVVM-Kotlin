@@ -36,7 +36,10 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
             supportFragmentManager,
             listOf(
                 HomeFragment(),
-                HotFragment(), FindFragment(), MeFragment()),
+                HotFragment(),
+                FindFragment(),
+                MeFragment()
+            ),
             bind.actMainRg,
             R.id.act_main_fl
         ).showTabToFragment()
