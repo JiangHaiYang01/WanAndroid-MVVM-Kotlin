@@ -3,6 +3,7 @@ package com.allens.ui.activity
 import com.allens.LogHelper
 import com.allens.bean.home_detail.DataX
 import com.allens.bean.user_detail.UserDetailBean
+import com.allens.model_base.base.BaseFragment
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
@@ -13,7 +14,12 @@ import com.allens.tool.HttpTool
 import com.allens.tools.R
 import com.allens.tools.databinding.ActivityMeBinding
 import com.allens.ui.adapter.FindDetailAdapter
+import com.allens.ui.adapter.HotFgPagerAdapter
 import com.allens.ui.adapter.MeDetailAdapter
+import com.allens.ui.fragment.hot.hot_detail.HotTabFragment
+import com.allens.ui.fragment.hot.hot_detail.NewProjectFg
+import com.allens.ui.fragment.hot.hot_detail.OfficialFg
+import com.allens.ui.fragment.hot.hot_detail.ProjectFg
 import com.google.android.material.snackbar.Snackbar
 
 class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
@@ -23,33 +29,18 @@ class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
         bind.actMeImgBack.setOnClickListener { finish() }
 
         //积分排名
+        meInfo()
+
+        addTab()
+        addViewPager()
+
+    }
+
+    private fun meInfo() {
+
         bind.actMeInfoView2.setInfo("总积分")
         bind.actMeInfoView3.setInfo("当前排名")
         bind.actMeInfoView1.setInfo("等级")
-
-
-        //获取用户积分排行
-        vm.getUserInfoDetail(object : OnBaseHttpListener<UserDetailBean> {
-            override fun onSuccess(t: UserDetailBean) {
-                if (t.errorCode != 0) {
-                    return
-                }
-                UserStatus.setUserRank(t)
-            }
-
-            override fun onError(e: Throwable) {
-
-            }
-        })
-
-
-        for(index in 1..40){
-            vm.data.add("1111")
-        }
-
-
-        bind.actMeRy.adapter = vm.adapter
-
     }
 
     override fun initMVVMBind() {
@@ -70,33 +61,39 @@ class MeAct : BaseMVVMAct<ActivityMeBinding, MeActModel, MeActVM>() {
         return MeActVM::class.java
     }
 
+
+    private fun addViewPager() {
+        bind.actMeVp.adapter = HotFgPagerAdapter(vm.fragList, vm.tabList, supportFragmentManager)
+        bind.fgHotTlParent.setupWithViewPager(bind.actMeVp)
+    }
+
+    private fun addTab() {
+        vm.tabList.forEach {
+            bind.fgHotTlParent.addTab(bind.fgHotTlParent.newTab().setText(it))
+        }
+    }
+
 }
 
 class MeActModel : BaseModel(), MeActModelImpl {
-    //获取积分排行
-    override fun getUserInfoDetail(listener: OnBaseHttpListener<UserDetailBean>) {
 
-        HttpTool.xHttp
-            .doGet(
-                lifecycle,
-                UserDetailBean::class.java,
-                "lg/coin/userinfo/json",
-                object : OnHttpListener<UserDetailBean>() {
-
-                    override fun onSuccess(t: UserDetailBean) {
-                        listener.onSuccess(t)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        listener.onError(e)
-                    }
-                })
-    }
 
 }
 
 
 class MeActVM : BaseVM<MeActModel>(), MeActModelImpl {
+
+
+    var tabList = mutableListOf(
+        "收藏文章",
+        "收藏网站",
+        "我的分享"
+    )
+    var fragList = mutableListOf<BaseFragment>(
+        NewProjectFg(),
+        OfficialFg(),
+        ProjectFg()
+    )
 
     //横图URL
     val defUrl =
@@ -105,17 +102,7 @@ class MeActVM : BaseVM<MeActModel>(), MeActModelImpl {
     var heardImgUrl = "http://static.runoob.com/images/demo/demo1.jpg"
 
 
-    override fun getUserInfoDetail(listener: OnBaseHttpListener<UserDetailBean>) {
-        model.getUserInfoDetail(listener)
-    }
-
-    var data = mutableListOf<String>()
-
-    var adapter = MeDetailAdapter(data)
-
-
 }
 
 interface MeActModelImpl {
-    fun getUserInfoDetail(listener: OnBaseHttpListener<UserDetailBean>)
 }

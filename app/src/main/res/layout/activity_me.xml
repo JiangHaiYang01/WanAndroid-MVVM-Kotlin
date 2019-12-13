@@ -17,24 +17,28 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        app:layout_collapseMode="parallax"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/color_background">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/color_write">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                app:contentScrim="@color/color_write"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/act_me_parent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/color_write"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_scrollFlags="scroll">
 
 
                     <ImageView
@@ -42,7 +46,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/icon"
                         app:imgUrl="@{vm.defUrl}"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,17 +61,6 @@
                         app:imgIsCircleCrop="@{true}"
                         app:imgPlace="@{@drawable/fg_me_heard_def}"
                         app:imgUrl="@{vm.heardImgUrl}"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <ImageView
-                        android:id="@+id/act_me_img_back"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="34dp"
-                        android:src="@drawable/common_back"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,18 +128,52 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+                <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin">
+
+                    <ImageView
+                        android:id="@+id/act_me_img_back"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="34dp"
+                        android:src="@drawable/toolbar_back"
+                        app:layout_collapseMode="pin"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.appcompat.widget.Toolbar>
+
             </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/fg_hot_tl_parent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/color_write"
+                app:elevation="0dp"
+                app:layout_collapseMode="pin"
+                app:layout_constraintTop_toBottomOf="@+id/act_me_info_view_3"
+                app:tabIndicatorColor="@color/color_blue"
+                app:tabIndicatorFullWidth="false"
+                app:tabMode="fixed"
+                app:tabRippleColor="@null"
+                app:tabSelectedTextColor="@color/color_blue"
+                app:tabTextAppearance="@style/style_act_main_home_tb"
+                app:tabTextColor="@color/color_gray" />
 
 
         </com.google.android.material.appbar.AppBarLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/act_me_ry"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/act_me_vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            custom:listitem="@layout/item_home_detail" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
