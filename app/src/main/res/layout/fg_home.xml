@@ -17,6 +17,7 @@
         android:background="@color/color_write">
 
         <com.google.android.material.appbar.AppBarLayout
+            app:elevation="0dp"
             android:id="@+id/fg_home_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

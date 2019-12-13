@@ -35,8 +35,8 @@ class MainActivity : BaseMVVMAct<ActivityMainBinding, MainModel, MainVM>() {
         TabHelper(
             supportFragmentManager,
             listOf(
-                HomeFragment(),
                 HotFragment(),
+                HomeFragment(),
                 FindFragment(),
                 MeFragment()
             ),
