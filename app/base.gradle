@@ -17,6 +17,7 @@ ext {
 //        implementation project(":model_http")
 //        implementation project(":model_webview")
 //        implementation project(":model_dialog")
+        implementation project(":model_s3")
 
 
         //==========================================================================================

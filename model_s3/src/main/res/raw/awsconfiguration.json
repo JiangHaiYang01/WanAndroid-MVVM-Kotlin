@@ -1,0 +1,20 @@
+{
+  "Version": "1.0",
+  "IdentityManager": {
+    "Default": {}
+  },
+"CredentialsProvider": {
+  "CognitoIdentity": {
+    "Default": {
+      "PoolId": "cn-north-1:d43e04ed-6fe7-4e2b-806a-7a668268913a",
+      "Region": "cn-north-1"
+    }
+  }
+},
+  "S3TransferUtility": {
+    "Default": {
+      "Bucket": "d.s3.translate.zhytek.com",
+      "Region": "cn-north-1"
+    }
+  }
+}

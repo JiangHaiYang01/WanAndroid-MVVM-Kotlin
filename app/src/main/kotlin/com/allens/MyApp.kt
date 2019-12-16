@@ -24,8 +24,13 @@ import com.tencent.mmkv.MMKV
  */
 class MyApp : BaseApplication() {
 
+    companion object {
+        lateinit var context: android.app.Application /* compiled code */
+    }
+
 
     override fun onAppCreate() {
+        context = this
         //日志
         registerLog()
         //key value 配置
