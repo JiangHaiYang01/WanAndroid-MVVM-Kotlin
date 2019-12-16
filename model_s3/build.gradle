@@ -2,9 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: '../defConfig.gradle'
-apply from: 'web_base.gradle'
-apply from: 'webview_maven.gradle'
+apply from: 's3_base.gradle'
+apply from: 's3_maven.gradle'
 android {
+
+    defaultConfig {
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
 
     buildTypes {
         release {
@@ -14,3 +20,4 @@ android {
     }
 
 }
+
