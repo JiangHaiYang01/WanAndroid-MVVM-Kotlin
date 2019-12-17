@@ -3,5 +3,6 @@
 
     <application>
         <activity android:name="com.allens.ui.AwsAct"/>
+        <activity android:name="com.allens.ui.WordDetailAct"/>
     </application>
 </manifest>

@@ -4,7 +4,7 @@ import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.allens.config.Config
 import com.allens.model_base.base.BaseApplication
-import com.allens.model_base.tools.FileHelper
+import com.allens.model_base.tools.getBasePath
 import com.allens.tools.R
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -100,7 +100,7 @@ class MyApp : BaseApplication() {
     private fun registerLog() {
         LogHelper.init(
             this,
-            FileHelper.getBasePath() + Config.logPath,
+            getBasePath() + Config.logPath,
             Config.maxLogRom,
             Config.maxLogFile,
             Config.isDebug

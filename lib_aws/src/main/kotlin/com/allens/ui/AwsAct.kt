@@ -1,6 +1,8 @@
 package com.allens.ui
 
+import android.os.Bundle
 import android.os.Environment
+import android.widget.ImageView
 import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.allens.LogHelper
@@ -52,7 +54,8 @@ class AwsAct : BaseMVVMAct<ActivityAwsBinding, AwsModel, AwsVm>(), GetFileListLi
 
         //title
         bind.actAwsTitle.findViewById<TextView>(R.id.include_tv_title).text = "AWS"
-
+        bind.actAwsTitle.findViewById<ImageView>(R.id.include_img_back)
+            .setOnClickListener { finish() }
 
         //adapter
         bind.actAwsRy.adapter = vm.adapter
@@ -104,6 +107,9 @@ class AwsAct : BaseMVVMAct<ActivityAwsBinding, AwsModel, AwsVm>(), GetFileListLi
     override fun onAwsDownloadComplete(key: String, path: String) {
         LogHelper.i("下载finish path %s", path)
 
+        val bundle = Bundle()
+        bundle.putString(WordDetailAct.PATH, path)
+        startActivity(WordDetailAct::class.java, bundle)
 
     }
 
