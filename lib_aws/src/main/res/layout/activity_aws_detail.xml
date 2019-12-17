@@ -18,8 +18,16 @@
             android:id="@+id/act_aws_title"
             layout="@layout/include_title" />
 
-        <TextView
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/act_detail_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.core.widget.NestedScrollView>
+
+
     </LinearLayout>
 </layout>

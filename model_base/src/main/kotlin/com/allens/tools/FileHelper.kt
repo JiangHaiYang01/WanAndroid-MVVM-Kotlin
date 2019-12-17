@@ -1,13 +1,11 @@
 package com.allens.model_base.tools
 
+import android.R.attr
 import android.os.Environment
 import android.os.StatFs
 import android.util.Log
 import com.allens.model_base.base.BaseApplication
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
@@ -321,4 +319,21 @@ fun getSDCardFree(path: String?): Long {
     } else {
         0
     }
+}
+
+
+/**
+ * @param path 文件路径
+ * @return 读取指定目录下的所有文件的文件内容
+ */
+fun getFileContent(path: String): String? {
+    val file = File(path)
+    if (!file.exists()) {
+        return null
+    }
+    val buffer = StringBuffer()
+    file.readLines().forEach {
+        buffer.append(it)
+    }
+    return buffer.toString()
 }
