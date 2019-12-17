@@ -52,7 +52,7 @@ class WordDetailAct : BaseMVVMAct<ActivityAwsDetailBinding, WordDetailModel, Wor
             return
         }
         val content = vm.getContent(path)
-        LogHelper.i("读取到的文件内容 $content")
+//        LogHelper.i("读取到的文件内容 $content")
 
 
         val list = mutableListOf<BaseFragment>(
@@ -83,7 +83,7 @@ class WordDetailModel : BaseModel(), WordDetailImpl {
     override fun getContent(path: String): String? {
         val stringBuffer = StringBuffer()
         File(path).readLines().forEach {
-            LogHelper.i(it)
+//            LogHelper.i(it)
             stringBuffer.append(it)
             stringBuffer.append("\n")
         }
