@@ -25,11 +25,22 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fg_me_ry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/fg_me_tv_title"
+            app:recyclerViewLineDef="@{false}"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_fg_me_btn" />
+
         <TextView
             android:id="@+id/act_setting_log_out"
-            android:background="@color/color_write"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:background="@color/color_write"
             android:gravity="center"
             android:text="@string/setting_log_out"
             android:textColor="@color/color_red"

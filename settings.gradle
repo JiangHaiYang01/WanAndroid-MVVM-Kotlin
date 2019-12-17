@@ -1,2 +1,2 @@
-include ':app', ':model_log', ':model_base', ':model_http', ':model_webview', ':model_dialog', ':model_s3'
+include ':app', ':model_log', ':model_base', ':model_http', ':model_webview', ':model_dialog', ':model_s3', ':lib_aws'
 rootProject.name='tools'
