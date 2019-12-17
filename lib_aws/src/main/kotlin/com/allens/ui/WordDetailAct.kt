@@ -3,10 +3,11 @@ package com.allens.ui
 import android.widget.ImageView
 import android.widget.TextView
 import com.allens.LogHelper
+import com.allens.adapter.WordPagerAdapter
+import com.allens.model_base.base.BaseFragment
 import com.allens.model_base.base.impl.BaseMVVMAct
 import com.allens.model_base.base.impl.BaseModel
 import com.allens.model_base.base.impl.BaseVM
-import com.allens.model_base.tools.getFileContent
 import com.example.lib_aws.R
 import com.example.lib_aws.databinding.ActivityAwsDetailBinding
 import java.io.File
@@ -22,6 +23,7 @@ class WordDetailAct : BaseMVVMAct<ActivityAwsDetailBinding, WordDetailModel, Wor
     companion object {
         const val PATH = "path"
     }
+
 
     override fun createModel(): WordDetailModel {
         return WordDetailModel()
@@ -44,7 +46,6 @@ class WordDetailAct : BaseMVVMAct<ActivityAwsDetailBinding, WordDetailModel, Wor
         bind.actAwsTitle.findViewById<ImageView>(R.id.include_img_back)
             .setOnClickListener { finish() }
 
-
         //获取文件内容
         val path = intent.getStringExtra(PATH)
         if (path.isNullOrEmpty()) {
@@ -52,10 +53,28 @@ class WordDetailAct : BaseMVVMAct<ActivityAwsDetailBinding, WordDetailModel, Wor
         }
         val content = vm.getContent(path)
         LogHelper.i("读取到的文件内容 $content")
-        bind.actDetailTv.text = content
+
+
+        val list = mutableListOf<BaseFragment>(
+            WordModel1Fg(content),
+            WordModel2Fg(content)
+        )
+        addTab()
+        addViewPager(list)
 
     }
 
+    private fun addViewPager(list: MutableList<BaseFragment>) {
+        bind.actAwsVp.adapter =
+            WordPagerAdapter(list, vm.tabList, fragmentManager = supportFragmentManager)
+        bind.actAwsTl.setupWithViewPager(bind.actAwsVp)
+    }
+
+    private fun addTab() {
+        vm.tabList.forEach {
+            bind.actAwsTl.addTab(bind.actAwsTl.newTab().setText(it))
+        }
+    }
 }
 
 
@@ -78,6 +97,10 @@ class WordDetailVm : BaseVM<WordDetailModel>(), WordDetailImpl {
         return model.getContent(path)
     }
 
+    var tabList = mutableListOf(
+        "模式1",
+        "模式2"
+    )
 }
 
 interface WordDetailImpl {

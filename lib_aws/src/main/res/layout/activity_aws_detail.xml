@@ -19,14 +19,15 @@
             layout="@layout/include_title" />
 
 
-        <androidx.core.widget.NestedScrollView
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/act_aws_tl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/act_detail_tv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </androidx.core.widget.NestedScrollView>
+            android:layout_height="40dp" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/act_aws_vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
