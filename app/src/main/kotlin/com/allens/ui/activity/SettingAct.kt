@@ -95,7 +95,7 @@ class SettingModel : BaseModel(), SettingModelImpl {
 
     fun getItemData(): MutableList<FgItemDto> {
         return mutableListOf(
-            FgItemDto(R.drawable.fg_me_options, "AWS测试", false, 1)
+            FgItemDto(R.drawable.fg_me_setting, "AWS测试", false, 1)
         )
     }
 

@@ -80,6 +80,9 @@ ext {
         kapt 'com.alibaba:arouter-compiler:1.2.2'
 
 
+        //权限 https://github.com/yanzhenjie/AndPermission
+        implementation 'com.yanzhenjie:permission:2.0.3'
+
         //==========================================================================================
         // jetPack
         //==========================================================================================

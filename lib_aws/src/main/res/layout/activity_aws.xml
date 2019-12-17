@@ -15,19 +15,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/include_title" />
+        <include
+            android:id="@+id/act_aws_title"
+            layout="@layout/include_title" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/act_aws_ry"
             android:layout_width="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="10"
-            tools:listitem="@layout/item_word"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include_tv_title" />
+            app:layout_constraintTop_toBottomOf="@+id/act_aws_title"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_word" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

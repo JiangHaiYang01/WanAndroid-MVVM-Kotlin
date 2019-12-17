@@ -41,25 +41,33 @@ class AwsS3Tools constructor(context: Context) {
 
     //下载任务
     fun downLoad(path: String, key: String, listener: OnAwsDownLoadListener) {
-        val download = transferUtility.download(key, File(path))
-        download.setTransferListener(object : TransferListener {
-            override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
-                listener.onAwsDownLoadProgress(id, bytesCurrent, bytesTotal)
-            }
-
-            override fun onStateChanged(p0: Int, p1: TransferState?) {
-                when (p1) {
-                    TransferState.COMPLETED -> {
-                        listener.onAwsDownloadComplete()
-                    }
+        try {
+            val download = transferUtility.download(key, File(path))
+            download.setTransferListener(object : TransferListener {
+                override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
+                    listener.onAwsDownLoadProgress(id, bytesCurrent, bytesTotal)
                 }
-                listener.onAwsDownLoadStatusChange(p1)
-            }
 
-            override fun onError(p0: Int, p1: Exception?) {
-                listener.onAwsDownloadFailed(p1)
-            }
-        })
+                override fun onStateChanged(p0: Int, p1: TransferState?) {
+                    when (p1) {
+                        TransferState.COMPLETED -> {
+                            listener.onAwsDownloadComplete()
+                        }
+                        else -> {
+                        }
+                    }
+                    listener.onAwsDownLoadStatusChange(p1)
+                }
+
+                override fun onError(p0: Int, p1: Exception?) {
+                    listener.onAwsDownloadFailed(p1)
+                }
+            })
+        } catch (throwable: Throwable) {
+            listener.onAwsDownloadFailed(throwable)
+        }
+
+
     }
 
     //取消下载
