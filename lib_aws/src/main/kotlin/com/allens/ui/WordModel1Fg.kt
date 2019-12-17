@@ -21,6 +21,9 @@ class WordModel1Fg(private val content: String?) :
 
     override fun initMVVMListener() {
         bind.actDetailTv.text = content
+
+
+
     }
 
     override fun getContentViewId(): Int {
