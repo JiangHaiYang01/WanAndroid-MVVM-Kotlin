@@ -81,11 +81,15 @@ class AwsAct : BaseMVVMAct<ActivityAwsBinding, AwsModel, AwsVm>(), GetFileListLi
         AndPermission.with(this)
             .runtime()
             .permission(Permission.Group.STORAGE)
-            .onGranted{
-//                tools?.downLoad(FileHelper.getBasePath(), item, this)
-                tools?.downLoad(Environment.getExternalStorageDirectory().toString() + "/" + item, item, this)
+            .onGranted {
+                //                tools?.downLoad(FileHelper.getBasePath(), item, this)
+                tools?.downLoad(
+                    Environment.getExternalStorageDirectory().toString() + "/" + item,
+                    item,
+                    this
+                )
             }
-            .onDenied{
+            .onDenied {
 
             }
             .start()
@@ -93,20 +97,24 @@ class AwsAct : BaseMVVMAct<ActivityAwsBinding, AwsModel, AwsVm>(), GetFileListLi
 
     }
 
-    override fun onAwsDownloadFailed(throwable: Throwable?) {
+    override fun onAwsDownloadFailed(key: String, throwable: Throwable?) {
         LogHelper.i("下载失败 ${throwable?.message}")
     }
 
-    override fun onAwsDownloadComplete() {
-        LogHelper.i("下载finish")
+    override fun onAwsDownloadComplete(key: String, path: String) {
+        LogHelper.i("下载finish path %s", path)
 
 
     }
-    override fun onAwsDownLoadStatusChange(status: TransferState?) {
+
+    override fun onAwsDownLoadStatusChange(
+        key: String,
+        status: TransferState?
+    ) {
         LogHelper.i("下载状态改变 $status")
     }
 
-    override fun onAwsDownLoadProgress(id: Int, bytesCurrent: Long, bytesTotal: Long) {
+    override fun onAwsDownLoadProgress(key: String, id: Int, bytesCurrent: Long, bytesTotal: Long) {
         LogHelper.i("下载进度改变  id: $id   bytesCurrent: $bytesCurrent  bytesTotal: $bytesTotal")
     }
 }

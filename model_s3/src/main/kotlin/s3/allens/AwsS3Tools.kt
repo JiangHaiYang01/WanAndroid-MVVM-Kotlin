@@ -45,26 +45,26 @@ class AwsS3Tools constructor(context: Context) {
             val download = transferUtility.download(key, File(path))
             download.setTransferListener(object : TransferListener {
                 override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
-                    listener.onAwsDownLoadProgress(id, bytesCurrent, bytesTotal)
+                    listener.onAwsDownLoadProgress(key, id, bytesCurrent, bytesTotal)
                 }
 
                 override fun onStateChanged(p0: Int, p1: TransferState?) {
                     when (p1) {
                         TransferState.COMPLETED -> {
-                            listener.onAwsDownloadComplete()
+                            listener.onAwsDownloadComplete(key, path)
                         }
                         else -> {
                         }
                     }
-                    listener.onAwsDownLoadStatusChange(p1)
+                    listener.onAwsDownLoadStatusChange(key, p1)
                 }
 
                 override fun onError(p0: Int, p1: Exception?) {
-                    listener.onAwsDownloadFailed(p1)
+                    listener.onAwsDownloadFailed(key, p1)
                 }
             })
         } catch (throwable: Throwable) {
-            listener.onAwsDownloadFailed(throwable)
+            listener.onAwsDownloadFailed(key, throwable)
         }
 
 

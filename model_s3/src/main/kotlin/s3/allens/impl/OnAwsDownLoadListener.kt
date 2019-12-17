@@ -9,11 +9,14 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
  * @Email 18856907654@163.com
  */
 interface OnAwsDownLoadListener {
-    fun onAwsDownloadFailed(throwable: Throwable?)
+    fun onAwsDownloadFailed(key: String, throwable: Throwable?)
 
-    fun onAwsDownloadComplete()
+    fun onAwsDownloadComplete(key: String, path: String)
 
-    fun onAwsDownLoadStatusChange(status: TransferState?)
+    fun onAwsDownLoadStatusChange(
+        key: String,
+        status: TransferState?
+    )
 
-    fun onAwsDownLoadProgress(id: Int, bytesCurrent: Long, bytesTotal: Long)
+    fun onAwsDownLoadProgress(key: String,id: Int, bytesCurrent: Long, bytesTotal: Long)
 }
