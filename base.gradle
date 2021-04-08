@@ -38,18 +38,20 @@ ext {
         //==========================================================================================
         // 引入model
         //==========================================================================================
-        implementation 'com.allens:logger:1.0.0'
+//        implementation 'com.allens:logger:1.0.0'
 //        implementation 'com.allens:base:1.0.0'
-        implementation 'com.allens:http:1.0.0'
-        implementation 'com.allens:web:1.0.0'
-        implementation 'com.allens:dialog:1.0.0'
-        implementation 'com.allens:view:1.0.0'
+//        implementation 'com.allens:http:1.0.0'
+//        implementation 'com.allens:web:1.0.0'
+//        implementation 'com.allens:dialog:1.0.0'
+//        implementation 'com.allens:view:1.0.0'
 
         implementation project(":model_base")
-//        implementation project(":model_http")
-//        implementation project(":model_webview")
-//        implementation project(":model_dialog")
+        implementation project(":model_http")
+        implementation project(":model_webview")
+        implementation project(":model_dialog")
         implementation project(":model_s3")
+        implementation project(":model_log")
+        implementation project(":model_view")
 
 
         //==========================================================================================
